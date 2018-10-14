@@ -1,0 +1,168 @@
+#---------------------------------------------------------------------
+# BARCODE: parameter file
+#---------------------------------------------------------------------
+correct_delta = true
+# calc_h:
+# Note: 0 and 1 are only kept in for reasons of lazyness. Only use 2 or 3!
+# WRONG   0: normal full calc_h
+# WRONG   1: only the dlnL/ddelta(x) term
+#         2: SPH calc_h, old version. More accurate, slower than option 3.
+#         3: SPH calc_h with Fourier/TSC calc_V. Less accurate, much faster.
+calc_h = 2
+particle_kernel = 0 # 0: SPH splines
+particle_kernel_h_rel = 1. # SPH splines kernel scale (unit relative to grid cell size; 1 means one grid cell size). Note: cell size is the average size, i.e. (d1 + d2 + d3)/3.)
+#---------------------------------------------------------------------
+inputmode = 0  # 0: random
+#---------------------------------------------------------------------
+seed  = 1   # seed (>0, otherwise depends on clock-time)
+#---------------------------------------------------------------------
+random_test = true
+random_test_rsd = false
+#---------------------------------------------------------------------
+# Window type for random_test:
+# 1: all ones
+# 10: half ones, half zeros
+# 23: put zeros where delta_eul <= 3, ones otherwise
+window_type = 1
+#---------------------------------------------------------------------
+# data_model is used mainly for the random_test. It must also be
+# compatible with the chosen likelihood; e.g. 0 for Gaussian
+# likelihood and 1 for log-normal likelihood.
+data_model = 0 # 0: additive error (linear model), 1: multiplicative error (logarithmic model)
+# negative_obs is also used in setup_random_test. When true, it allows
+# negative density values, which may be used to test idealized pdfs.
+negative_obs = false
+#---------------------------------------------------------------------
+# Likelihoods:
+# 0: Poissonian (integer observation field, e.g. galaxy counts!)
+# 1: Gaussian
+# 2: log-normal
+# 3: GRF (no evolution, just lagrangian)
+likelihood = 1
+prior = 0 # 0: Gaussian 
+#---------------------------------------------------------------------
+sfmodel = 1 # 0: Lognormal; 1: ZELDOVICH; 2: 2LPT; 3: ALPT (in Patchy code)
+#---------------------------------------------------------------------
+# N.B.: rsd_model only yet implemented in Gaussian likelihood with Zel'dovich model!
+rsd_model = false # include redshift space distortions in SF-model and statistical model
+#---------------------------------------------------------------------
+sigma_min = 1.0 # gaussian likelihood
+sigma_fac = 0.0 # gaussian and log-normal likelihoods
+delta_min = -0.999 # log-normal likelihood
+#---------------------------------------------------------------------
+initial_guess = 0 # 0: zero, 1: field from file, 2: GRF (with given PS), 3: smoothed GRF (with given PS) on scale 20 Mpc/h
+initial_guess_file = deltaLAGtest # when you want to use the solution for the random_test use deltaLAGtest (without .dat!).
+initial_guess_smoothing_type = 1 # 1: Gaussian
+initial_guess_smoothing_scale = 20. # [Mpc/h]
+#---------------------------------------------------------------------
+# number of leap-frog steps per MC iteration
+N_eps_fac = 8.0
+#---------------------------------------------------------------------
+
+# Epsilon (time step per leap-frog jump) schemes:
+
+# 0: constant epsilon, given by eps_fac
+# 1: updating epsilon; starts at eps_fac_initial, slowly decreases toward eps_fac
+# 2: adjusting epsilon; starts at eps_fac and adjusts automatically to get
+#    acceptance rate within given range.
+# 3: same as 2, but with extra fast initial stage; halving every step, until
+#    the first step is accepted.
+eps_fac_update_type = 3
+
+# eps_fac:
+# all: Set to zero to automatically let the code determine heuristic optimal
+#      value for given Nx gridsize.
+# 0: constant epsilon
+# 1: target epsilon, i.e. final eps_fac that will be reached after the process
+#    carried out by the parameters below.
+# 2: starting eps_fac
+eps_fac = 0.0
+
+# 1 (more options at bottom of input.par):
+eps_fac_initial = 0.5 # starting eps_fac for faster burn-in, from which it then slowly moves toward eps_fac set above
+eps_fac_power = 2 # the higher, the slower eps_fac will move towards the preset eps_fac, and vice-versa
+
+# 2:
+N_a_eps_update = 100
+acc_min = 0.6
+acc_max = 0.7
+eps_down_smooth = 5
+eps_up_fac = 1
+
+#---------------------------------------------------------------------
+# Mass type (either in Fourier space FS, real space R or both):
+# 0: R: all ones (essentially: no mass term)
+# 1: FS: inverse power spectrum
+# 2: FS+FS: inverse power spectrum + likelihood force spectrum
+# 3: FS+FS: inverse power spectrum + mean likelihood force (Wang+13)
+# 4: FS: power spectrum
+# 5: FS+R: inverse power spectrum + 1st order likelihood force expansion (Jasche+13)
+# 6: R: 1st order likelihood force expansion (Jasche+13)
+# 60: R: type 0 until burn-in, type 6 afterwards
+mass_type = 1
+
+massnum_burn = 0   # recompute masses each #, before burn-in
+massnum_post = 0   # recompute masses each #, after burn-in
+# in the above we define burn-in loosely as the massnum'th iteration, for now
+#---------------------------------------------------------------------
+outnum = 10 # number of output samples (1-10 will always be output)
+outnum_ps = 10 # same for power spectrum
+#---------------------------------------------------------------------
+file = /path/to/input/file.dat
+#---------------------------------------------------------------------
+filec = file.dat
+#---------------------------------------------------------------------
+readPS = true
+#---------------------------------------------------------------------
+fnamePS = /path/to/power/spectrum/like/for/instance/WMAP7_CAMB.dat
+#---------------------------------------------------------------------
+dir = ./data/
+#---------------------------------------------------------------------
+slength = 4.   # 
+#---------------------------------------------------------------------
+Nx = 64   # Number of pixels x 
+#---------------------------------------------------------------------
+Lx = 200.  # Box length in x-direction [Mpc/h] 
+#---------------------------------------------------------------------
+z  = .0  # redshift 
+#---------------------------------------------------------------------
+N_bin = 200
+#---------------------------------------------------------------------
+N_Gibbs = 10000      # abort when accepted steps exceed this number
+total_steps_lim = 0  # abort when accepted + rejected steps exceed this number
+#---------------------------------------------------------------------
+masskernel = 3
+#---------------------------------------------------------------------
+xllc = 0.
+yllc = 0.
+zllc = 0.
+#---------------------------------------------------------------------
+# Redshift space distortions:
+xobs = 90.
+yobs = 90.
+zobs = 90.
+planepar = true
+periodic = true
+#---------------------------------------------------------------------
+
+#---------------------------------------------------------------------
+# Testing:
+mass_factor = 1.
+grad_psi_prior_factor = 1.
+grad_psi_likeli_factor = 1.
+grad_psi_prior_conjugate = false
+grad_psi_likeli_conjugate = false
+grad_psi_prior_times_i = false
+grad_psi_likeli_times_i = false
+div_dH_by_N = false
+deltaQ_factor = 1.0 
+#---------------------------------------------------------------------
+
+# More epsilon options:
+
+# 1:
+# The values below can be edited, but these are pretty safe choices for
+# automated resolution dependent s_eps_total values:
+s_eps_total_fac = 158.0 # the factor with which the amount of iteration steps s between eps_fac updates varies with the total number of cells n (to some power), i.e. s_eps_total = fac * (n/Nx_norm^3)^scaling, where n = nx^3. 0.0003 was the result of a heuristic fit to test-runs. a higher value means that eps_fac is updated less frequently. based on later tests, 0.0003 was changed to 0.0006 with scaling of 0.5 instead of 1 as it was before. 0.0006, in the new new way of writing (adding the /Nx_norm) is equivalent to 158.0 at Nx_norm = 64.
+s_eps_total_Nx_norm = 64 # the resolution at which we normalize the s_eps_total law
+s_eps_total_scaling = 0.5 # see above
