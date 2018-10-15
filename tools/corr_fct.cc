@@ -7,13 +7,13 @@
  */
 
 
-#include "../struct_main.h"
-#include "../fftw_array.h"
+#include "struct_main.h"
+#include "fftw_array.h"
 #include <cmath>
 
-#include "../convenience.h"
+#include "convenience.h"
 
-#include "../IOfunctionsGen.h"
+#include "IOfunctionsGen.h"
 
 using namespace std;
 

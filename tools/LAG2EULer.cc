@@ -7,14 +7,14 @@
  */
 
 
-#include "../define_opt.h"
-#include "../struct_main.h"
-#include "../fftw_array.h"
+#include "define_opt.h"
+#include "struct_main.h"
+#include "fftw_array.h"
 #include <sstream>
-#include "../math_funcs.h" // create_GARFIELD
-#include "../IOfunctionsGen.h"
-#include "../Lag2Eul.h"
-#include "../init_par.h" // INIT_COSMOLOGY
+#include "math_funcs.h" // create_GARFIELD
+#include "IOfunctionsGen.h"
+#include "Lag2Eul.h"
+#include "init_par.h" // INIT_COSMOLOGY
 
 using namespace std;
 

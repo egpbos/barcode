@@ -7,15 +7,15 @@
  */
 
 
-#include "../define_opt.h"
-#include "../struct_main.h"
-#include "../fftw_array.h"
+#include "define_opt.h"
+#include "struct_main.h"
+#include "fftw_array.h"
 #include <cmath>
 #include <sstream>
-#include "../IOfunctionsGen.h"
-#include "../math_funcs.h"
+#include "IOfunctionsGen.h"
+#include "math_funcs.h"
 
-#include "../massFunctions.h" // getDensity
+#include "massFunctions.h" // getDensity
 
 using namespace std;
 

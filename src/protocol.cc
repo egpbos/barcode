@@ -13,7 +13,7 @@
 #include <iostream>
 #include <cassert>
 
-#include "planck/paramfile.h"
+#include "../planck/paramfile.h"
 
 #include "struct_main.h"
 

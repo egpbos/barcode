@@ -10,11 +10,11 @@
 #include <string>  // string
 #include <sstream>  // stringstream
 
-#include "../define_opt.h"  // real_prec, ULONG
-#include "../fftw_array.h"  // fftw_array
-#include "../IOfunctionsGen.h"  // get_scalar, dump_scalar
-#include "../IOfunctions.h"  // dump_measured_spec
-#include "../field_statistics.h" // measure_spectrum
+#include "define_opt.h"  // real_prec, ULONG
+#include "fftw_array.h"  // fftw_array
+#include "IOfunctionsGen.h"  // get_scalar, dump_scalar
+#include "IOfunctions.h"  // dump_measured_spec
+#include "field_statistics.h" // measure_spectrum
 
 using std::cout;
 using std::cerr;

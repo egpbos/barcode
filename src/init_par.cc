@@ -20,7 +20,7 @@
 #include "define_opt.h"
 
 #include "fftwrapper.h"
-#include "planck/paramfile.h"
+#include "../planck/paramfile.h"
 
 #include "struct_main.h"
 #include "cosmo.h"

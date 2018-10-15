@@ -10,11 +10,11 @@
 #include <string>  // string
 #include <sstream>  // stringstream
 
-#include "../define_opt.h"  // real_prec, ULONG
-#include "../fftw_array.h"  // fftw_array
-#include "../IOfunctionsGen.h"  // get_scalar, dump_scalar
-#include "../massFunctions.h"  // getDensity_SPH
-#include "../convenience.h" // fill_one
+#include "define_opt.h"  // real_prec, ULONG
+#include "fftw_array.h"  // fftw_array
+#include "IOfunctionsGen.h"  // get_scalar, dump_scalar
+#include "massFunctions.h"  // getDensity_SPH
+#include "convenience.h" // fill_one
 
 using std::cout;
 using std::cerr;

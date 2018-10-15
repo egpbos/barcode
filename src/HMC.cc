@@ -16,7 +16,7 @@
 #include <algorithm>  // find, find_if, copy
 
 #include "fftw_array.h"
-#include "planck/paramfile.h"
+#include "../planck/paramfile.h"
 
 #include "math_funcs.h"
 #include "IOfunctionsGen.h"

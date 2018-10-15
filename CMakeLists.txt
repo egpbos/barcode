@@ -111,49 +111,51 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(BARCODE_SOURCE_FILES
 # CORE
-        barcoderunner.cc
-        protocol.cc         # initialization of ... not sure what exactly. TODO: REMOVE, ONLY ONE THAT'S USED IS RESTART_PROTOCOL
-        sample_maker.cc
+        src/barcoderunner.cc
+        src/protocol.cc         # initialization of ... not sure what exactly. TODO: REMOVE, ONLY ONE THAT'S USED IS RESTART_PROTOCOL
+        src/sample_maker.cc
 # CONFIG FILE
         planck/cxxutils.cc  # PARSING
-        init_par.cc
+        src/init_par.cc
 # HMC
-        call_hamil.cc
-        HMC.cc
-        HMC_help.cc
-        HMC_mass.cc
-        HMC_models.cc
-        HMC_momenta.cc
+        src/call_hamil.cc
+        src/HMC.cc
+        src/HMC_help.cc
+        src/HMC_mass.cc
+        src/HMC_models.cc
+        src/HMC_momenta.cc
 # ARRAY, MATH AND STRING MANIPULATIONS:
-        convenience.cc
-        math_funcs.cc
+        src/convenience.cc
+        src/math_funcs.cc
 # COSMOLOGY
-        cosmo.cc
-        calc_power.cc       # calculate theoretical cosmological power spectra
+        src/cosmo.cc
+        src/calc_power.cc       # calculate theoretical cosmological power spectra
 # INTERFACE
-        curses_funcs.cc
+        src/curses_funcs.cc
 # DEBUGGING
-        debug.cc
+        src/debug.cc
 # LAG2EUL
-        Lag2Eul.cc
-        disp_part.cc
-        EqSolvers.cc
+        src/Lag2Eul.cc
+        src/disp_part.cc
+        src/EqSolvers.cc
 # FFT
-        fftwrapper.cc
+        src/fftwrapper.cc
 # IO
-        IOfunctions.cc
-        IOfunctionsGen.cc
+        src/IOfunctions.cc
+        src/IOfunctionsGen.cc
 # DENSITY
-        massFunctions.cc
-        transf.cpp
-        rankorder.cc         # aren't these also just transfer functions? TODO: maybe merge with transf.cpp
-        field_statistics.cpp # field statistics; power spectrum, etc
+        src/massFunctions.cc
+        src/transf.cpp
+        src/rankorder.cc         # aren't these also just transfer functions? TODO: maybe merge with transf.cpp
+        src/field_statistics.cpp # field statistics; power spectrum, etc
 # REDSHIFT SPACE
-        rsd.cc)
+        src/rsd.cc)
+
+include_directories(include)
 
 add_library(barlib ${BARCODE_SOURCE_FILES})
 
-add_executable(barcode main.cc)
+add_executable(barcode src/main.cc)
 target_link_libraries(barcode barlib)
 
 #--------------------------------------- dependencies

@@ -11,11 +11,11 @@
 #include <sstream>
 #include <iostream>
 
-#include "../struct_main.h"
-#include "../fftw_array.h"
+#include "struct_main.h"
+#include "fftw_array.h"
 
-#include "../IOfunctionsGen.h"
-#include "../convenience.h"
+#include "IOfunctionsGen.h"
+#include "convenience.h"
 
 using namespace std;
 

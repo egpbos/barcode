@@ -19,8 +19,8 @@
 
 #include <gsl/gsl_randist.h>
 
-#include "planck/bstream.h"
-#include "planck/paramfile.h"
+#include "../planck/bstream.h"
+#include "../planck/paramfile.h"
 
 // for dump_deltas:
 #include "Lag2Eul.h"
