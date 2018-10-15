@@ -1,10 +1,33 @@
-# barcode
+# Barcode
 Bayesian Reconstruction of COsmic DEnsity fields
 
 This repository contains both Barcode and a set of supplementary analysis tools.
 
+## Citing
 
-# Build
+If you use this software, please cite it as:
+
+Bos E. G. P., Kitaura F.-S., van de Weygaert R., 2018, preprint ([arXiv:1810.05189](https://arxiv.org/abs/1810.05189))
+
+In bibtex format:
+
+```bibtex
+@article{Bos+2018,
+      author         = "Bos, E. G. Patrick and Kitaura, Francisco-Shu and van de
+                        Weygaert, Rien",
+      title          = "{Bayesian cosmic density field inference from redshift
+                        space dark matter maps}",
+      year           = "2018",
+      eprint         = "1810.05189",
+      archivePrefix  = "arXiv",
+      primaryClass   = "astro-ph.CO",
+      journal        = {ArXiv e-prints}
+}
+```
+
+This code was further described and applied in [conference proceedings](https://arxiv.org/abs/1611.01220) and in [Patrick's PhD thesis](https://www.rug.nl/research/portal/en/publications/clusters-voids-and-reconstructions-of-the-cosmic-web(0f7c3d17-9661-4b9f-a27c-dfac2990b844).html).
+
+## Build
 
 Clone the repository, `cd` into the cloned directory (`$BARCODE` below) and run the following to configure and build:
 
@@ -17,7 +40,11 @@ make
 
 This will create binaries for barcode and the supplementary tools in the `bin` directory.
 
-# Run
+### MacOS
+The MacOS version has no OpenMP support. Configure the project with `cmake` options `-DMULTITHREAD=OFF -DMULTITHREAD_FFTW=OFF` to build on macOS.
+
+
+## Run
 
 Barcode must be run in the same directory as the `input.par` file.
 Edit this file to change input parameters.
@@ -30,17 +57,13 @@ $BARCODE/bin/barcode [restart_iteration]
 Optionally add the `restart_iteration` number when doing a restart run from existing output files.
 
 
-# MacOS
-The MacOS version has no OpenMP support. Configure the project with `cmake` options `-DMULTITHREAD=OFF -DMULTITHREAD_FFTW=OFF` to build on macOS.
-
-
-# Development and contributing
+## Development and contributing
 This is an early release. Unit tests and other test codes will be added later (as mentioned in some of the code comments). Documentation as well.
 
 Contributions are very welcome! Please don't hesitate to propose ideas for improvements in the GitHub issues or in a PR.
 
 
-# License
+## License
 The original contributions made as part of this code are distributed under the MIT license (see `LICENSE` file).
 
 Barcode makes use of an early version of the [Planck LevelS toolkit](https://sourceforge.net/projects/planck-ls/), which is distributed under the GNU Public License v2 (see `planck/LICENSE` file).
