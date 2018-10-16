@@ -15,9 +15,12 @@ matrix:
   - os: linux
     addons:
       apt:
+        sources:
+        - ubuntu-toolchain-r-test
         packages:
         - g++-7
-    env: COMPILER=gcc GCC=7
+    env:
+    - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
   - os: linux
     addons:
       apt:
@@ -25,24 +28,14 @@ matrix:
         - llvm-toolchain-trusty-5.0
         packages:
         - clang-5.0
-    env: COMPILER=clang CLANG=5
+    env:
+    - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
   - os: osx
     osx_image: xcode9.1
     compiler: clang
 
 before_install:
-- |
-  # Configure build variables
-  if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-    if [[ "$COMPILER" == "gcc" ]]; then
-      export CXX=g++-$GCC CC=gcc-$GCC;
-    fi
-    if [[ "$COMPILER" == "clang" ]]; then
-      export CXX=clang++-$CLANG CC=clang-$CLANG;
-    fi
-  elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-    export CXX=clang++ CC=clang;
-  fi
+- eval "${MATRIX_EVAL}"
 install:
 # Testing
 - mkdir $TRAVIS_BUILD_DIR/build
