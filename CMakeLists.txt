@@ -6,8 +6,8 @@
 # The full license is in the file LICENSE, distributed with this software.
 #
 
-cmake_minimum_required(VERSION 3.1.3)
-# 3.1.3 for set(CMAKE_CXX_STANDARD 11), all other features are in 3.0 at least (didn't check 2.x)
+cmake_minimum_required(VERSION 3.9.0)
+# 3.1.3 for set(CMAKE_CXX_STANDARD 11), 3.9.0 for FindOpenMP, all other features are in 3.0 at least (didn't check 2.x)
 
 
 #--------------------------------------- download and setup FindFFTW
@@ -164,6 +164,13 @@ include_directories(${GSL_INCLUDE_DIRS})
 target_link_libraries(barcode ${GSL_LIBRARIES})
 #target_link_libraries(barlib ${GSL_LIBRARIES})
 
+find_package(OpenMP COMPONENTS CXX)
+if (NOT OPENMP_CXX_FOUND)
+    message("Disabling MULTITHREAD and MULITHREAD_FFTW options, since OpenMP support was not detected.")
+    set(MULTITHREAD OFF)
+    set(MULTITHREAD_FFTW OFF)
+endif()
+
 find_package(FFTW)
 
 include_directories(${FFTW_INCLUDE_DIRS})
@@ -282,13 +289,9 @@ if (GFINDIFF)
 endif()
 
 # some additional things that must be added based on the options
-if (NOT INTEL)
-    if (MULTITHREAD)
-        target_link_libraries(barcode gomp)
-#        target_link_libraries(barlib gomp)
-        target_compile_options(barcode PUBLIC -fopenmp)
-        target_compile_options(barlib PUBLIC -fopenmp)
-    endif()
+if (MULTITHREAD)
+    target_link_libraries(barcode PRIVATE OpenMP::OpenMP_CXX)
+    target_link_libraries(barlib PRIVATE OpenMP::OpenMP_CXX)
 endif()
 
 # final things that are always used

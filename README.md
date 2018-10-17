@@ -40,9 +40,6 @@ make
 
 This will create binaries for barcode and the supplementary tools in the `cmake-build` directory.
 
-### MacOS
-The MacOS version has no OpenMP support. Configure the project with `cmake` options `-DMULTITHREAD=OFF -DMULTITHREAD_FFTW=OFF` to build on macOS.
-
 
 ## Run
 
