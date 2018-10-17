@@ -3,6 +3,9 @@ Bayesian Reconstruction of COsmic DEnsity fields
 
 This repository contains both Barcode and a set of supplementary analysis tools.
 
+[![Build Status](https://travis-ci.org/egpbos/barcode.svg?branch=master)](https://travis-ci.org/egpbos/barcode)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/db7aa18754fa4720a2d80ab47ed85e3b)](https://www.codacy.com/app/egpbos/barcode?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=egpbos/barcode&amp;utm_campaign=Badge_Grade)
+
 ## Citing
 
 If you use this software, please cite it as:
