@@ -43,8 +43,7 @@ install:
     export PATH="$HOME/miniconda/bin:$PATH"
     hash -r
     conda update -yq conda
-    conda create -y -n install_barcode fftw -c conda-forge
-    source activate install_barcode
+    conda install -y fftw -c conda-forge
   fi
 
 script:
