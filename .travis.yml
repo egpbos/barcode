@@ -33,11 +33,11 @@ matrix:
 
 before_install:
 - eval "${MATRIX_EVAL}"
-install:
-# Testing
+script:
+# Build
 - mkdir $TRAVIS_BUILD_DIR/build
 - cd $TRAVIS_BUILD_DIR/build
 - cmake ..
 - make -j2
-#script:
+# Testing
 #- run_test
