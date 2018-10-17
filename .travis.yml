@@ -35,7 +35,7 @@ before_install:
 - eval "${MATRIX_EVAL}"
 
 install:
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gsl; fi
+#- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gsl; fi
 - |
   if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     wget "http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh" -O miniconda.sh;
@@ -43,7 +43,7 @@ install:
     export PATH="$HOME/miniconda/bin:$PATH"
     hash -r
     conda update -yq conda
-    conda install -y cmake fftw -c conda-forge
+    conda install -y cmake gsl fftw -c conda-forge
   fi
 
 script:
