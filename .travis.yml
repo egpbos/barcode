@@ -10,7 +10,7 @@ matrix:
         packages:
         - g++-7
         - libfftw3-dev
-        - libgsl-dev
+        - libgsl0-dev
         - libncurses-dev
     env:
     - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
@@ -23,7 +23,7 @@ matrix:
         packages:
         - clang-5.0
         - libfftw3-dev
-        - libgsl-dev
+        - libgsl0-dev
         - libncurses-dev
     env:
     - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
