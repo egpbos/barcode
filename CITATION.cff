@@ -16,6 +16,7 @@ license: MIT
 message: "If you use this software, please cite the paper in the references field."
 references:
   -
+    type: article
     authors:
       -
         family-names: Bos

@@ -25,7 +25,11 @@ In bibtex format:
 }
 ```
 
-This code was further described and applied in [conference proceedings](https://arxiv.org/abs/1611.01220) and in [Patrick's PhD thesis](https://www.rug.nl/research/portal/en/publications/clusters-voids-and-reconstructions-of-the-cosmic-web(0f7c3d17-9661-4b9f-a27c-dfac2990b844).html).
+A Zenodo DOI is provided for each release to cite the software itself (preferably in addition to citing the paper above). Latest release:
+
+[![DOI](https://zenodo.org/badge/152633059.svg)](https://zenodo.org/badge/latestdoi/152633059)
+
+This code was previously described and applied in [conference proceedings](https://arxiv.org/abs/1611.01220) and in [Patrick's PhD thesis](https://www.rug.nl/research/portal/en/publications/clusters-voids-and-reconstructions-of-the-cosmic-web(0f7c3d17-9661-4b9f-a27c-dfac2990b844).html).
 
 ## Build
 
