@@ -35,7 +35,17 @@ before_install:
 - eval "${MATRIX_EVAL}"
 
 install:
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install --build-from-source fftw --without-fortran; brew install gsl; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gsl; fi
+- |
+  if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+    wget "http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh" -O miniconda.sh;
+    bash miniconda.sh -b -p $HOME/miniconda
+    export PATH="$HOME/miniconda/bin:$PATH"
+    hash -r
+    conda update -yq conda
+    conda create -y -n install_barcode fftw -c conda-forge
+    source activate install_barcode
+  fi
 
 script:
 # Build
