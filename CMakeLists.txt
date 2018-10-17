@@ -156,13 +156,13 @@ include_directories(include)
 add_library(barlib ${BARCODE_SOURCE_FILES})
 
 add_executable(barcode src/main.cc)
-target_link_libraries(barcode barlib)
+target_link_libraries(barcode PRIVATE barlib)
 
 #--------------------------------------- dependencies
 find_package(GSL REQUIRED)
 include_directories(${GSL_INCLUDE_DIRS})
-target_link_libraries(barcode ${GSL_LIBRARIES})
-#target_link_libraries(barlib ${GSL_LIBRARIES})
+target_link_libraries(barcode PRIVATE ${GSL_LIBRARIES})
+target_link_libraries(barlib PRIVATE ${GSL_LIBRARIES})
 
 find_package(OpenMP COMPONENTS CXX)
 if (NOT OPENMP_CXX_FOUND)
@@ -175,17 +175,17 @@ find_package(FFTW)
 
 include_directories(${FFTW_INCLUDE_DIRS})
 if (DOUBLE_PREC)
-    target_link_libraries(barcode ${FFTW_DOUBLE_LIB})
+    target_link_libraries(barcode PRIVATE ${FFTW_DOUBLE_LIB})
 #    target_link_libraries(barlib ${FFTW_DOUBLE_LIB})
     if (MULTITHREAD_FFTW)
-        target_link_libraries(barcode ${FFTW_DOUBLE_OPENMP_LIB})
+        target_link_libraries(barcode PRIVATE ${FFTW_DOUBLE_OPENMP_LIB})
 #        target_link_libraries(barlib ${FFTW_DOUBLE_OPENMP_LIB})
     endif()
 elseif(SINGLE_PREC)
-    target_link_libraries(barcode ${FFTW_FLOAT_LIB})
+    target_link_libraries(barcode PRIVATE ${FFTW_FLOAT_LIB})
 #    target_link_libraries(barlib ${FFTW_FLOAT_LIB})
     if (MULTITHREAD_FFTW)
-        target_link_libraries(barcode ${FFTW_FLOAT_OPENMP_LIB})
+        target_link_libraries(barcode PRIVATE ${FFTW_FLOAT_OPENMP_LIB})
 #        target_link_libraries(barlib ${FFTW_FLOAT_OPENMP_LIB})
     endif()
 endif()
@@ -295,8 +295,8 @@ if (MULTITHREAD)
 endif()
 
 # final things that are always used
-target_link_libraries(barcode m ncurses)
-#target_link_libraries(barlib m ncurses)
+target_link_libraries(barcode PRIVATE m ncurses)
+target_link_libraries(barlib PRIVATE m ncurses)
 
 # make a link for the most recent build
 # if Mercurial is present, use it to add the revision number to the output executable
@@ -336,9 +336,9 @@ ADD_DEFAULT_BINARY(powspec tools/powspec.cc)
 ## 2D correlation function generators (with or without interpolating resolution upscaling)
 ADD_DEFAULT_BINARY(2D_corr_fct tools/2D_corr_fct.cc)
 ADD_DEFAULT_BINARY(2D_corr_fct_interp tools/2D_corr_fct_interp.cc)
-target_link_libraries(2D_corr_fct_interp ${FFTW_DOUBLE_LIB})
+target_link_libraries(2D_corr_fct_interp PRIVATE ${FFTW_DOUBLE_LIB})
 if (MULTITHREAD_FFTW)
-    target_link_libraries(2D_corr_fct_interp ${FFTW_DOUBLE_OPENMP_LIB})
+    target_link_libraries(2D_corr_fct_interp PRIVATE ${FFTW_DOUBLE_OPENMP_LIB})
 endif()
 
 ## 2D power spectrum calculator
