@@ -1,0 +1,56 @@
+language: cpp
+
+matrix:
+  include:
+  - os: linux
+    addons:
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        packages:
+        - g++-7
+        - libfftw3-dev
+        - libgsl0-dev
+        - libncurses-dev
+    env:
+    - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+  - os: linux
+    addons:
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        - llvm-toolchain-trusty-5.0
+        packages:
+        - clang-5.0
+        - libfftw3-dev
+        - libgsl0-dev
+        - libncurses-dev
+    env:
+    - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
+  - os: osx
+    osx_image: xcode10
+    compiler: clang
+
+before_install:
+- eval "${MATRIX_EVAL}"
+
+install:
+#- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gsl; fi
+- |
+  if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+    wget "http://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh" -O miniconda.sh;
+    bash miniconda.sh -b -p $HOME/miniconda
+    export PATH="$HOME/miniconda/bin:$PATH"
+    hash -r
+    conda update -yq conda
+    conda install -y cmake gsl fftw -c conda-forge
+  fi
+
+script:
+# Build
+- mkdir $TRAVIS_BUILD_DIR/build
+- cd $TRAVIS_BUILD_DIR/build
+- cmake ..
+- make -j2
+# Testing
+#- run_test
