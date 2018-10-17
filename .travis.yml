@@ -35,7 +35,7 @@ before_install:
 - eval "${MATRIX_EVAL}"
 
 install:
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install fftw gsl; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install --build-from-source fftw; brew install gsl; fi
 
 script:
 # Build
