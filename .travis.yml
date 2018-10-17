@@ -1,33 +1,32 @@
 language: cpp
 
-addons:
-  apt:
-    update: true
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - libfftw3-dev
-      - libgsl-dev
-      - libncurses-dev
-
 matrix:
   include:
   - os: linux
     addons:
       apt:
+        update: true
         sources:
         - ubuntu-toolchain-r-test
         packages:
         - g++-7
+        - libfftw3-dev
+        - libgsl-dev
+        - libncurses-dev
     env:
     - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
   - os: linux
     addons:
       apt:
+        update: true
         sources:
+        - ubuntu-toolchain-r-test
         - llvm-toolchain-trusty-5.0
         packages:
         - clang-5.0
+        - libfftw3-dev
+        - libgsl-dev
+        - libncurses-dev
     env:
     - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
   - os: osx
