@@ -28,11 +28,15 @@ matrix:
     env:
     - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
   - os: osx
-    osx_image: xcode9.1
+    osx_image: xcode10
     compiler: clang
 
 before_install:
 - eval "${MATRIX_EVAL}"
+
+install:
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install fftw gsl; fi
+
 script:
 # Build
 - mkdir $TRAVIS_BUILD_DIR/build
