@@ -12,6 +12,8 @@
 
 #include "fftw_array.h"
 
+#include "IOfunctionsGen.h"
+
 #include <iomanip>
 #include <cassert>
 #include <sstream>
@@ -30,7 +32,7 @@
 
 using namespace std;
 
-ULONG count_lines(string fname)
+ULONG count_lines(const string& fname)
 {
   ifstream inStream;
   inStream.open(fname.data());
@@ -106,45 +108,11 @@ void change_cm2rm (float *A,real_prec *B,int N1,int N2,int N3)
       }
 }
 
-int get_scalar(string FNAME, real_prec *OUT, unsigned int N1, unsigned int N2, unsigned int N3) {
-  ULONG N=N1*N2*N3;	
-  fftw_array<real_prec> dummy(N);
 
-  string fname=FNAME+string(".dat");
-  // cout<<"... reading file "<<FNAME<<endl;
-  bifstream inStream(fname.data());
-  assert(inStream.is_open());
-  inStream.get(dummy.data,N);
-  inStream.close();
-
-  for(ULONG i=0;i<N;i++)
-    OUT[i]=dummy[i];
-
-  return 0;
-}
-
-
-void dump_scalar(real_prec *A_rm, unsigned int N1, unsigned int N2, unsigned int N3, string fname) {
-  ULONG N=N1*N2*N3;
-
-  fftw_array<real_prec> dummy(N);
-
-  for(ULONG i=0;i<N;i++)
-    dummy[i]=A_rm[i];
-
-  string FNAME=fname+string(".dat");
-#ifdef DEBUG
-  cout<<"... writing file "<<FNAME<<endl;
-#endif // DEBUG
-  bofstream outStream(FNAME.data());
-  assert(outStream.is_open());
-  outStream.put(dummy.data,N);
-  outStream.close();
-}
 
 // EGP: handy function for debugging, only for cubical boxes and only when not using amira mesh!
 // Note: N1 is the linear size.
-void quick_dump_scalar(real_prec *A_rm, unsigned int N1, string fname, unsigned int sample_number = 0,
+void quick_dump_scalar(real_prec *A_rm, unsigned int N1, const string& fname, unsigned int sample_number = 0,
                        bool prepend_timestamp = true)
 {
   stringstream filename;
@@ -163,7 +131,7 @@ void quick_dump_scalar(real_prec *A_rm, unsigned int N1, string fname, unsigned 
 }
 
 // Dump all delta's
-void dump_deltas(struct DATA *data, real_prec *deltaLAG, real_prec *deltaS, string fname_append)
+void dump_deltas(struct DATA *data, real_prec *deltaLAG, real_prec *deltaS, const string& fname_append)
 {
   // TODO: add appendage to signify exact Eulerian model (Zel'dovich, 2LPT, ALPT)
 
@@ -200,14 +168,24 @@ void dump_deltas(struct DATA *data, real_prec *deltaLAG, real_prec *deltaS, stri
   }
 }
 
-// EGP: another version, which only takes one length argument
-void read_array(string FNAME, real_prec *out, ULONG N)
+int get_scalar(const string& FNAME, real_prec *OUT, unsigned int N1, unsigned int N2, unsigned int N3) {
+  read_array(FNAME, OUT, N1, N2, N3);
+  return 0;
+}
+
+void read_array(const string& fname, real_prec *out, unsigned int N1, unsigned int N2, unsigned int N3)
+{
+  ULONG N=N1*N2*N3;
+  read_array(fname, out, N);
+}
+
+void read_array(const string& FNAME, real_prec *out, ULONG N)
 {
   fftw_array<real_prec> dummy(N);
 
   string fname=FNAME+string(".dat");
   // cout<<"... reading file "<<FNAME<<endl;
-  
+
   bifstream inStream(fname.data());
   assert(inStream.is_open());
   inStream.get(dummy.data,N);
@@ -217,13 +195,18 @@ void read_array(string FNAME, real_prec *out, ULONG N)
     out[i]=dummy[i];
 }
 
-void read_array(string fname, real_prec *out, unsigned int N1, unsigned int N2, unsigned int N3)
-{
-  ULONG N=N1*N2*N3;
-  read_array(fname, out, N);
+
+void dump_scalar(real_prec *A_rm, unsigned int N1, unsigned int N2, unsigned int N3, const string& fname) {
+  write_array(fname, A_rm, N1, N2, N3);
 }
 
-void write_array(string fname, real_prec *A_rm, ULONG N)
+void write_array(const string& fname, real_prec *A_rm, unsigned int N1, unsigned int N2, unsigned int N3)
+{
+  ULONG N=N1*N2*N3;
+  write_array(fname, A_rm, N);
+}
+
+void write_array(const string& fname, real_prec *A_rm, ULONG N)
 {
   fftw_array<real_prec> dummy(N);
 
@@ -240,14 +223,8 @@ void write_array(string fname, real_prec *A_rm, ULONG N)
   outStream.close();
 }
 
-void write_array(string fname, real_prec *A_rm, unsigned int N1, unsigned int N2, unsigned int N3)
-{
-  ULONG N=N1*N2*N3;
-  write_array(fname, A_rm, N);
-}
 
-
-void dump_signal_it(ULONG iGibbs, unsigned int N1, unsigned int N2, unsigned int N3, real_prec *signal, string filnam) {
+void dump_signal_it(ULONG iGibbs, unsigned int N1, unsigned int N2, unsigned int N3, real_prec *signal, const string& filnam) {
   ULONG N=N1*N2*N3;
   fftw_array<real_prec> dummy(N);
 
