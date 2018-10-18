@@ -7,7 +7,7 @@
 #
 
 cmake_minimum_required(VERSION 3.9.0)
-# 3.1.3 for set(CMAKE_CXX_STANDARD 11), 3.9.0 for FindOpenMP, all other features are in 3.0 at least (didn't check 2.x)
+# 3.8 for target_compile_features(target PRIVATE/PUBLIC cxx_std_11/17), 3.9.0 for FindOpenMP, all other features are in 3.0 at least (didn't check 2.x)
 
 
 #--------------------------------------- download and setup FindFFTW
@@ -107,8 +107,6 @@ if ( NOT (GFINDIFF OR GFFT) )
     message(FATAL_ERROR "Must choose one of GFFT and GFINDIFF!")
 endif()
 
-set(CMAKE_CXX_STANDARD 11)
-
 set(BARCODE_SOURCE_FILES
 # CORE
         src/barcoderunner.cc
@@ -154,6 +152,7 @@ set(BARCODE_SOURCE_FILES
 include_directories(include)
 
 add_library(barlib ${BARCODE_SOURCE_FILES})
+target_compile_features(barlib PUBLIC cxx_std_11)
 
 add_executable(barcode src/main.cc)
 target_link_libraries(barcode PRIVATE barlib)
