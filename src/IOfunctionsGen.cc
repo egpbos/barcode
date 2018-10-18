@@ -112,8 +112,8 @@ void change_cm2rm (float *A,real_prec *B,int N1,int N2,int N3)
 
 // EGP: handy function for debugging, only for cubical boxes and only when not using amira mesh!
 // Note: N1 is the linear size.
-void quick_dump_scalar(real_prec *A_rm, unsigned int N1, const string& fname, unsigned int sample_number = 0,
-                       bool prepend_timestamp = true)
+void quick_dump_scalar(real_prec *A_rm, unsigned int N1, const string& fname, unsigned int sample_number,
+                       bool prepend_timestamp)
 {
   stringstream filename;
   if (prepend_timestamp)
