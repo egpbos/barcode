@@ -112,7 +112,7 @@ int get_scalar(string FNAME, real_prec *OUT, unsigned int N1, unsigned int N2, u
 
   string fname=FNAME+string(".dat");
   // cout<<"... reading file "<<FNAME<<endl;
-  bifstream inStream(fname.data(),file_is_natural);
+  bifstream inStream(fname.data());
   assert(inStream.is_open());
   inStream.get(dummy.data,N);
   inStream.close();
@@ -136,7 +136,7 @@ void dump_scalar(real_prec *A_rm, unsigned int N1, unsigned int N2, unsigned int
 #ifdef DEBUG
   cout<<"... writing file "<<FNAME<<endl;
 #endif // DEBUG
-  bofstream outStream(FNAME.data(),file_is_natural);
+  bofstream outStream(FNAME.data());
   assert(outStream.is_open());
   outStream.put(dummy.data,N);
   outStream.close();
@@ -208,7 +208,7 @@ void read_array(string FNAME, real_prec *out, ULONG N)
   string fname=FNAME+string(".dat");
   // cout<<"... reading file "<<FNAME<<endl;
   
-  bifstream inStream(fname.data(),file_is_natural);
+  bifstream inStream(fname.data());
   assert(inStream.is_open());
   inStream.get(dummy.data,N);
   inStream.close();
@@ -234,7 +234,7 @@ void write_array(string fname, real_prec *A_rm, ULONG N)
 #ifdef DEBUG
   cout<<"... writing file "<<FNAME<<endl;
 #endif // DEBUG
-  bofstream outStream(FNAME.data(),file_is_natural);
+  bofstream outStream(FNAME.data());
   assert(outStream.is_open());
   outStream.put(dummy.data,N);
   outStream.close();
@@ -262,7 +262,7 @@ void dump_signal_it(ULONG iGibbs, unsigned int N1, unsigned int N2, unsigned int
 #ifdef DEBUG
   cout<<"... writing file "<<FileName<<endl;
 #endif // DEBUG
-  bofstream outStream(FileName.data(),file_is_natural);
+  bofstream outStream(FileName.data());
   assert(outStream.is_open());
   outStream.put(dummy.data,N);
   outStream.close();
