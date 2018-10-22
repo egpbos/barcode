@@ -6,21 +6,9 @@
  *  Authors: Martin Reinecke, Reinhard Hell
  */
 
-/*
- * TODO: (EGP) clean up unused things
- */
-
-// if we are using g++, check for version 3.0 or higher
-#ifdef __GNUC__
-#if (__GNUC__<3)
-#error your C++ compiler is too old. g++ version 3.0 or higher is required.
-#endif
-#endif
-
 #include <fstream>
 #include <iostream>
 #include "cxxutils.h"
-
 
 std::string trim (const std::string &orig) {
   std::string::size_type p1=orig.find_first_not_of(" \t");
@@ -29,15 +17,12 @@ std::string trim (const std::string &orig) {
   return orig.substr(p1,p2-p1+1);
 }
 
-
-void parse_file (const std::string &filename, std::map<std::string, std::string> &dict)
-  {
+void parse_file (const std::string &filename, std::map<std::string, std::string> &dict) {
   int lineno=0;
   dict.clear();
     std::ifstream inp(filename.c_str());
   planck_assert(inp.good(),"Could not open parameter file "+filename);
-  while (inp)
-    {
+  while (inp) {
     std::string line;
     getline(inp, line);
     ++lineno;
@@ -51,20 +36,18 @@ void parse_file (const std::string &filename, std::map<std::string, std::string>
         if (key=="")
           std::cerr << "Warning: empty key in " << filename << ", line "
                << lineno << std::endl;
-        else
-          {
+        else {
           if (dict.find(key)!=dict.end())
             std::cerr << "Warning: key " << key << " multiply defined in "
                  << filename << ", line " << lineno << std::endl;
           dict[key]=value;
-          }
         }
-      else
+      } else
         std::cerr << "Warning: unrecognized format in " << filename << ", line "
              << lineno << ":\n" << line << std::endl;
-      }
     }
   }
+}
 
 
 template<> void stringToData (const std::string &x, std::string &value)
