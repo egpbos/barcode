@@ -11,7 +11,6 @@
 #include <map>
 #include <string>
 #include <iostream>
-#include "simparams.h"
 #include "cxxutils.h"
 
 class paramfile
@@ -60,26 +59,6 @@ class paramfile
       return deflt;
       }
 
-    const params_type &getParams() const
-      { return params; }
-
-    template<typename T> void findParam
-      (const std::string &key, T &value) const
-      { value = find<T>(key); }
-
-    template<typename T> void findHeaderParam(const std::string& key,
-      T& value, simparams& headerParams, const std::string& headerKey,
-      const std::string& headerComment) const
-      {
-      findParam(key, value);
-      headerParams.add(key, headerKey, dataToString(value), headerComment);
-      }
-    void findSourceParam(const std::string& key, std::string& value,
-      simparams& headerParams) const
-      {
-      findParam(key, value);
-      headerParams.add_source_file(value);
-      }
   };
 
 #endif
