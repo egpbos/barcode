@@ -175,17 +175,17 @@ find_package(FFTW)
 include_directories(${FFTW_INCLUDE_DIRS})
 if (DOUBLE_PREC)
     target_link_libraries(barcode PRIVATE ${FFTW_DOUBLE_LIB})
-#    target_link_libraries(barlib ${FFTW_DOUBLE_LIB})
+    target_link_libraries(barlib PRIVATE ${FFTW_DOUBLE_LIB})
     if (MULTITHREAD_FFTW)
         target_link_libraries(barcode PRIVATE ${FFTW_DOUBLE_OPENMP_LIB})
-#        target_link_libraries(barlib ${FFTW_DOUBLE_OPENMP_LIB})
+        target_link_libraries(barlib PRIVATE ${FFTW_DOUBLE_OPENMP_LIB})
     endif()
 elseif(SINGLE_PREC)
     target_link_libraries(barcode PRIVATE ${FFTW_FLOAT_LIB})
-#    target_link_libraries(barlib ${FFTW_FLOAT_LIB})
+    target_link_libraries(barlib PRIVATE ${FFTW_FLOAT_LIB})
     if (MULTITHREAD_FFTW)
         target_link_libraries(barcode PRIVATE ${FFTW_FLOAT_OPENMP_LIB})
-#        target_link_libraries(barlib ${FFTW_FLOAT_OPENMP_LIB})
+        target_link_libraries(barlib PRIVATE ${FFTW_FLOAT_OPENMP_LIB})
     endif()
 endif()
 
@@ -310,6 +310,10 @@ target_link_libraries(barlib PRIVATE m ncurses)
 #            COMMENT "Renamed output binary to include Mercurial revision information and created symbolic link barcode_latest_build to new path.")
 #endif(HG_FOUND)
 
+#########
+# TESTS #
+#########
+add_subdirectory(test)
 
 ##################
 # OTHER BINARIES #
