@@ -20,7 +20,7 @@ std::string trim (const std::string &orig) {
 void parse_file (const std::string &filename, std::map<std::string, std::string> &dict) {
   int lineno=0;
   dict.clear();
-    std::ifstream inp(filename.c_str());
+  std::ifstream inp(filename.c_str());
   planck_assert(inp.good(),"Could not open parameter file "+filename);
   while (inp) {
     std::string line;
