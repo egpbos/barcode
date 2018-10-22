@@ -53,4 +53,8 @@ script:
 - cmake ..
 - make -j2
 # Testing
-#- run_test
+- |
+  cd $TRAVIS_BUILD_DIR/test
+  $TRAVIS_BUILD_DIR/build/test/io_array
+  cd -
+
