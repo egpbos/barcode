@@ -18,10 +18,10 @@
 #include <cassert>
 #include <sstream>
 #include <netinet/in.h>
+#include <fstream>
 
 #include <gsl/gsl_randist.h>
 
-#include "../planck/bstream.h"
 #include "../planck/paramfile.h"
 
 // for dump_deltas:
@@ -179,20 +179,25 @@ void read_array(const string& fname, real_prec *out, unsigned int N1, unsigned i
   read_array(fname, out, N);
 }
 
-void read_array(const string& FNAME, real_prec *out, ULONG N)
-{
-  fftw_array<real_prec> dummy(N);
 
-  string fname=FNAME+string(".dat");
-  // cout<<"... reading file "<<FNAME<<endl;
+std::string add_extension_if_missing(const std::string& fn, const std::string ext = ".dat") {
+  if (fn.rfind('.') == fn.npos) {
+    return fn + ext;
+  } else {
+    return fn;
+  }
+}
 
-  bifstream inStream(fname.data());
-  assert(inStream.is_open());
-  inStream.get(dummy.data,N);
-  inStream.close();
 
-  for(ULONG i=0;i<N;i++)
-    out[i]=dummy[i];
+void read_array(const string& FNAME, real_prec *out, ULONG N) {
+  string fname = add_extension_if_missing(FNAME);
+
+  std::ifstream inStream(fname.c_str(), std::ios::binary);
+  if(inStream.is_open()) {
+    inStream.read(reinterpret_cast<char *>(out), static_cast<std::streamsize>(N * sizeof(real_prec)));
+  } else {
+    throw BarcodeException(std::string("In read_array: error opening file ") + fname);
+  }
 }
 
 
@@ -206,41 +211,29 @@ void write_array(const string& fname, real_prec *A_rm, unsigned int N1, unsigned
   write_array(fname, A_rm, N);
 }
 
-void write_array(const string& fname, real_prec *A_rm, ULONG N)
-{
-  fftw_array<real_prec> dummy(N);
+void write_array(const string& fname, real_prec *A_rm, ULONG N) {
+  string FNAME = add_extension_if_missing(fname);
 
-  for(ULONG i=0;i<N;i++)
-    dummy[i]=A_rm[i];
-
-  string FNAME=fname+string(".dat");
 #ifdef DEBUG
   cout<<"... writing file "<<FNAME<<endl;
 #endif // DEBUG
-  bofstream outStream(FNAME.data());
-  assert(outStream.is_open());
-  outStream.put(dummy.data,N);
-  outStream.close();
+
+  std::ofstream outStream(FNAME.c_str(), std::ios::binary);
+  if (outStream.is_open()) {
+    outStream.write(reinterpret_cast<const char *>(A_rm), static_cast<std::streamsize>(N * sizeof(real_prec)));
+  } else {
+    throw BarcodeException(std::string("In write_array: error opening file ") + FNAME);
+  }
 }
 
 
 void dump_signal_it(ULONG iGibbs, unsigned int N1, unsigned int N2, unsigned int N3, real_prec *signal, const string& filnam) {
   ULONG N=N1*N2*N3;
-  fftw_array<real_prec> dummy(N);
-
-  for(ULONG i=0;i<N;i++)
-    dummy[i]=signal[i];
 
   int bmax=100;
-  char buffer1[bmax];  	    
-  sprintf(buffer1,"_%lu.dat",iGibbs); // EGP: %d -> %lu
+  char buffer1[bmax];
+  sprintf(buffer1,"_%lu.dat", iGibbs); // EGP: %d -> %lu
 
   string FileName=filnam+buffer1;
-#ifdef DEBUG
-  cout<<"... writing file "<<FileName<<endl;
-#endif // DEBUG
-  bofstream outStream(FileName.data());
-  assert(outStream.is_open());
-  outStream.put(dummy.data,N);
-  outStream.close();
+  write_array(FileName, signal, N);
 }

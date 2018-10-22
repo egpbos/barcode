@@ -35,7 +35,7 @@ SCENARIO("The array IO functions read_array and write_array should respectively 
   GIVEN("An fftw_array<real_prec> of shape 2x2x2 containing numbers 1-8") {
     unsigned long N = 2 * 2 * 2;
     fftw_array<real_prec> array(N);
-    std::iota(array + 0, array + N, 1);
+    std::iota(array.data, array.data + N, 1);
 
     WHEN("write_array is called on it") {
       write_array("io_array_test", array, N);
