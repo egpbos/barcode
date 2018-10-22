@@ -1,6 +1,3 @@
-# CTest (needed for catch_discover_tests?)
-enable_testing()
-
 # Prepare "Catch" library for other executables
 set(CATCH_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/ext/catch2)
 add_library(Catch INTERFACE)
