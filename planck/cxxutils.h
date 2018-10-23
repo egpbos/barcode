@@ -14,7 +14,6 @@
 #include <sstream>
 #include <iomanip>
 #include "message_error.h"
-#include "datatypes.h"
 
 
 //! Throws a Message_error containing \a msg if \a testval is false.
@@ -53,18 +52,13 @@ template<typename T> std::string dataToString (const T &x)
 
 template<typename T> void stringToData (const std::string &x, T &value)
 {
-  std::string error = std::string("conversion error in stringToData<")
-                 + type2typename<T>()
-                 +">(\""+x+"\")";
   std::istringstream strstrm(x);
   strstrm >> value;
-  if (!strstrm)
-    throw Message_error(error);
+  if (!strstrm) throw Message_error("conversion error in stringToData");
 
   std::string rest;
   strstrm >> rest;
-//  rest=trim(rest);
-  if (rest.length()>0) throw Message_error(error);
+  if (rest.length()>0) throw Message_error("conversion error in stringToData (rest data left)");
 }
 
 

@@ -17,8 +17,6 @@
 #include <cassert>
 #include <ncurses.h>
 
-#include "../planck/paramfile.h"
-
 #include "struct_main.h"
 #include "struct_hamil.h"
 #include "fftw_array.h"

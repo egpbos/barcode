@@ -11,8 +11,6 @@
 #include "struct_main.h"
 #include "fftw_array.h"
 
-#include "../planck/paramfile.h"
-
 #include "cosmo.h"
 #include "EqSolvers.h"
 #include "massFunctions.h"

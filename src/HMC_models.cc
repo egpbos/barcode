@@ -17,7 +17,6 @@
 #include <gsl/gsl_integration.h>
 
 #include "fftw_array.h"
-#include "../planck/paramfile.h"
 
 #include "math_funcs.h"
 #include "Lag2Eul.h"

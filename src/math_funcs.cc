@@ -19,7 +19,6 @@
 #include <string>
 
 #include "fftw_array.h"
-#include "../planck/paramfile.h"
 #include "IOfunctionsGen.h"
 
 #include "BarcodeException.h"

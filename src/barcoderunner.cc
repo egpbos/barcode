@@ -19,8 +19,6 @@
 #include <gsl/gsl_randist.h>
 #include <gsl/gsl_integration.h>
 
-#include "../planck/paramfile.h"
-
 #include "transf.h"
 #include "field_statistics.h"
 #include "Lag2Eul.h"

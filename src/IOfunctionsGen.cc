@@ -22,8 +22,6 @@
 
 #include <gsl/gsl_randist.h>
 
-#include "../planck/paramfile.h"
-
 // for dump_deltas:
 #include "Lag2Eul.h"
 #include "HMC_models.h"

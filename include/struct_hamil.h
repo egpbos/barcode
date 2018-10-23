@@ -36,7 +36,6 @@
 /* #include <gsl/gsl_sf.h> */
 
 /* #include "fftw_array.h" */
-/* #include "planck/paramfile.h" */
 
 /* #include "define_opt.h" */
 
