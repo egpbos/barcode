@@ -12,7 +12,12 @@ target_link_libraries(catch_main PUBLIC Catch)
 target_compile_features(catch_main PUBLIC cxx_std_11)
 
 # test executables
-add_executable(io_array io_array.cpp)
-target_link_libraries(io_array PRIVATE barlib catch_main)
-catch_discover_tests(io_array WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+function(add_default_test target_name source_file)
+    add_executable(${target_name} ${source_file})
+    target_link_libraries(${target_name} PRIVATE barlib catch_main)
+    catch_discover_tests(${target_name} WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+endfunction(add_default_test)
+
+add_default_test(io_array io_array.cpp)
 #target_compile_features(io_array PRIVATE cxx_std_17)
+add_default_test(parameter_input_file parameter_input_file.cpp)
