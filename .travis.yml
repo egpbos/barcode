@@ -65,6 +65,8 @@ script:
 - cmake -DCOVERAGE=$COVERAGE ..
 - make -j2
 - if [[ "$COVERAGE" == "ON" ]]; then gem install coveralls-lcov; fi
+# base line coverage
+- if [[ "$COVERAGE" == "ON" ]]; then lcov -c -i -d $TRAVIS_BUILD_DIR -o baseline.info; fi
 # Testing
 - |
   cd $TRAVIS_BUILD_DIR/test
@@ -77,7 +79,8 @@ after_success:
   if [[ "${COVERAGE}" == "ON" ]]; then
     cd ${TRAVIS_BUILD_DIR}
     lcov --directory . --capture --output-file coverage.info # capture coverage info
-    lcov --remove coverage.info 'tests/*' '/usr/*' 'miniconda/*' --output-file coverage.info # filter out system and test code and external includes
+    lcov -a baseline.info -a coverage.info -o coverage.info
+    lcov --remove coverage.info 'test/*' '/usr/*' 'miniconda/*' --output-file coverage.info # filter out system and test code and external includes
     lcov --list coverage.info # debug before upload
     coveralls-lcov coverage.info # uploads to coveralls
   fi
