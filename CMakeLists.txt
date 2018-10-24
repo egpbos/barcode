@@ -90,7 +90,15 @@ endif()
 #--------------------------------------- Things for special behaviour
 option(SCSMOO "[NOT TESTED!] Smooth the spherical collapse part of the displacement field with a smoothing length kthsc2. This variable is currently not implemented in the code. kthsc is implemented and is equal to kth, which equals ksmooth from input.par. Something similar should probably be defined for this." OFF)
 
+OPTION(COVERAGE "Enable coverage compile flags (gcc only!)" OFF)
+
 #--------------------------------------- NEEDS ATTENTION
+
+if (COVERAGE)
+    if(NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+        message(FATAL_ERROR "Coverage can only be used with GNU and Clang compilers!")
+    endif()
+endif()
 
 # CONSIDER EITHER TAKING THESE OPTIONS OUT OR ACTUALLY GIVING THEM CODE-WIDE IMPACT:
 option(GFFT "Use FFT based derivative (NOT REALLY USED, currently only used in non-Zel'dovich Lag2Eul via calc_m2v_mem and in EigenValuesTweb)." OFF)

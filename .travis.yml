@@ -2,39 +2,51 @@ language: cpp
 
 matrix:
   include:
-  - os: linux
-    addons:
-      apt:
-        sources:
-        - ubuntu-toolchain-r-test
-        packages:
-        - g++-7
-        - libfftw3-dev
-        - libgsl0-dev
-        - libncurses-dev
-    env:
-    - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
-  - os: linux
-    addons:
-      apt:
-        sources:
-        - ubuntu-toolchain-r-test
-        - llvm-toolchain-trusty-5.0
-        packages:
-        - clang-5.0
-        - libfftw3-dev
-        - libgsl0-dev
-        - libncurses-dev
-    env:
-    - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
-  - os: osx
-    osx_image: xcode10
-    compiler: clang
+    # code coverage:
+    - os: linux
+      addons:
+        apt:
+          sources:
+          - ubuntu-toolchain-r-test
+          packages:
+          - g++-7
+          - libfftw3-dev
+          - libgsl0-dev
+          - libncurses-dev
+          - lcov
+      env:
+      - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7 && COVERAGE=ON"
+    - os: linux
+      addons:
+        apt:
+          sources:
+          - ubuntu-toolchain-r-test
+          packages:
+          - g++-7
+          - libfftw3-dev
+          - libgsl0-dev
+          - libncurses-dev
+      env:
+      - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+    - os: linux
+      addons:
+        apt:
+          sources:
+          - ubuntu-toolchain-r-test
+          - llvm-toolchain-trusty-5.0
+          packages:
+          - clang-5.0
+          - libfftw3-dev
+          - libgsl0-dev
+          - libncurses-dev
+      env:
+      - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
+    - os: osx
+      osx_image: xcode10
+      compiler: clang
 
 before_install:
 - eval "${MATRIX_EVAL}"
-
-install:
 #- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gsl; fi
 - |
   if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
@@ -50,11 +62,22 @@ script:
 # Build
 - mkdir $TRAVIS_BUILD_DIR/build
 - cd $TRAVIS_BUILD_DIR/build
-- cmake ..
+- cmake -DCOVERAGE=$COVERAGE ..
 - make -j2
+- if [[ "$COVERAGE" == "ON" ]]; then gem install coveralls-lcov; fi
 # Testing
 - |
   cd $TRAVIS_BUILD_DIR/test
   $TRAVIS_BUILD_DIR/build/test/io_array
   $TRAVIS_BUILD_DIR/build/test/parameter_input_file
   cd -
+
+after_success:
+- |
+  if [[ "${COVERAGE}" == "ON" ]]; then
+    cd ${TRAVIS_BUILD_DIR}/build
+    lcov --directory . --capture --output-file coverage.info # capture coverage info
+    lcov --remove coverage.info 'tests/*' '/usr/*' 'miniconda/*' --output-file coverage.info # filter out system and test code and external includes
+    lcov --list coverage.info # debug before upload
+    coveralls-lcov coverage.info # uploads to coveralls
+  fi
