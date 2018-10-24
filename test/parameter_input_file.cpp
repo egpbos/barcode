@@ -9,7 +9,7 @@
 #include <string>
 
 #include "define_opt.h" // real_prec
-#include "../planck/paramfile.h"
+#include <ini_reader.hpp>
 
 #include <catch.hpp>
 
@@ -19,7 +19,7 @@ SCENARIO("Reading a parameter input file.") {
     std::string filename("data/input.par");
 
     WHEN("we load the file") {
-      paramfile params(filename);
+      parameter_inifile params(filename);
       THEN("we should be able to correctly load its contents") {
         REQUIRE(params.find<bool>("correct_delta") == true);
         REQUIRE(params.find<int>("calc_h") == 2);

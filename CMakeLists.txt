@@ -114,6 +114,7 @@ set(BARCODE_SOURCE_FILES
         src/sample_maker.cc
 # CONFIG FILE
         planck/cxxutils.cc  # PARSING
+        src/ini_reader.cpp
         src/init_par.cc
 # HMC
         src/call_hamil.cc
