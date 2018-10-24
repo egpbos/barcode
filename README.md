@@ -70,10 +70,8 @@ Contributions are very welcome! Please don't hesitate to propose ideas for impro
 ## License
 The original contributions made as part of this code are distributed under the MIT license (see `LICENSE` file).
 
-Barcode makes use of an early version of the [Planck LevelS toolkit](https://sourceforge.net/projects/planck-ls/), which is distributed under the GNU Public License v2 (see `planck/LICENSE` file).
+When compiled, this code must link to FFTW 3 and the GNU Scientific Library (GSL).
+FFTW is distributed under the GNU Public License v2 or a later version, GSL under GPL v3.
+This means that any redistribution of Barcode in binary form is subject to GPL v3 terms.
 
-This code depends on FFTW 3, the GNU Scientific Library, both distributed under the GPL as well.
-
-These three dependencies mean that any redistribution of Barcode in binary form is subject to GPLv2 terms.
-
-Barcode also depends on ncurses, which is distributed under the X11 license, a permissive license similar to the MIT license.
+<!-- Barcode also depends on ncurses, which is distributed under the X11 license, a permissive license similar to the MIT license. -->

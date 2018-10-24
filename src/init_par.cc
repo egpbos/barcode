@@ -20,7 +20,7 @@
 #include "define_opt.h"
 
 #include "fftwrapper.h"
-#include "../planck/paramfile.h"
+#include "ini_reader.hpp"
 
 #include "struct_main.h"
 #include "cosmo.h"
@@ -41,7 +41,7 @@ void INIT_PARAMS(struct DATA *data) {
   data->numerical->rejections = 0; // EGP: start counting
 
   char fname_PAR[100]="input.par";
-  paramfile params (fname_PAR);
+  parameter_inifile params (fname_PAR);
 
   int inputmode=params.find<int>("inputmode");
 

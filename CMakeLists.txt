@@ -87,9 +87,6 @@ if ( SINGLE_PREC AND DOUBLE_PREC )
     message(FATAL_ERROR "Cannot use SINGLE_PREC and DOUBLE_PREC at same time!")
 endif()
 
-#--------------------------------------- Testing and Debugging options
-option(PLANCK_SILENT "Makes the Planck LevelS package functions silent (used for parsing configuration input file). Turn off to make them more verbose." ON)
-
 #--------------------------------------- Things for special behaviour
 option(SCSMOO "[NOT TESTED!] Smooth the spherical collapse part of the displacement field with a smoothing length kthsc2. This variable is currently not implemented in the code. kthsc is implemented and is equal to kth, which equals ksmooth from input.par. Something similar should probably be defined for this." OFF)
 
@@ -113,7 +110,6 @@ set(BARCODE_SOURCE_FILES
         src/protocol.cc         # initialization of ... not sure what exactly. TODO: REMOVE, ONLY ONE THAT'S USED IS RESTART_PROTOCOL
         src/sample_maker.cc
 # CONFIG FILE
-        planck/cxxutils.cc  # PARSING
         src/ini_reader.cpp
         src/init_par.cc
 # HMC
@@ -270,10 +266,6 @@ endif()
 
 if (DOUBLE_PREC)
     add_definitions(-DDOUBLE_PREC)
-endif()
-
-if (PLANCK_SILENT)
-    add_definitions(-DPLANCK_SILENT)
 endif()
 
 if (SCSMOO)
