@@ -56,5 +56,5 @@ script:
 - |
   cd $TRAVIS_BUILD_DIR/test
   $TRAVIS_BUILD_DIR/build/test/io_array
+  $TRAVIS_BUILD_DIR/build/test/parameter_input_file
   cd -
-
