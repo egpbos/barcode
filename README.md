@@ -28,9 +28,10 @@ In bibtex format:
 }
 ```
 
-A Zenodo DOI is provided for each release to cite the software itself (preferably in addition to citing the paper above). Latest release:
+Unique identifiers for citing the software itself (preferably in addition to citing the paper above) are provided through Zenodo (a unique DOI for each Barcode release) and the Astrophysics Source Code Library (all Barcode versions).
 
 [![DOI](https://zenodo.org/badge/152633059.svg)](https://zenodo.org/badge/latestdoi/152633059)
+<a href="http://ascl.net/1810.002"><img src="https://img.shields.io/badge/ascl-1810.002-blue.svg?colorB=262255" alt="ascl:1810.002" /></a>
 
 This code was previously described and applied in [conference proceedings](https://arxiv.org/abs/1611.01220) and in [Patrick's PhD thesis](https://www.rug.nl/research/portal/en/publications/clusters-voids-and-reconstructions-of-the-cosmic-web(0f7c3d17-9661-4b9f-a27c-dfac2990b844).html).
 
