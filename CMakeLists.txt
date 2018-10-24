@@ -98,6 +98,12 @@ if (COVERAGE)
     if(NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND NOT CMAKE_CXX_COMPILER_ID MATCHES "GNU")
         message(FATAL_ERROR "Coverage can only be used with GNU and Clang compilers!")
     endif()
+
+    message("Adding coverage compile flags")
+    #    set_target_properties(${TARGET} PROPERTIES COMPILE_FLAGS -g -O0 --coverage)
+    #    add_compile_options(-g -O0 --coverage)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0")     # debug, no optimisation
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage") # enabling coverage
 endif()
 
 # CONSIDER EITHER TAKING THESE OPTIONS OUT OR ACTUALLY GIVING THEM CODE-WIDE IMPACT:

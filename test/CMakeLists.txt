@@ -17,11 +17,3 @@ endfunction(add_default_test)
 add_default_test(io_array io_array.cpp)
 #target_compile_features(io_array PRIVATE cxx_std_17)
 add_default_test(parameter_input_file parameter_input_file.cpp)
-
-if(COVERAGE)
-    message("Adding coverage compile flags")
-    #    set_target_properties(${TARGET} PROPERTIES COMPILE_FLAGS -g -O0 --coverage)
-    #    add_compile_options(-g -O0 --coverage)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0")     # debug, no optimisation
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage") # enabling coverage
-endif()

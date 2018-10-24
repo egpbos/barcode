@@ -80,7 +80,7 @@ after_success:
     cd ${TRAVIS_BUILD_DIR}
     lcov --directory . --capture --output-file coverage.info # capture coverage info
     lcov -a baseline.info -a coverage.info -o coverage.info
-    lcov --remove coverage.info 'test/*' '/usr/*' 'miniconda/*' --output-file coverage.info # filter out system and test code and external includes
+    lcov --remove coverage.info 'test/*' '/usr/*' 'miniconda/*' 'ext/*' --output-file coverage.info # filter out system and test code and external includes
     lcov --list coverage.info # debug before upload
     coveralls-lcov coverage.info # uploads to coveralls
   fi
