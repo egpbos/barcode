@@ -1,5 +1,11 @@
 language: cpp
 
+env:
+  global:
+  # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+  #   via the "travis encrypt" command using the project repo's public key
+  - secure: "o/46Dvf4DzhOqWhsHEQ+uwgd2bo3sGKHbiWyn9PfqDktf1FiBS9DpKdHUAEpAAdMmQKnzYYUqHqCJzcXtdntgas1vZOFigO/TkocyRQ9IJXFJV4JC8qRJrnYAaQYJ0PcxftHbHSLtmKEPYqZhAyPb220HkRVsuSFyL8PG9Zxk+Ub0pfBECx/ueeg8jCXtqrbgQitaSwVj7lLVi4xv2lwSeKF8vabPTv+ZBGPdDHzeq2sJvuxqoKgyHWslTq3hiFCdwoEOn6oL3S5OFVXyBSKb4aZv5LUwxWo57TqFm01W42o1J1sz9vfjtsl4mDTkGkQs1BfSichL+KR4OxiFvBi4a7sjl1naYhYqyC1F0VvKLMHOTT8nx8HDA03HqALnxwHkEfy4GGveSwVBxFtvfTvipspNDSBU4muS8i22v5HfMv48cgkFIlJGJOOzWnK9mvVD6taET1RHBKUPKWfHukVf6dG1q/o/NqoFB2sn3eQuRUFpR+i9ulEkVpVmty4g95/IhNQiXf/iVhez+eaBEWAdSQMnvifTmA1e04kYpfcXM7nGb9CB1aESBnByxlLT/8extpX+PQaXurxGhpuKZaasRpdDLtd2Nrg6UYxBggxPinzxZ+hHD7KRF1efu2IgToqufFi+Bim5tkqJ3Di2LUvOkY+w0cojPPHLLujE2xQ+Kc="
+
 matrix:
   include:
   - os: linux
@@ -33,8 +39,7 @@ matrix:
 
 before_install:
 - eval "${MATRIX_EVAL}"
-
-install:
+- echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 #- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install gsl; fi
 - |
   if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
@@ -45,6 +50,16 @@ install:
     conda update -yq conda
     conda install -y cmake gsl fftw -c conda-forge
   fi
+
+addons:
+  coverity_scan:
+    project:
+      name: "egpbos/barcode"
+      description: "Bayesian reconstruction of cosmic density fields"
+    notification_email: egpbos@gmail.com
+    build_command_prepend: "mkdir $TRAVIS_BUILD_DIR/build; cd $TRAVIS_BUILD_DIR/build; cmake .."
+    build_command: "make"
+    branch_pattern: coverity_scan
 
 script:
 # Build
