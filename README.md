@@ -5,7 +5,7 @@ This repository contains both Barcode and a set of supplementary analysis tools.
 
 [![Build Status](https://travis-ci.org/egpbos/barcode.svg?branch=master)](https://travis-ci.org/egpbos/barcode)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/db7aa18754fa4720a2d80ab47ed85e3b)](https://www.codacy.com/app/egpbos/barcode?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=egpbos/barcode&amp;utm_campaign=Badge_Grade)
-[![Coverage Status](https://coveralls.io/repos/github/egpbos/barcode/badge.svg?branch=add_coveralls)](https://coveralls.io/github/egpbos/barcode?branch=add_coveralls)
+[![Coverage Status](https://coveralls.io/repos/github/egpbos/barcode/badge.svg?branch=master)](https://coveralls.io/github/egpbos/barcode?branch=master)
 
 ## Citing
 
