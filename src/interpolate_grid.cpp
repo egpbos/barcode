@@ -235,12 +235,12 @@ void interpolate_TSC_multi(ULONG N1_ul, ULONG N2_ul, ULONG N3_ul, real_prec d1, 
   wx[1] = 0.75 - dx_p_cell*dx_p_cell;
   wy[1] = 0.75 - dy_p_cell*dy_p_cell;
   wz[1] = 0.75 - dz_p_cell*dz_p_cell;
-  wx[0] = 0.5 * gsl_pow_2(1.5 - abs(dx_p_cell+1));
-  wy[0] = 0.5 * gsl_pow_2(1.5 - abs(dy_p_cell+1));
-  wz[0] = 0.5 * gsl_pow_2(1.5 - abs(dz_p_cell+1));
-  wx[2] = 0.5 * gsl_pow_2(1.5 - abs(dz_p_cell-1));
-  wy[2] = 0.5 * gsl_pow_2(1.5 - abs(dz_p_cell-1));
-  wz[2] = 0.5 * gsl_pow_2(1.5 - abs(dz_p_cell-1));
+  wx[0] = 0.5 * gsl_pow_2(1.5 - std::abs(dx_p_cell+1));
+  wy[0] = 0.5 * gsl_pow_2(1.5 - std::abs(dy_p_cell+1));
+  wz[0] = 0.5 * gsl_pow_2(1.5 - std::abs(dz_p_cell+1));
+  wx[2] = 0.5 * gsl_pow_2(1.5 - std::abs(dz_p_cell-1));
+  wy[2] = 0.5 * gsl_pow_2(1.5 - std::abs(dz_p_cell-1));
+  wz[2] = 0.5 * gsl_pow_2(1.5 - std::abs(dz_p_cell-1));
 
   // indices per dimension, periodic box-ized
   unsigned ix_x[3], ix_y[3], ix_z[3];
