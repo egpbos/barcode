@@ -11,8 +11,7 @@
 
 #include <cmath>
 #include <iomanip>
-#include <algorithm>  // std::max_element, std::find
-#include <iterator>  // std::distance
+#include <algorithm>  // std::max_element
 #include <vector>
 #include <utility> // pair
 

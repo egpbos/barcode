@@ -8,6 +8,8 @@
 
 #include <stdexcept>
 #include <cmath> // sqrt, abs
+#include <algorithm> // find
+#include <iterator>  // distance
 
 #include "SPH_kernel.hpp"
 
@@ -119,7 +121,7 @@ void SPH_kernel_3D_cells_hull_1(const std::vector<int> &i, const std::vector<int
     // cout << ix << endl;
     // cout << i[ix] << " " << j[ix] << endl;
     std::pair<int, int> ij(i[ix], j[ix]);
-    auto ij_duplicate = find(ij_out.begin(), ij_out.end(), ij);
+    auto ij_duplicate = std::find(ij_out.begin(), ij_out.end(), ij);
     if (ij_duplicate == ij_out.end()) {
       // cout << "nieuw" << endl << endl;
       ij_out.push_back(ij);
@@ -127,7 +129,7 @@ void SPH_kernel_3D_cells_hull_1(const std::vector<int> &i, const std::vector<int
       k_last.push_back(k[ix]);
     } else {
       // cout << "duplicaat" << endl << endl;
-      ULONG ix_duplicate = static_cast<ULONG>(distance(ij_out.begin(), ij_duplicate));
+      ULONG ix_duplicate = static_cast<ULONG>(std::distance(ij_out.begin(), ij_duplicate));
       if (k_begin[ix_duplicate] > k[ix])
         k_begin[ix_duplicate] = k[ix];
       if (k_last[ix_duplicate] < k[ix])
