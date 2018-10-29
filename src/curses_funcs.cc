@@ -63,22 +63,22 @@ void init_windows(struct CURSES_STRUCT *curses) {
     // curses->table = newwin(nlines-4, ncols, 4, 0);  // without debug
     curses->table = newwin(nlines-4-2, ncols, 4+2, 0);  // with debug
     // colors
-    wattron(curses->title, COLOR_PAIR(1));
-    wbkgd(curses->title, COLOR_PAIR(1));
-    wattron(curses->table, COLOR_PAIR(2));
-    wbkgd(curses->table, COLOR_PAIR(2));
-    // wattron(curses->table_fixed, COLOR_PAIR(4));
-    // wbkgd(curses->table_fixed, COLOR_PAIR(4));
-    wattron(curses->status, COLOR_PAIR(3));
-    wbkgd(curses->status, COLOR_PAIR(3));
-    wattron(curses->message, COLOR_PAIR(3));
-    wbkgd(curses->message, COLOR_PAIR(3));
-    wattron(curses->header, COLOR_PAIR(2));
-    wbkgd(curses->header, COLOR_PAIR(2));
+    wattron(curses->title, COLOR_PAIR(1u));
+    wbkgd(curses->title, COLOR_PAIR(1u));
+    wattron(curses->table, COLOR_PAIR(2u));
+    wbkgd(curses->table, COLOR_PAIR(2u));
+    // wattron(curses->table_fixed, COLOR_PAIR(4u));
+    // wbkgd(curses->table_fixed, COLOR_PAIR(4u));
+    wattron(curses->status, COLOR_PAIR(3u));
+    wbkgd(curses->status, COLOR_PAIR(3u));
+    wattron(curses->message, COLOR_PAIR(3u));
+    wbkgd(curses->message, COLOR_PAIR(3u));
+    wattron(curses->header, COLOR_PAIR(2u));
+    wbkgd(curses->header, COLOR_PAIR(2u));
     wattron(curses->header, A_BOLD);
 
-    wattron(curses->debug, COLOR_PAIR(1));
-    wbkgd(curses->debug, COLOR_PAIR(1));
+    wattron(curses->debug, COLOR_PAIR(1u));
+    wbkgd(curses->debug, COLOR_PAIR(1u));
 
     // scrolling
     scrollok(curses->table, TRUE);

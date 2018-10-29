@@ -10,7 +10,7 @@
 #include "define_opt.h"
 #include "struct_main.h"
 
-#include <math.h>
+#include <cmath>
 #include <iomanip>
 
 #include <gsl/gsl_integration.h>
@@ -119,7 +119,7 @@ void getDensity_CIC(ULONG N1, ULONG N2, ULONG N3,real_prec L1, real_prec L2, rea
       getCICweights(L1, L2, L3, d1, d2, d3, xp[n], yp[n], zp[n], i, dx, tx);
 
       // Take care this assumes periodic boundary conditions. This conserves Mass when using FFTs to deconvolve with CIC kernel, as the FFT assumes periodicity
-      real_prec mass=num_1;
+      auto mass=num_1;
       if (weightmass==true)
         mass=Par_mass[n];
 
@@ -425,15 +425,15 @@ void getDensity_SPH(ULONG N1, ULONG N2, ULONG N3,real_prec L1, real_prec L2, rea
     // check if particle is in selected domain, else discard it
     if((xp[n] >= min1 && xp[n] < min1+L1) && (yp[n] >= min2 && yp[n] < min2+L2) && (zp[n] >= min3 && zp[n] < min3+L3))
     {
-      real_prec mass = num_1;
+      auto mass = num_1;
       if (weightmass == true)
         mass = Par_mass[n];
       //mass_total += mass;
 
       // Determine central cell index where particle resides
-      ULONG ix = static_cast<ULONG>(xp[n]/d1);
-      ULONG iy = static_cast<ULONG>(yp[n]/d2);
-      ULONG iz = static_cast<ULONG>(zp[n]/d3);
+      auto ix = static_cast<ULONG>(xp[n]/d1);
+      auto iy = static_cast<ULONG>(yp[n]/d2);
+      auto iz = static_cast<ULONG>(zp[n]/d3);
       // Central cell position:
       real_prec ccx = (static_cast<real_prec>(ix) + 0.5)*d1;
       real_prec ccy = (static_cast<real_prec>(iy) + 0.5)*d2;
