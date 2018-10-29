@@ -131,8 +131,14 @@ set(BARCODE_SOURCE_FILES
         src/HMC.cc
         src/HMC_help.cc
         src/HMC_mass.cc
-        src/HMC_models.cc
         src/HMC_momenta.cc
+        src/HMC_models.cc
+        # split off of old HMC_models.cc:
+        src/hmc/prior/gaussian.cpp
+        src/hmc/likelihood/gaussian_random_field.cpp
+        src/hmc/likelihood/poissonian.cpp
+        src/hmc/likelihood/gaussian_independent.cpp
+        src/hmc/likelihood/lognormal_independent.cpp
 # ARRAY, MATH AND STRING MANIPULATIONS:
         src/convenience.cc
         src/math_funcs.cc

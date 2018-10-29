@@ -13,36 +13,15 @@
 #include <utility>  // std::pair
 #include <vector>
 
-// Prior //
-void prior_gaussian_grad_log_prior(struct HAMIL_DATA *hd, real_prec *signal, real_prec *out);
-real_prec prior_gaussian_log_prior(struct HAMIL_DATA *hd, real_prec *signal);
-
-
 // Likelihood //
-void grf_likelihood_grad_f_delta_x_comp(struct HAMIL_DATA *, real_prec *, real_prec *, unsigned int);
-void grf_likelihood_partial_f_delta_x_log_like(struct HAMIL_DATA *, real_prec *, real_prec *);
-real_prec grf_likelihood_log_like(struct HAMIL_DATA *hamil_data, real_prec *delta);
 
-void poissonian_likelihood_partial_f_delta_x_log_like(struct HAMIL_DATA *hamil_data, real_prec *deltaX, real_prec *dummy);
-real_prec poissonian_likelihood_log_like(struct HAMIL_DATA *hamil_data, real_prec *delta);
-void poissonian_likelihood_grad_f_delta_x_comp(struct HAMIL_DATA *hamil_data, real_prec *deltaX, real_prec *out,
-                                               unsigned int component);
 
 // old testing stuff (interpolate):
 void gaussian_likelihood_partial_f_delta_x_log_like_interpolate(struct HAMIL_DATA *hamil_data, real_prec *deltaX, real_prec *dummy);
 void gaussian_likelihood_grad_f_delta_x_comp_interpolate(struct HAMIL_DATA *hamil_data, real_prec *deltaX,
                                                          real_prec *out, unsigned int component);
 
-void gaussian_likelihood_partial_f_delta_x_log_like(struct HAMIL_DATA *hd, real_prec *deltaX, real_prec *dummy);
-real_prec gaussian_likelihood_log_like(struct HAMIL_DATA *hamil_data, real_prec *delta);
-void gaussian_likelihood_grad_f_delta_x_comp(struct HAMIL_DATA *hd, real_prec *deltaX, real_prec *out,
-                                             unsigned int component);
 
-real_prec lognormal_likelihood_f_delta_x_i_calc(real_prec rho_c, real_prec delta_min, real_prec deltaX_i);
-void lognormal_likelihood_partial_f_delta_x_log_like(struct HAMIL_DATA *hamil_data, real_prec *deltaX, real_prec *dummy);
-real_prec lognormal_likelihood_log_like(struct HAMIL_DATA *hamil_data, real_prec *delta);
-void lognormal_likelihood_grad_f_delta_x_comp(struct HAMIL_DATA *hamil_data, real_prec *deltaX, real_prec *out,
-                                              unsigned int component);
 
 void likelihood_grad_log_like(struct HAMIL_DATA *hamil_data, real_prec *delta, real_prec *dummy);
 void likelihood_grad_log_like_old(struct HAMIL_DATA *hamil_data, real_prec *delta, real_prec *dummy);

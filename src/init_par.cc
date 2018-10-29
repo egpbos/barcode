@@ -26,6 +26,11 @@
 #include "cosmo.h"
 
 #include "HMC_models.h"
+#include "hmc/prior/gaussian.hpp"
+#include "hmc/likelihood/gaussian_random_field.hpp"
+#include "hmc/likelihood/poissonian.hpp"
+#include "hmc/likelihood/gaussian_independent.hpp"
+#include "hmc/likelihood/lognormal_independent.hpp"
 
 using namespace std;
 

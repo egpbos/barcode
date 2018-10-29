@@ -33,7 +33,8 @@
 
 #include "convenience.h"
 
-#include "HMC_models.h"
+#include "HMC_models.h" // SPH_kernel_scale
+#include "hmc/likelihood/lognormal_independent.hpp" // lognormal_likelihood_f_delta_x_i_calc
 
 using namespace std;
 
