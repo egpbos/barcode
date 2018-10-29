@@ -11,6 +11,7 @@
 #include "struct_hamil.h"
 #include "gradient.hpp" // gradfindif
 #include "Lag2Eul.h"
+#include "SPH_kernel.hpp" // SPH_kernel_scale
 
 #include "hmc/likelihood/poissonian.hpp"
 

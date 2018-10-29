@@ -31,6 +31,7 @@
 #include "hmc/likelihood/poissonian.hpp"
 #include "hmc/likelihood/gaussian_independent.hpp"
 #include "hmc/likelihood/lognormal_independent.hpp"
+#include "SPH_kernel.hpp" // SPH_kernel_3D_cells_count, SPH_kernel_3D_cells
 
 using namespace std;
 

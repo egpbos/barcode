@@ -12,6 +12,7 @@
 #include "fftw_array.h"
 #include "gradient.hpp" // gradfindif
 #include "Lag2Eul.h"
+#include "SPH_kernel.hpp" // SPH_kernel_scale
 
 #include "hmc/likelihood/lognormal_independent.hpp"
 

@@ -14,6 +14,7 @@
 #include "convenience.h" // multiply_factor_array
 #include "Lag2Eul.h"
 #include "gsl/gsl_math.h" // gsl_pow_2
+#include "SPH_kernel.hpp" // SPH_kernel_scale
 
 #include "hmc/likelihood/gaussian_independent.hpp"
 

@@ -24,7 +24,7 @@
 
 // for dump_deltas:
 #include "Lag2Eul.h"
-#include "HMC_models.h"
+#include "SPH_kernel.hpp" // SPH_kernel_scale
 
 #include <chrono> // for timestamp in quick_dump_scalar
 

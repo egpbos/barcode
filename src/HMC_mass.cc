@@ -31,6 +31,7 @@
 #include "convenience.h"
 
 #include "HMC_mass.h"
+#include "SPH_kernel.hpp" // SPH_kernel_scale
 
 using namespace std;
 

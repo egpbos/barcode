@@ -139,6 +139,8 @@ set(BARCODE_SOURCE_FILES
         src/hmc/likelihood/poissonian.cpp
         src/hmc/likelihood/gaussian_independent.cpp
         src/hmc/likelihood/lognormal_independent.cpp
+        src/HMC_models_testing.cpp
+        src/SPH_kernel.cpp
 # ARRAY, MATH AND STRING MANIPULATIONS:
         src/convenience.cc
         src/math_funcs.cc

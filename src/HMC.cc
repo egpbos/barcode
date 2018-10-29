@@ -24,6 +24,7 @@
 #include "HMC_help.h"
 #include "HMC_momenta.h"
 #include "HMC_mass.h"
+#include "hmc/likelihood/gaussian_random_field.hpp"
 
 #include "convenience.h"
 

@@ -14,5 +14,7 @@
 void grf_likelihood_grad_f_delta_x_comp(struct HAMIL_DATA *, real_prec *, real_prec *, unsigned int);
 void grf_likelihood_partial_f_delta_x_log_like(struct HAMIL_DATA *, real_prec *, real_prec *);
 real_prec grf_likelihood_log_like(struct HAMIL_DATA *hamil_data, real_prec *delta);
+// special for grf:
+void grf_likelihood_grad_log_like(struct HAMIL_DATA *hd, real_prec *delta, real_prec *out);
 
 #endif //BARCODE_GAUSSIAN_RANDOM_FIELD_HPP
