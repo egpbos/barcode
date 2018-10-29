@@ -84,8 +84,6 @@ void grad_SPH_kernel_3D(real_prec x, real_prec y, real_prec z, real_prec h_inv, 
                         real_prec &out_x, real_prec &out_y, real_prec &out_z);
 
 
-void pad_array_pacman(real_prec *input, unsigned int N1_in, real_prec *out, unsigned int padding);
-
 
 template <class T = struct HAMIL_DATA>
 real_prec SPH_kernel_scale(T *d)

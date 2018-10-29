@@ -18,7 +18,7 @@
 
 #include "struct_main.h"
 #include "fftw_array.h"
-
+#include "pacman.hpp" // pacman_center_on_origin
 #include "IOfunctionsGen.h"
 #include "interpolate_grid.hpp"  // interpolate_CIC
 #include "convenience.h"
@@ -57,14 +57,6 @@ void interp_field(real_prec *input, unsigned N1, unsigned N2, unsigned N3, real_
         output[ix] = interpolate_CIC(N1, N2, N3, L1, L2, L3, dx, dy, dz,
                                      posx, posy, posz, input);
       }
-}
-
-
-real_prec pacman_center_on_origin(unsigned ix, unsigned Ni, real_prec di) {
-  if (ix <= Ni/2)
-    return di * static_cast<real_prec>(ix);
-  else
-    return -di * static_cast<real_prec>(Ni - ix);
 }
 
 

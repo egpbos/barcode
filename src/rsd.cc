@@ -11,7 +11,6 @@
 #include <cmath>
 #include <iostream>
 #include <stdexcept> // runtime_error
-#include "math_funcs.h" // pacman_coordinate
 #include "pacman.hpp"
 
 using namespace std;

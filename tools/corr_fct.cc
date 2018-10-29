@@ -6,24 +6,16 @@
  * The full license is in the file LICENSE, distributed with this software.
  */
 
+#include <cmath>
 
 #include "struct_main.h"
 #include "fftw_array.h"
-#include <cmath>
-
+#include "pacman.hpp" // pacman_center_on_origin
 #include "convenience.h"
-
 #include "IOfunctionsGen.h"
 
 using namespace std;
 
-real_prec pacman_center_on_origin(unsigned ix, unsigned Ni, real_prec di)
-{
-  if (ix <= Ni/2)
-    return di * static_cast<real_prec>(ix);
-  else
-    return -di * static_cast<real_prec>(Ni - ix);
-}
 
 void measure_corr_grid(unsigned N1, unsigned N2, unsigned N3, real_prec L1, /*real_prec L2, real_prec L3,*/ real_prec d1, real_prec d2, real_prec d3, ULONG N_bin, real_prec *signal, real_prec *rmode, ULONG *nmode, real_prec *corr)
 {

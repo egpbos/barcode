@@ -22,6 +22,7 @@
 #include "scale_space.hpp" // calc_k*
 #include "convolution.hpp" // convolve
 #include "gradient.hpp" // grad*
+#include "pacman.hpp" // pad_array_pacman
 
 #include "Lag2Eul.h"
 #include "cosmo.h"
@@ -863,21 +864,6 @@ void _likelihood_calc_V_SPH_kernel_loop_h_units(ULONG N2pad, ULONG N3pad, real_p
 //  _out_y_j = out_y_j;
 //  _out_z_j = out_z_j;
 //}
-
-void pad_array_pacman(real_prec *input, unsigned int N1_in, real_prec *out,
-                      unsigned int padding) {
-  unsigned N1_out = N1_in + 2*padding;
-  for (unsigned io = 0; io < N1_out; ++io)
-    for (unsigned jo = 0; jo < N1_out; ++jo)
-      for (unsigned ko = 0; ko < N1_out; ++ko) {
-        ULONG ix_out = ko + N1_out*(jo + static_cast<ULONG>(N1_out)*io);
-        unsigned ii = static_cast<unsigned>(static_cast<int>(io + N1_in) - static_cast<int>(padding)) % N1_in;
-        unsigned ji = static_cast<unsigned>(static_cast<int>(jo + N1_in) - static_cast<int>(padding)) % N1_in;
-        unsigned ki = static_cast<unsigned>(static_cast<int>(ko + N1_in) - static_cast<int>(padding)) % N1_in;
-        ULONG ix_in = ki + N1_in*(ji + static_cast<ULONG>(N1_in)*ii);
-        out[ix_out] = input[ix_in];
-      }
-}
 
 
 
