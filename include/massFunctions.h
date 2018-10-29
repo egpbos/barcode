@@ -9,6 +9,8 @@
 
 #pragma once
 
+#include "define_opt.h"
+
 void cellbound(unsigned int N1, unsigned int N2, unsigned int N3, real_prec *v1, real_prec *v2, real_prec *v3);
 
 void cellboundcomp(unsigned int N1, unsigned int N2, unsigned int N3, real_prec *vi);

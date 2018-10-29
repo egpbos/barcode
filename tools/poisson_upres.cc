@@ -12,8 +12,8 @@
 #include "fftw_array.h"
 #include <cmath>
 #include <sstream>
+#include <gsl/gsl_randist.h>
 #include "IOfunctionsGen.h"
-#include "math_funcs.h"
 
 #include "massFunctions.h" // getDensity
 
