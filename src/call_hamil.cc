@@ -45,7 +45,7 @@ void call_hamil(struct DATA *data, gsl_rng * seed) {
 
   if (hamil_data == nullptr) {
     delete hamil_data;
-    throw BarcodeException("Hamiltonian: error allocating memory....");
+    throw runtime_error("Hamiltonian: error allocating memory....");
   }
 
 

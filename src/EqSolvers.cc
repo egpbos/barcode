@@ -12,13 +12,13 @@
 
 #include <cmath>
 #include <iomanip>
+#include <stdexcept> // runtime_error
 
 #include "cosmo.h"
 #include "IOfunctionsGen.h"
 #include "math_funcs.h"
 
 #include "convenience.h"
-#include "BarcodeException.h"
 
 // Everything in here is only used in Lag2Eul
 
@@ -97,7 +97,7 @@ void calc_LapPhiv(unsigned int N1, unsigned int N2, unsigned int N3, real_prec L
             k1=kz;
             break;
           default:
-            throw BarcodeException("In calc_LapPhiv : index1 must be either 1, 2 or 3!");
+            throw runtime_error("In calc_LapPhiv : index1 must be either 1, 2 or 3!");
         }
 
         switch (index2)
@@ -112,7 +112,7 @@ void calc_LapPhiv(unsigned int N1, unsigned int N2, unsigned int N3, real_prec L
             k2=kz;
             break;
           default:
-            throw BarcodeException("In calc_LapPhiv : index2 must be either 1, 2 or 3!");
+            throw runtime_error("In calc_LapPhiv : index2 must be either 1, 2 or 3!");
         }
 
         re(LapPhivl[ii])=-k1*k2*re(philv[ii]); // EGP (20131213): note that this was wrong! philv[ihalf] was called,
@@ -148,7 +148,7 @@ real_prec linearvel3d(int index, real_prec kx, real_prec ky, real_prec kz, real_
       }
     default:
       {
-        throw BarcodeException("In linearvel3d : index must be either 1, 2 or 3!");
+        throw runtime_error("In linearvel3d : index must be either 1, 2 or 3!");
       }
   }
   real_prec kmod2=kx*kx+ky*ky+kz*kz;

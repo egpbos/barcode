@@ -12,6 +12,7 @@
 
 #include <cmath>
 #include <iomanip>
+#include <stdexcept> // runtime_error
 
 #include <gsl/gsl_integration.h>
 
@@ -20,7 +21,6 @@
 #include "math_funcs.h"
 
 #include "convenience.h"
-#include "BarcodeException.h"
 
 // EGP: time.h for benchmark tests
 #include <sys/time.h>
@@ -373,7 +373,7 @@ real_prec SPH_kernel_3D(real_prec r, real_prec h)
   real_prec result = 0.;
   real_prec q = r/h;
   if (q < 0.) {
-    throw BarcodeException("In SPH_kernel_3D: r may not be smaller than zero!");
+    throw runtime_error("In SPH_kernel_3D: r may not be smaller than zero!");
   }
   else if (q <= 1.)
     result = 1./M_PI/(h*h*h) * (1 - 3./2*q*q + 3./4*q*q*q);

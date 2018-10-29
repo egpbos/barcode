@@ -40,7 +40,6 @@
 /* #include "define_opt.h" */
 
 #include <vector>
-#include "BarcodeException.h"
 #include "HMC_models.h"
 #include "struct_main.h"
 #include <sstream>
@@ -310,7 +309,7 @@ struct HAMIL_DATA {
       default:
       stringstream message;
       message << "mass_type " << numerical->mass_type << " is not a valid value!";
-      throw BarcodeException(message.str());
+      throw runtime_error(message.str());
     }
 
     numerical->massnum_init = data->numerical->massnum_init;

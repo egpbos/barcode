@@ -104,7 +104,7 @@ void setup_random_test(struct DATA *data, real_prec *delta_lag, real_prec *delta
     default:
       stringstream message;
       message << "in barcoderunner: window_type = " << n->window_type << " is not a valid choice!";
-      throw BarcodeException(message.str());
+      throw runtime_error(message.str());
   }
   dump_scalar(o->window, n->N1, n->N2, n->N3, n->dir + string("win"));
 
@@ -148,7 +148,7 @@ void setup_random_test(struct DATA *data, real_prec *delta_lag, real_prec *delta
               }
               break;
             default:
-              throw BarcodeException("in barcoderunner: linear data model was chosen (additive error), but incompatible likelihood!");
+              throw runtime_error("in barcoderunner: linear data model was chosen (additive error), but incompatible likelihood!");
           }
         }
         else
@@ -179,7 +179,7 @@ void setup_random_test(struct DATA *data, real_prec *delta_lag, real_prec *delta
     default:
       stringstream message;
       message << "in barcoderunner: data_model = " << n->data_model << " is not a valid choice!";
-      throw BarcodeException(message.str());
+      throw runtime_error(message.str());
   }
 
   // Gaussian (RSD) and GRF likelihood can't have zero noise terms, or you'll get NaNs.
@@ -189,7 +189,7 @@ void setup_random_test(struct DATA *data, real_prec *delta_lag, real_prec *delta
         if (o->noise_sf[i] == 0.) {
           stringstream message;
           message << "in barcoderunner(): noise = 0 found! Index " << i;
-          throw BarcodeException(message.str());
+          throw runtime_error(message.str());
         }
 
   dump_scalar(o->nobs, n->N1, n->N2, n->N3, n->dir + string("nobs"));
@@ -237,7 +237,7 @@ void make_initial_guess(struct DATA *data, gsl_rng *gBaseRand)
     default:
       stringstream message;
       message << "In barcoderunner: invalid choice of initial_guess (" << n->initial_guess << ")!";
-      throw BarcodeException(message.str());
+      throw runtime_error(message.str());
   }
 }
 
@@ -500,7 +500,7 @@ void barcoderunner(struct DATA *data,gsl_rng * gBaseRand)
     {
       stringstream message;
       message << "attention: fast exit command!";
-      throw BarcodeException(message.str());
+      throw runtime_error(message.str());
     }
     inStreamfe.close();
 

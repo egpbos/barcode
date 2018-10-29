@@ -11,6 +11,7 @@
 
 #include <iomanip>
 #include <iostream>
+#include <stdexcept> // runtime_error
 
 //#include <gsl/gsl_errno.h>
 #include <gsl/gsl_randist.h>
@@ -20,8 +21,6 @@
 #include "math_funcs.h"
 
 #include "convenience.h"
-
-#include "BarcodeException.h"
 
 /*
 
@@ -45,7 +44,7 @@ void disp_part(unsigned int N1, unsigned int N2, unsigned int N3, real_prec L1, 
 {
   if ((facL > 1) && (reggrid == false))
   {
-    throw BarcodeException("facL > 1 and reggrid == false in disp_part; doesn't make sense, because it would then just put facL^3 particles in the same cell center positions.");
+    throw runtime_error("facL > 1 and reggrid == false in disp_part; doesn't make sense, because it would then just put facL^3 particles in the same cell center positions.");
   }
 
   real_prec rx,ry,rz;
@@ -92,7 +91,7 @@ void disp_part(unsigned int N1, unsigned int N2, unsigned int N3, real_prec L1, 
   // Interpolate the psi values to the particle positions (if reggrid == false)
   if (reggrid == false)
   {
-    throw BarcodeException("This part of the code is not right, fix before use!");
+    throw runtime_error("This part of the code is not right, fix before use!");
     // below I explain why it's wrong
     fftw_array<real_prec> dri(numpart);
     interpolate_CIC(N1, N2, N3, L1, L2, L3, d1, d2, d3, posx, posy, posz, psix, numpart, dri);

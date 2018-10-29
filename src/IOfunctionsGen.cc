@@ -194,7 +194,7 @@ void read_array(const string& FNAME, real_prec *out, ULONG N) {
   if(inStream.is_open()) {
     inStream.read(reinterpret_cast<char *>(out), static_cast<std::streamsize>(N * sizeof(real_prec)));
   } else {
-    throw BarcodeException(std::string("In read_array: error opening file ") + fname);
+    throw runtime_error(std::string("In read_array: error opening file ") + fname);
   }
 }
 
@@ -220,7 +220,7 @@ void write_array(const string& fname, real_prec *A_rm, ULONG N) {
   if (outStream.is_open()) {
     outStream.write(reinterpret_cast<const char *>(A_rm), static_cast<std::streamsize>(N * sizeof(real_prec)));
   } else {
-    throw BarcodeException(std::string("In write_array: error opening file ") + FNAME);
+    throw runtime_error(std::string("In write_array: error opening file ") + FNAME);
   }
 }
 

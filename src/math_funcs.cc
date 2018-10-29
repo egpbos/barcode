@@ -11,7 +11,7 @@
 
 #include <cmath>
 #include <cstdlib>
-#include <stdexcept>  // std::logic_error
+#include <stdexcept>  // std::logic_error, runtime_error
 
 #include <gsl/gsl_randist.h>
 #include <gsl/gsl_integration.h>
@@ -20,8 +20,6 @@
 
 #include "fftw_array.h"
 #include "IOfunctionsGen.h"
-
-#include "BarcodeException.h"
 
 #include "convenience.h"
 
@@ -992,7 +990,7 @@ void gradfft(unsigned N1, unsigned N2, unsigned N3, real_prec L1, real_prec L2, 
             kl=calc_kz(k,L3,N3);
             break;
           default:
-            throw BarcodeException("In gradfft: dim should be either 1, 2 or 3!");
+            throw runtime_error("In gradfft: dim should be either 1, 2 or 3!");
             break;
         }
 
@@ -1066,7 +1064,7 @@ void gradfindif(unsigned N1, real_prec L1, const real_prec *in, real_prec *out, 
             break;
           }
           default: {
-            throw BarcodeException("dim must be 1, 2 or 3 in gradfindif!");
+            throw runtime_error("dim must be 1, 2 or 3 in gradfindif!");
           }
         }
 
@@ -1131,7 +1129,7 @@ void grad_inv_lap_FS(unsigned N1, unsigned N2, unsigned N3, real_prec L1, real_p
             ki_over_kmod=kz*fac_kmod;
             break;
           default:
-            throw BarcodeException("In grad_inv_lap_FS: index must be either 1, 2 or 3!");
+            throw runtime_error("In grad_inv_lap_FS: index must be either 1, 2 or 3!");
             break;
         }
         real_prec dummy = re(in[ii]); // to make in-place possible (in == out)

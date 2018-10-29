@@ -29,6 +29,7 @@ output : initial and final density and velocity field on a cartesian grid
 #include <iomanip>
 #include <iostream>
 #include <sstream>
+#include <stdexcept> // runtime_error
 #ifndef RESTART_FILE
 #endif  // RESTART_FILE
 
@@ -39,7 +40,6 @@ output : initial and final density and velocity field on a cartesian grid
 #include "IOfunctionsGen.h"
 #include "calc_power.h"
 #include "barcoderunner.h"
-#include "BarcodeException.h"
 
 // EGP: NaN detection (part 1)
 #ifdef NAN_DETECTION
@@ -101,7 +101,7 @@ int main(int argc, char *argv[]) {
 
   try {
     if (data == nullptr) {
-      throw BarcodeException("main: error allocating memory....");
+      throw runtime_error("main: error allocating memory....");
     }
 
   /* read parameter file */
@@ -193,7 +193,7 @@ int main(int argc, char *argv[]) {
 
     end_curses(data->curses);
   }
-  catch(BarcodeException &caught) {
+  catch(std::runtime_error &caught) {
     end_curses(data->curses);
     cout << endl << "ERROR: " << caught.what() << endl;
   }

@@ -411,7 +411,7 @@ template <typename T, typename T_other>
 vector<T> sort_vector_by_other(const vector<T> &sortee,
                                const vector<T_other> &other) {
   if (sortee.size() != other.size()) {
-    throw BarcodeException("sort_vector_by_other: vector sizes must be equal!");
+    throw runtime_error("sort_vector_by_other: vector sizes must be equal!");
   }
   auto ix_sort = sort_indexes(other);
   vector<T> sorted;
@@ -523,7 +523,7 @@ string update_eps_fac_acceptance_rate_downwards(struct HAMIL_DATA *hd,
     }
   }
   if (n->eps_fac == 0.) {
-    throw BarcodeException("In update_eps_fac_acceptance_rate_downwards: "
+    throw runtime_error("In update_eps_fac_acceptance_rate_downwards: "
                            "epsilon became zero, shouldn't happen!");
   }
   return (message);
@@ -663,7 +663,7 @@ void HamiltonianMC(struct HAMIL_DATA *hd, gsl_rng * seed, struct DATA *data) {
     string fname = dn->dir + string("auxmass_r");
     if (n->mass_rs) {
       if (contains_nan(hd->mass_r, n->N)) {
-        throw BarcodeException("auxmass_r contains a NaN! aborting.");
+        throw runtime_error("auxmass_r contains a NaN! aborting.");
       }
       write_array(fname, hd->mass_r, n->N1, n->N2, n->N3);
     }
@@ -795,7 +795,7 @@ void HamiltonianMC(struct HAMIL_DATA *hd, gsl_rng * seed, struct DATA *data) {
     wrefresh(data->curses->table);
 
     if (total_steps >= n->total_steps_lim) {
-      throw BarcodeException("ABORTING: total steps exceeds total_steps_lim");
+      throw runtime_error("ABORTING: total steps exceeds total_steps_lim");
     }
 
     wprintw(data->curses->table, "\n");

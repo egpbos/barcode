@@ -68,7 +68,7 @@ void INIT_PARAMS(struct DATA *data) {
 
   if (((data_model == 1) && (likelihood != 2)) ||
       ((likelihood == 2) && (data_model != 1)) ) {
-    throw BarcodeException("Error: incompatible data_model and likelihood in input.par! Logarithmic and log-normal must go together, or you must choose other models.");
+    throw runtime_error("Error: incompatible data_model and likelihood in input.par! Logarithmic and log-normal must go together, or you must choose other models.");
   }
   // EGP: end added switches
 
@@ -360,12 +360,12 @@ void INIT_PARAMS(struct DATA *data) {
     while( !cin.fail() && type!='y' && type!='n' );
 
     if (type == 'n') {
-      throw BarcodeException("entered n, aborting.");
+      throw runtime_error("entered n, aborting.");
     }
 #endif  // DEBUG
   }
   if (data->numerical->particle_kernel_h_rel > static_cast<real_prec>(data->numerical->N1)/4) {
-    throw BarcodeException("A particle_kernel_h_rel of more than Nx/4 cells does not make sense for SPH kernels, since the diameter of the kernel will be larger than the width of the box!\nAborting.");
+    throw runtime_error("A particle_kernel_h_rel of more than Nx/4 cells does not make sense for SPH kernels, since the diameter of the kernel will be larger than the width of the box!\nAborting.");
   }
 
   real_prec d1 = data->numerical->d1, d2 = data->numerical->d2, d3 = data->numerical->d3;

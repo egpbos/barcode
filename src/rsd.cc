@@ -10,8 +10,8 @@
 #include "define_opt.h"
 #include <cmath>
 #include <iostream>
+#include <stdexcept> // runtime_error
 #include "math_funcs.h" // pacman_coordinate
-#include "BarcodeException.h"
 
 using namespace std;
 
@@ -59,7 +59,7 @@ void calc_pos_rsd(ULONG Npart, real_prec L3, real_prec xobs, real_prec yobs, rea
 
     if (periodic) {
       if (!planepar) {
-        throw BarcodeException("Periodic boundary conditions not yet implemented for non-plane-parallel RSDs!");
+        throw runtime_error("Periodic boundary conditions not yet implemented for non-plane-parallel RSDs!");
       } else {
         pacman_coordinate(&(zr[i]), L3);
       }

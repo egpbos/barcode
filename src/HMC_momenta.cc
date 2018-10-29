@@ -136,7 +136,7 @@ void draw_masked_momenta(struct HAMIL_DATA *hd, gsl_rng *seed,
 #endif
 #ifdef FOURIER_DEF_2
         mass = hd->mass_f[ix] * static_cast<real_prec>(n->N);  // care
-        throw BarcodeException("Look into normalization of draw_masked_momenta! Seems wrong now.");
+        throw runtime_error("Look into normalization of draw_masked_momenta! Seems wrong now.");
 #endif
 
         real_prec sigma = sqrt(mass);

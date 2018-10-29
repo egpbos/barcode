@@ -415,13 +415,13 @@ void likelihood_calc_h_old(struct HAMIL_DATA *hd, real_prec *deltaX, real_prec *
      //switch (n->mk)
       //{
         //case 0:
-          //throw BarcodeException("likelihood_calc_h: NGP interpolation not yet implemented!");
+          //throw runtime_error("likelihood_calc_h: NGP interpolation not yet implemented!");
           //break;
         //case 1:
           interpolate_CIC(n->N1,n->N2,n->N3,n->L1,n->L2,n->L3,n->d1,n->d2,n->d3, hd->posx, hd->posy, hd->posz,dummy,n->N,dummy2);
           //break;
         //case 2:
-          //throw BarcodeException("likelihood_calc_h: TSC interpolation not yet implemented!");
+          //throw runtime_error("likelihood_calc_h: TSC interpolation not yet implemented!");
           //break;
       //}
     //}
@@ -449,13 +449,13 @@ void likelihood_calc_h_simple(struct HAMIL_DATA *hd, real_prec *deltaX, real_pre
   //switch (n->mk)
   //{
     //case 0:
-      //throw BarcodeException("likelihood_calc_h: NGP interpolation not yet implemented!");
+      //throw runtime_error("likelihood_calc_h: NGP interpolation not yet implemented!");
       //break;
     //case 1:
       interpolate_CIC(n->N1,n->N2,n->N3,n->L1,n->L2,n->L3,n->d1,n->d2,n->d3, hd->posx, hd->posy, hd->posz, partLike, n->N, out);
       //break;
     //case 2:
-      //throw BarcodeException("likelihood_calc_h: TSC interpolation not yet implemented!");
+      //throw runtime_error("likelihood_calc_h: TSC interpolation not yet implemented!");
       //break;
   //}
 }
@@ -476,7 +476,7 @@ real_prec SPH_kernel_radius(int particle_kernel_type,
       radius = particle_kernel_h * 2;
       break;
     default:
-      throw BarcodeException("\"Eat my shorts!\" -- B. J. Simpson");
+      throw runtime_error("\"Eat my shorts!\" -- B. J. Simpson");
   }
   return(radius);
 }
@@ -983,7 +983,7 @@ void likelihood_calc_V_SPH(struct HAMIL_DATA *hd, real_prec *part_like, real_pre
 
     if (rsd_model) {
       if (!planepar) {
-        throw BarcodeException("Non-plane-parallel RSD model is not yet implemented in calc_V! Use planepar = true.");
+        throw runtime_error("Non-plane-parallel RSD model is not yet implemented in calc_V! Use planepar = true.");
       } else {
         out_z[j] += f1 * out_z[j];
       }
@@ -1115,7 +1115,7 @@ void likelihood_calc_V_SPH_fourier_TSC(struct HAMIL_DATA *hd, real_prec *part_li
   // RSD stuff
   if (hd->rsd_model) {
     if (!n->planepar) {
-      throw BarcodeException("Non-plane-parallel RSD model is not yet "
+      throw runtime_error("Non-plane-parallel RSD model is not yet "
                              "implemented in calc_V! Use planepar = true.");
     } else {
       // first order growth factor (Zel'dovich only!)
@@ -1139,7 +1139,7 @@ void likelihood_calc_h_SPH(struct HAMIL_DATA *hd, real_prec *deltaX, real_prec *
   struct HAMIL_NUMERICAL *n = hd->numerical;
 
   if (!(n->mk == 3)) {
-    throw BarcodeException("Must use SPH mass kernel (masskernel = 3) when "
+    throw runtime_error("Must use SPH mass kernel (masskernel = 3) when "
                            "using likelihood_calc_h_SPH (calc_h = 2 or 3)!");
   }
 
@@ -1268,7 +1268,7 @@ void likelihood_grad_log_like(struct HAMIL_DATA *hd, real_prec *delta, real_prec
   //     break;
   //   case 3:
   //     if (n->d1 != n->d2 || n->d2 != n->d3) {
-  //       throw BarcodeException("likelihood_grad_log_like: d1, d2 and d3 are not"
+  //       throw runtime_error("likelihood_grad_log_like: d1, d2 and d3 are not"
   //                              " equal, so heuristic_correction is unknown! "
   //                              "Aborting.");
   //     } else {
