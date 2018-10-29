@@ -9,6 +9,7 @@
 
 #include "define_opt.h"
 #include "struct_hamil.h"
+#include "convolution.hpp" // convolve
 
 using namespace std;
 

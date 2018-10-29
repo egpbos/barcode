@@ -19,6 +19,7 @@
 #include "fftw_array.h"
 #include "math_funcs.h"
 #include "convenience.h"
+#include "random.hpp"
 
 #include "debug.h"
 

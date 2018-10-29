@@ -24,7 +24,10 @@
 #include "Lag2Eul.h"
 #include "IOfunctions.h"
 #include "IOfunctionsGen.h"
-#include "math_funcs.h"
+#include "math_funcs.h" // power_mean
+#include "convolution.hpp" // kernelcomp, convcomp
+#include "random.hpp" // create_GARFIELD
+
 #include "protocol.h"
 #include "sample_maker.h"
 

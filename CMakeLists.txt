@@ -136,6 +136,13 @@ set(BARCODE_SOURCE_FILES
 # ARRAY, MATH AND STRING MANIPULATIONS:
         src/convenience.cc
         src/math_funcs.cc
+        # split off of old math_funcs.cc:
+        src/random.cpp  # included includes in random.hpp
+        src/interpolate_grid.cpp
+        src/pacman.cpp
+        src/scale_space.cpp
+        src/convolution.cpp
+        src/gradient.cpp
 # COSMOLOGY
         src/cosmo.cc
         src/calc_power.cc       # calculate theoretical cosmological power spectra

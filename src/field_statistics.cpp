@@ -12,7 +12,8 @@
 #include "convenience.h"
 #include "fftwrapper.h"
 #include <cmath>
-#include "math_funcs.h"
+//#include "math_funcs.h"
+#include "scale_space.hpp"
 
 // Used in barcoderunner.cc and HMC_mass.cc:
 // Calculating power spectrum of the density field

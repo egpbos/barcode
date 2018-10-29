@@ -17,7 +17,8 @@
 
 #include "fftw_array.h"
 
-#include "math_funcs.h"
+#include "math_funcs.h" // max_arr, power_mean
+#include "convolution.hpp" // convolve
 #include "IOfunctionsGen.h"
 
 #include "HMC_help.h"

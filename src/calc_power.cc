@@ -21,7 +21,7 @@
 
 #include "cosmo.h"
 #include "IOfunctionsGen.h"
-#include "math_funcs.h"
+#include "scale_space.hpp" // k_squared
 
 #include "convenience.h"
 

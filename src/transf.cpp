@@ -9,7 +9,8 @@
 
 #include "transf.h"
 #include "fftw_array.h"
-#include "math_funcs.h"
+//#include "math_funcs.h"
+#include "scale_space.hpp"
 #include "fftwrapper.h"
 #include <cassert>
 #include <fstream>

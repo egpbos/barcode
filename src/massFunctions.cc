@@ -17,8 +17,8 @@
 #include <gsl/gsl_integration.h>
 
 #include "fftw_array.h"
-
-#include "math_funcs.h"
+#include "interpolate_grid.hpp"
+#include "convolution.hpp" // convolve
 
 #include "convenience.h"
 

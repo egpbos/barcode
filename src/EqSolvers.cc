@@ -16,7 +16,9 @@
 
 #include "cosmo.h"
 #include "IOfunctionsGen.h"
-#include "math_funcs.h"
+#include "math_funcs.h" // odd
+#include "scale_space.hpp" // calc_k*, k_squared
+#include "gradient.hpp" // gradfindif
 
 #include "convenience.h"
 

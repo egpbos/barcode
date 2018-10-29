@@ -20,7 +20,11 @@
 #include "struct_main.h"
 #include "struct_hamil.h"
 #include "fftw_array.h"
-#include "math_funcs.h"
+
+#include "pacman.hpp" // pacman_*
+#include "scale_space.hpp" // k_squared
+#include "gradient.hpp" // grad_inv_lap_FS
+
 #include "IOfunctions.h"
 #include "Lag2Eul.h"
 #include "field_statistics.h"

@@ -14,7 +14,8 @@
 #include "cosmo.h"
 #include "EqSolvers.h"
 #include "massFunctions.h"
-#include "math_funcs.h"
+#include "convolution.hpp" // convcomp, convcompb
+
 #include "disp_part.h"
 
 #include "convenience.h"

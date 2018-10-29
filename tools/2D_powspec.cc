@@ -13,7 +13,8 @@
 #include <cmath>
 #include <sstream>
 #include "IOfunctionsGen.h"
-#include "math_funcs.h"
+//#include "math_funcs.h"
+#include "scale_space.hpp"
 
 #include "convenience.h"
 

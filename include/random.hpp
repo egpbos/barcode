@@ -12,6 +12,11 @@
 #include <vector>
 #include <complex>
 
+real_prec GR_NUM(gsl_rng * SEED, real_prec sigma ,int GR_METHOD);
+
+void create_GARFIELD(unsigned N1,unsigned N2,unsigned N3, real_prec L1, real_prec L2, real_prec L3, real_prec *delta, const real_prec * Power, gsl_rng * seed);
+
+
 template <class out_type>
 std::complex<out_type> complex_gaussian_random_number(gsl_rng *rng)
 {

@@ -16,7 +16,7 @@
 #include "struct_main.h"
 #include "fftw_array.h"
 #include "IOfunctionsGen.h"
-#include "math_funcs.h"  // interpolate_CIC
+#include "interpolate_grid.hpp"  // interpolate_CIC
 
 // using namespace std;  // forbidden by Google C++ Style Guide
 using std::cout;

@@ -11,7 +11,7 @@
 #include "struct_main.h"
 #include "fftw_array.h"
 #include <sstream>
-#include "math_funcs.h" // create_GARFIELD
+#include <gsl/gsl_rng.h>
 #include "IOfunctionsGen.h"
 #include "Lag2Eul.h"
 #include "init_par.h" // INIT_COSMOLOGY

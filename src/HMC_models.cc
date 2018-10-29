@@ -18,7 +18,11 @@
 
 #include "fftw_array.h"
 
-#include "math_funcs.h"
+#include "interpolate_grid.hpp" // interpolate_CIC/_TSC
+#include "scale_space.hpp" // calc_k*
+#include "convolution.hpp" // convolve
+#include "gradient.hpp" // grad*
+
 #include "Lag2Eul.h"
 #include "cosmo.h"
 

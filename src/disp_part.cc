@@ -17,17 +17,11 @@
 #include <gsl/gsl_randist.h>
 
 #include "fftw_array.h"
-
 #include "math_funcs.h"
-
 #include "convenience.h"
+#include "pacman.hpp"
+#include "interpolate_grid.hpp"
 
-/*
-
-  F.S. Kitaura 2012
-  E.G.P. Bos 2013-2017
-
-*/
 
 using namespace std;
 
