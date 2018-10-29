@@ -58,9 +58,9 @@ void Lag2Eul_zeldovich(const real_prec *in, real_prec *out, real_prec *posx,
                        real_prec *posy, real_prec *posz,
                        const GridSize &gridsize, const RealVec3 &boxsize,
                        const RealVec3 &cellsize, const RealVec3 &origin,
-                       const Cosmology &cosmo, const int masskernel,
-                       const real_prec kth, const int facL, const bool reggrid,
-                       gsl_rng * gBaseRand, const real_prec kernel_scale_factor,
+                       const Cosmology &cosmo, int masskernel,
+                       real_prec kth, int facL, bool reggrid,
+                       gsl_rng * gBaseRand, real_prec kernel_scale_factor,
                        plan_pkg *R2Cplan, plan_pkg *C2Rplan);
 
 
@@ -139,7 +139,7 @@ void Lag2Eul_non_zeldovich(real_prec *in, real_prec *dummy, real_prec *posx, rea
                            real_prec d2,
                            real_prec d3, real_prec min1, real_prec min2, real_prec min3, real_prec D1, real_prec D2,
                            real_prec scale, real_prec Omega_M, real_prec Omega_L, int masskernel, real_prec kth,
-                           unsigned int facL, bool reggrid, gsl_rng *gBaseRand, string dir,
+                           unsigned int facL, bool reggrid, gsl_rng *gBaseRand, const std::string& dir,
                            real_prec kernel_scale_factor)
 {
   real_prec kthsc=kth;
@@ -317,7 +317,7 @@ void Lag2Eul(real_prec *in, real_prec *out, real_prec *posx, real_prec *posy, re
              unsigned int N2, unsigned int N3, real_prec L1, real_prec L2, real_prec L3, real_prec d1, real_prec d2,
              real_prec d3, real_prec min1, real_prec min2, real_prec min3, real_prec D1, real_prec D2, real_prec scale,
              real_prec Omega_M, real_prec Omega_L, int sfmodel, int masskernel, real_prec kth, unsigned int facL,
-             bool reggrid, gsl_rng *gBaseRand, string dir, real_prec kernel_scale_factor, plan_pkg *R2Cplan,
+             bool reggrid, gsl_rng *gBaseRand, const std::string& dir, real_prec kernel_scale_factor, plan_pkg *R2Cplan,
              plan_pkg *C2Rplan)
 {
   if (sfmodel == 1) {

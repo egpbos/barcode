@@ -16,8 +16,8 @@ template <class out_type>
 std::complex<out_type> complex_gaussian_random_number(gsl_rng *rng)
 {
   // _ugaussian is the same as _gaussian, but with sigma = 1.0
-  out_type val_real = static_cast<out_type>(gsl_ran_ugaussian(rng)); // real part
-  out_type val_imag = static_cast<out_type>(gsl_ran_ugaussian(rng)); // imaginary part
+  auto val_real = static_cast<out_type>(gsl_ran_ugaussian(rng)); // real part
+  auto val_imag = static_cast<out_type>(gsl_ran_ugaussian(rng)); // imaginary part
   std::complex<out_type> val(val_real, val_imag);
   return(val);
 }

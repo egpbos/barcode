@@ -12,7 +12,7 @@ void Lag2Eul(real_prec *in, real_prec *dummy, real_prec *posx, real_prec *posy, 
              unsigned int N2, unsigned int N3, real_prec L1, real_prec L2, real_prec L3, real_prec d1, real_prec d2,
              real_prec d3, real_prec min1, real_prec min2, real_prec min3, real_prec D1, real_prec D2, real_prec scale,
              real_prec Omega_M, real_prec Omega_L, int sfmodel, int masskernel, real_prec kth, unsigned int facL,
-             bool reggrid, gsl_rng *gBaseRand, string dir, real_prec kernel_scale_factor, plan_pkg *R2Cplan,
+             bool reggrid, gsl_rng *gBaseRand, const std::string& dir, real_prec kernel_scale_factor, plan_pkg *R2Cplan,
              plan_pkg *C2Rplan);
 
 void Lag2Eul_zeldovich(real_prec *in, real_prec *dummy, real_prec *posx, real_prec *posy, real_prec *posz,

@@ -10,7 +10,7 @@
 #include "define_opt.h"
 #include "fftw_array.h"
 
-#include <math.h>
+#include <cmath>
 
 using namespace std;
 

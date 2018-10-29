@@ -53,7 +53,7 @@ void transflpt(unsigned int N1, unsigned int N2, unsigned int N3, real_prec L1, 
   inStream.open(inputFileName.data());
   assert(inStream.is_open());
   ULONG Nkr=10000;
-  real_prec dkr=static_cast<real_prec>(1.e-3);
+  auto dkr=static_cast<real_prec>(1.e-3);
   fftw_array<real_prec> kr(Nkr), pkr(Nkr);
   for(ULONG i=0;i<Nkr;i++) // EGP: int i -> ULONG i
   {
@@ -93,7 +93,7 @@ void transflpt(unsigned int N1, unsigned int N2, unsigned int N3, real_prec L1, 
 
         if (zeld==true)
         {
-          real_prec fac=static_cast<real_prec>(0.085);
+          auto fac=static_cast<real_prec>(0.085);
           out[ii]=exp(-fac*kmod*kmod/(kNL*kNL));
         }
 
@@ -129,7 +129,7 @@ void transflpt(unsigned int N1, unsigned int N2, unsigned int N3, real_prec L1, 
               dvar+=static_cast<real_prec>(dkr*kr[ikk]*kr[ikk]*(pkr[ikk]/(4.*M_PI)));//normalisation??
           }
 
-          real_prec dmod=static_cast<real_prec>(4.*M_PI*dvar);
+          auto dmod=static_cast<real_prec>(4.*M_PI*dvar);
 
           out[ii]=static_cast<real_prec>(exp(0.58*dmod));
         }

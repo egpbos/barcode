@@ -82,10 +82,10 @@ void measure_spec2D(unsigned N1, unsigned N2, unsigned N3,
           // EGP: these two were already commented out, the others above I commented out
           //kpar =calc_rpar (pos1,pos2);
           //kperp=calc_rperp(pos1,pos2);
-        }         
+        }
 
-        ULONG nbin_perp = static_cast<ULONG>(kperp/dk);
-        ULONG nbin_par  = static_cast<ULONG>(kpar/dk);
+        auto nbin_perp = static_cast<ULONG>(kperp/dk);
+        auto nbin_par  = static_cast<ULONG>(kpar/dk);
 
         if (nbin_perp < N_bin && nbin_par < N_bin )
         {

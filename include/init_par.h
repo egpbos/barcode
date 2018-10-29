@@ -11,7 +11,7 @@
 #include <string>
 void INIT_PARAMS(struct DATA *data);
 
-int INIT_COSMOLOGY(struct COSMOLOGY *c, std::string codename);
+int INIT_COSMOLOGY(struct COSMOLOGY *c, const std::string& codename);
 
 void set_likelihood_functions(struct DATA *data);
 

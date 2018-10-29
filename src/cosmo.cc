@@ -9,7 +9,7 @@
 
 #include "define_opt.h"
 
-#include <math.h>
+#include <cmath>
 #include <fstream>
 
 #include <gsl/gsl_integration.h>
@@ -37,7 +37,7 @@ gsl_real
 e_of_z (gsl_real z, void * p) {
    /*struct my_f_params * params 
      = (struct my_f_params *)p;*/
-   struct my_f_params * params 
+  auto * params 
      = static_cast<struct my_f_params *>( p ); // EGP: static_cast
 
    gsl_real OmM = (params->OmM);
@@ -53,7 +53,7 @@ gsl_real
 e_of_z_cube (real_prec z, void * p) {
    /*struct my_f_params * params 
      = (struct my_f_params *)p;*/
-   struct my_f_params * params 
+  auto * params 
      = static_cast<struct my_f_params *>( p ); // EGP: static_cast
 
    gsl_real OmM = (params->OmM);
@@ -69,7 +69,7 @@ gsl_real
 growth_var (gsl_real z, void * p) {
    /*struct my_f_params * params 
      = (struct my_f_params *)p;*/
-   struct my_f_params * params 
+  auto * params 
      = static_cast<struct my_f_params *>( p ); // EGP: static_cast
 
    gsl_real OmM = (params->OmM);
@@ -88,10 +88,10 @@ real_prec calc_dcom(real_prec scale_factor, real_prec Omega_M, real_prec Omega_L
 
 
   // Getting Cosmology
-  real_prec H0=static_cast<real_prec>(100.*hconst*cgs_km/cgs_Mpc/cgs_sec);	
+  auto H0=static_cast<real_prec>(100.*hconst*cgs_km/cgs_Mpc/cgs_sec);	
   gsl_integration_workspace * w = gsl_integration_workspace_alloc (1000);
-  
-  gsl_real redshift=static_cast<gsl_real>(1./scale_factor-1.);
+
+  auto redshift=static_cast<gsl_real>(1./scale_factor-1.);
 
   gsl_real result, error, epsabs, epsrel;
   size_t neval;
@@ -99,9 +99,9 @@ real_prec calc_dcom(real_prec scale_factor, real_prec Omega_M, real_prec Omega_L
   epsabs=1e-4;
   epsrel=1e-8;
 
-  gsl_real omega_m=static_cast<gsl_real>(Omega_M);
-  gsl_real omega_k=static_cast<gsl_real>(Omega_C);
-  gsl_real omega_q=static_cast<gsl_real>(Omega_L);
+  auto omega_m=static_cast<gsl_real>(Omega_M);
+  auto omega_k=static_cast<gsl_real>(Omega_C);
+  auto omega_q=static_cast<gsl_real>(Omega_L);
 
   gsl_function F;
   struct my_f_params params = {omega_m,omega_k,omega_q};
@@ -126,23 +126,23 @@ real_prec D_growth(real_prec scale_factor, real_prec Omega_M, real_prec Omega_L,
   // Getting Cosmology
   real_prec Omega_C=static_cast<real_prec>(1.)-Omega_M-Omega_L;
 
-  real_prec H0=static_cast<real_prec>(hconst*(cgs_km/cgs_Mpc/cgs_sec));
-  real_prec H=static_cast<real_prec>(H0*sqrt(Omega_M/scale_factor/scale_factor/scale_factor+Omega_L+Omega_C/scale_factor/scale_factor)); // Beware only LCDM
+  auto H0=static_cast<real_prec>(hconst*(cgs_km/cgs_Mpc/cgs_sec));
+  auto H=static_cast<real_prec>(H0*sqrt(Omega_M/scale_factor/scale_factor/scale_factor+Omega_L+Omega_C/scale_factor/scale_factor)); // Beware only LCDM
   
   gsl_integration_workspace * w 
     = gsl_integration_workspace_alloc (1000);
   
   gsl_real result, result2, error, epsabs, epsrel;
   //EGP size_t neval;
-  
-  gsl_real redshift=static_cast<gsl_real>(1./scale_factor-1.);
+
+  auto redshift=static_cast<gsl_real>(1./scale_factor-1.);
 
   epsabs=1e-4;
   epsrel=1e-8;
-  
-  gsl_real omega_m=static_cast<gsl_real>(Omega_M);
-  gsl_real omega_k=static_cast<gsl_real>(Omega_C);
-  gsl_real omega_q=static_cast<gsl_real>(Omega_L);
+
+  auto omega_m=static_cast<gsl_real>(Omega_M);
+  auto omega_k=static_cast<gsl_real>(Omega_C);
+  auto omega_q=static_cast<gsl_real>(Omega_L);
 
   gsl_function F;
   struct my_f_params params = {omega_m,omega_k,omega_q};
@@ -221,7 +221,7 @@ real_prec c_pecvel(real_prec scale_factor, real_prec Omega_M, real_prec Omega_L,
 {
   // EGP: put everything in units of Mpc/h etc., so that we don't need H0 (or h) to be given.
   // Note: this requires distance units to be in Mpc/h!
-  real_prec H0 = static_cast<real_prec>(100.); // km/s/Mpc*h; i.e. in "Hubble-units"
+  auto H0 = static_cast<real_prec>(100.); // km/s/Mpc*h; i.e. in "Hubble-units"
 
   real_prec f = fgrow(scale_factor, Omega_M, Omega_L, term);
   real_prec E = E_Hubble_a(scale_factor, Omega_M, Omega_L);

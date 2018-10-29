@@ -7,7 +7,7 @@
  */
 
 
-#include <math.h>
+#include <cmath>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -88,7 +88,7 @@ void INIT_PROTOCOL_SPEC(struct DATA *data)
   outStream.close();  
 }
 
-void UPDATE_PROTOCOL_SPEC(struct DATA *data, string specname)
+void UPDATE_PROTOCOL_SPEC(struct DATA *data, const std::string & specname)
 {
 //EGP  int N1=data->numerical->N1;
 //EGP  int N2=data->numerical->N2;

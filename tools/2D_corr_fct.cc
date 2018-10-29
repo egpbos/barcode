@@ -81,8 +81,8 @@ void measure_corr2D(unsigned N1, unsigned N2, unsigned N3, real_prec L1,/* real_
           throw std::runtime_error("non-plane-parallel option not yet implemented");
         }
 
-        ULONG nbin_perp = static_cast<ULONG>(rperp/dr);
-        ULONG nbin_par  = static_cast<ULONG>(rpar/dr);
+        auto nbin_perp = static_cast<ULONG>(rperp/dr);
+        auto nbin_par  = static_cast<ULONG>(rpar/dr);
 
         if (nbin_perp < N_bin && nbin_par < N_bin) {
           // par on "x axis", perp on "y axis" (reverse of regular sigma-pi
@@ -186,8 +186,8 @@ void measure_corr2D_destructive(unsigned N1, unsigned N2, unsigned N3, real_prec
           throw std::runtime_error("non-plane-parallel option not yet implemented");
         }
 
-        ULONG nbin_perp = static_cast<ULONG>(rperp/dr);
-        ULONG nbin_par  = static_cast<ULONG>(rpar/dr);
+        auto nbin_perp = static_cast<ULONG>(rperp/dr);
+        auto nbin_par  = static_cast<ULONG>(rpar/dr);
 
         if (nbin_perp < N_bin && nbin_par < N_bin) {
           // par on "x axis", perp on "y axis" (reverse of regular sigma-pi

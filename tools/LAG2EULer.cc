@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
   // load input file
   get_scalar(fname_in, delta_lag, N1, N1, N1);
 
-  struct COSMOLOGY *c = new COSMOLOGY;
+  auto c = new COSMOLOGY;
   c->ascale = ascale;
   INIT_COSMOLOGY(c, string("LAG2EULer"));
 
@@ -87,5 +87,6 @@ int main(int argc, char *argv[])
 
   quick_dump_scalar(delta_eul, N1, fname_out, 0, false);
 
+  delete c;
   return(0);
 }

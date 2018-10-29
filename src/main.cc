@@ -95,12 +95,12 @@ int main(int argc, char *argv[]) {
 #endif
 
   // memory allocation before try/catch
-  struct DATA *data = new DATA;
-  struct CURSES_STRUCT *curses = new CURSES_STRUCT;
+  auto data = new DATA;
+  auto curses = new CURSES_STRUCT;
   gsl_rng *gBaseRand = gsl_rng_alloc(gsl_rng_mt19937);
 
   try {
-    if (data == NULL) {
+    if (data == nullptr) {
       throw BarcodeException("main: error allocating memory....");
     }
 

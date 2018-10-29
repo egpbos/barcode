@@ -13,7 +13,7 @@
 using namespace std;
 
 void convolveInvCorrFuncWithSignal(struct HAMIL_DATA *hd, real_prec *signal,
-                                   real_prec *out, real_prec *corrFunc) {
+                                   real_prec *out, const real_prec *corrFunc) {
   struct HAMIL_NUMERICAL *n = hd->numerical;
   unsigned N3half = (n->N3/2 + 1);
   // fftw_array<complex_prec> signal_C(n->Nhalf);

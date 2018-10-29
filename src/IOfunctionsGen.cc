@@ -178,8 +178,8 @@ void read_array(const string& fname, real_prec *out, unsigned int N1, unsigned i
 }
 
 
-std::string add_extension_if_missing(const std::string& fn, const std::string ext = ".dat") {
-  if (fn.rfind('.') == fn.npos) {
+std::string add_extension_if_missing(const std::string& fn, std::string ext = ".dat") {
+  if (fn.rfind('.') == std::string::npos) {
     return fn + ext;
   } else {
     return fn;

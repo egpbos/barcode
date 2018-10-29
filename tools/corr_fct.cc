@@ -63,7 +63,7 @@ void measure_corr_grid(unsigned N1, unsigned N2, unsigned N3, real_prec L1, /*re
 
         real_prec rtot = sqrt(xpos*xpos + ypos*ypos + zpos*zpos);
 
-        ULONG nbin = static_cast<ULONG>(rtot/dr);
+        auto nbin = static_cast<ULONG>(rtot/dr);
 
         //if (rtot <= rmax) // this condition is useless, it will never happen with the given rmax
         //{

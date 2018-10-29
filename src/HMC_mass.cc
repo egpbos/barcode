@@ -57,7 +57,7 @@ void Hamiltonian_mass_likeli_force(struct HAMIL_DATA *hd, real_prec *signal,
     n->L3, n->N1, n->N2, n->N3));
   real_prec dk = kmax/static_cast<real_prec>(n->N_bin);
 
-  real_prec NORM = num_1;  // [>static_cast<real_prec>(N);// care
+  auto NORM = num_1;  // [>static_cast<real_prec>(N);// care
   #ifdef MULTITHREAD
   #pragma omp parallel for
   #endif  // MULTITHREAD
@@ -68,7 +68,7 @@ void Hamiltonian_mass_likeli_force(struct HAMIL_DATA *hd, real_prec *signal,
 
         real_prec kr = sqrt(k_squared(i, j, k, n->L1, n->L2, n->L3, n->N1,
           n->N2, n->N3));
-        ULONG nbin = static_cast<ULONG>(kr/dk);
+        auto nbin = static_cast<ULONG>(kr/dk);
 
         if (kr>0.)
           out[l] = likeli_power[nbin]*NORM;
@@ -176,11 +176,11 @@ void Wprime_il(struct HAMIL_DATA *hd, ULONG l, real_prec *out_x,
   struct HAMIL_NUMERICAL *n = hd->numerical;
 
   // cell center for cell l
-  ULONG N3 = static_cast<ULONG>(n->N3);
-  ULONG N2 = static_cast<ULONG>(n->N2);
-  int ix_x = static_cast<int>((l / N3) / N2);
-  int ix_y = static_cast<int>((l / N3) % N2);
-  int ix_z = static_cast<int>(l % N3);
+  auto N3 = static_cast<ULONG>(n->N3);
+  auto N2 = static_cast<ULONG>(n->N2);
+  auto ix_x = static_cast<int>((l / N3) / N2);
+  auto ix_y = static_cast<int>((l / N3) % N2);
+  auto ix_z = static_cast<int>(l % N3);
   real_prec xl = (static_cast<real_prec>(ix_x) + 0.5) * n->d1;
   real_prec yl = (static_cast<real_prec>(ix_y) + 0.5) * n->d2;
   real_prec zl = (static_cast<real_prec>(ix_z) + 0.5) * n->d3;

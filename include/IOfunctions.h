@@ -9,7 +9,7 @@
 
 #pragma once
 
-void dump_ps_it(struct DATA *data,real_prec *x,real_prec *y);
+void dump_ps_it(struct DATA *data, real_prec *x, const real_prec *y);
 
-void dump_measured_spec(real_prec *x,real_prec *y,string outputFileName, ULONG N_bin);
+void dump_measured_spec(real_prec *x, real_prec *y, const std::string& outputFileName, ULONG N_bin);
 

@@ -16,7 +16,7 @@ void PROTOCOL_RESTART(ULONG it, struct DATA *data);
 
 void INIT_PROTOCOL_SPEC(struct DATA *data);
 
-void UPDATE_PROTOCOL_SPEC(struct DATA *data, string specname);
+void UPDATE_PROTOCOL_SPEC(struct DATA *data, const std::string & specname);
 
 
 

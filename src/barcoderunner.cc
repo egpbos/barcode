@@ -9,9 +9,9 @@
 #include "struct_main.h"
 #include "fftw_array.h"
 
-#include <math.h>
+#include <cmath>
 #include <iomanip>
-#include <string.h>
+#include <cstring>
 #include <cassert>
 #include <sstream>
 #include <algorithm>  // std::max_element

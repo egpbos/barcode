@@ -15,13 +15,13 @@
 #include "IOfunctions.h" // dump_measured_spec
 #include "field_statistics.h" // measure_spectrum
 
-void debug_array_statistics(real_prec *array, ULONG size, std::string name) {
+void debug_array_statistics(real_prec *array, ULONG size, const std::string &name) {
   cout << endl << "DEBUG -- mean " << name << ": " << mean_arr(size, array) << endl;
   cout <<         "DEBUG -- min "  << name << ": " << min_arr(size, array)  << " max " << name << ": " << max_arr(size, array) << endl;
 }
 
 void debug_scalar_dump(real_prec *array, unsigned int N1, unsigned int N2, unsigned int N3, real_prec L1, real_prec L2,
-                       real_prec L3, ULONG N_bin, std::string fname) {
+                       real_prec L3, ULONG N_bin, const std::string &fname) {
   dump_scalar(array, N1, N2, N3, fname);
 
   real_prec power[N_bin];

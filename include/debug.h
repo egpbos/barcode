@@ -12,8 +12,8 @@
 #include "struct_main.h"
 #include <string>
 
-void debug_array_statistics(real_prec *array, ULONG size, std::string name);
+void debug_array_statistics(real_prec *array, ULONG size, const std::string &name);
 void debug_scalar_dump(real_prec *array, unsigned int N1, unsigned int N2, unsigned int N3, real_prec L1, real_prec L2,
-                       real_prec L3, ULONG N_bin, std::string fname);
+                       real_prec L3, ULONG N_bin, const std::string &fname);
 void print_data(struct DATA *d);
 void print_hamil_data(struct HAMIL_DATA *hd);

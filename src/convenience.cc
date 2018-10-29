@@ -17,7 +17,7 @@
 
 // TODO: almost all functions are in fact array functions. Rename file to array.cc and move other stuff out (absolute_squared and split functions)
 
-void copyArray(real_prec *from, real_prec *to, ULONG size) {
+void copyArray(const real_prec *from, real_prec *to, ULONG size) {
 #ifdef MULTITHREAD
 #pragma omp parallel for
 #endif  // MULTITHREAD
@@ -35,7 +35,7 @@ void copyArray(complex_prec *from, complex_prec *to, ULONG size) {
   }
 }
 
-void sum_arrays(real_prec *array1, real_prec *array2, real_prec *out,
+void sum_arrays(const real_prec *array1, const real_prec *array2, real_prec *out,
                 ULONG size) {
 #ifdef MULTITHREAD
 #pragma omp parallel for
@@ -44,7 +44,7 @@ void sum_arrays(real_prec *array1, real_prec *array2, real_prec *out,
     out[i] = array1[i] + array2[i];
 }
 
-void multiplyArrays(real_prec *array1, real_prec *array2, real_prec *out,
+void multiplyArrays(const real_prec *array1, const real_prec *array2, real_prec *out,
                     ULONG size) {
 #ifdef MULTITHREAD
 #pragma omp parallel for
@@ -53,7 +53,7 @@ void multiplyArrays(real_prec *array1, real_prec *array2, real_prec *out,
     out[i] = array1[i] * array2[i];
 }
 
-void multiply_factor_array(real_prec factor, real_prec *array, real_prec *out,
+void multiply_factor_array(real_prec factor, const real_prec *array, real_prec *out,
                            ULONG size) {
 #ifdef MULTITHREAD
 #pragma omp parallel for
@@ -62,7 +62,7 @@ void multiply_factor_array(real_prec factor, real_prec *array, real_prec *out,
     out[i] = factor * array[i];
 }
 
-void subtract_arrays(real_prec *array1, real_prec *array2, real_prec *out,
+void subtract_arrays(const real_prec *array1, const real_prec *array2, real_prec *out,
                      ULONG size) {
 #ifdef MULTITHREAD
 #pragma omp parallel for
@@ -79,7 +79,7 @@ void add_to_array(real_prec addition, real_prec *out, ULONG size) {
     out[i] += addition;
 }
 
-void add_to_array(real_prec *addition, real_prec *out, ULONG size) {
+void add_to_array(const real_prec *addition, real_prec *out, ULONG size) {
 #ifdef MULTITHREAD
 #pragma omp parallel for
 #endif  // MULTITHREAD
@@ -87,7 +87,7 @@ void add_to_array(real_prec *addition, real_prec *out, ULONG size) {
     out[i] += addition[i];
 }
 
-void add_to_array(complex_prec *addition, complex_prec *out, ULONG size) {
+void add_to_array(const complex_prec *addition, complex_prec *out, ULONG size) {
 #ifdef MULTITHREAD
 #pragma omp parallel for
 #endif  // MULTITHREAD
@@ -141,7 +141,7 @@ void fillZero(complex_prec *out, ULONG size) {
   }
 }
 
-void flip_sign(real_prec *in, real_prec *out, ULONG size) {
+void flip_sign(const real_prec *in, real_prec *out, ULONG size) {
 #ifdef MULTITHREAD
 #pragma omp parallel for
 #endif  // MULTITHREAD
@@ -149,7 +149,7 @@ void flip_sign(real_prec *in, real_prec *out, ULONG size) {
     out[j] = -in[j];
 }
 
-void flip_sign(complex_prec *in, complex_prec *out, ULONG size) {
+void flip_sign(const complex_prec *in, complex_prec *out, ULONG size) {
 #ifdef MULTITHREAD
 #pragma omp parallel for
 #endif  // MULTITHREAD
@@ -159,7 +159,7 @@ void flip_sign(complex_prec *in, complex_prec *out, ULONG size) {
   }
 }
 
-void complexify_array(real_prec *in, complex_prec *out, ULONG size) {
+void complexify_array(const real_prec *in, complex_prec *out, ULONG size) {
 #ifdef MULTITHREAD
 #pragma omp parallel for
 #endif  // MULTITHREAD
@@ -169,7 +169,7 @@ void complexify_array(real_prec *in, complex_prec *out, ULONG size) {
   }
 }
 
-void real_part_array(complex_prec *in, real_prec *out, ULONG size) {
+void real_part_array(const complex_prec *in, real_prec *out, ULONG size) {
 #ifdef MULTITHREAD
 #pragma omp parallel for
 #endif  // MULTITHREAD
@@ -177,7 +177,7 @@ void real_part_array(complex_prec *in, real_prec *out, ULONG size) {
     out[i] = re(in[i]);
 }
 
-void imaginary_part_array(complex_prec *in, real_prec *out, ULONG size) {
+void imaginary_part_array(const complex_prec *in, real_prec *out, ULONG size) {
 #ifdef MULTITHREAD
 #pragma omp parallel for
 #endif  // MULTITHREAD
@@ -186,7 +186,7 @@ void imaginary_part_array(complex_prec *in, real_prec *out, ULONG size) {
 }
 
 
-bool contains_nan(real_prec *in, ULONG size) {
+bool contains_nan(const real_prec *in, ULONG size) {
   for (ULONG i = 0; i < size; ++i)
     if (std::isnan(in[i])) {
       std::cout << "found a NaN at i = " << i << "!" << std::endl;
@@ -195,7 +195,7 @@ bool contains_nan(real_prec *in, ULONG size) {
   return false;
 }
 
-bool contains_nan(complex_prec *in, ULONG size) {
+bool contains_nan(const complex_prec *in, ULONG size) {
   for (ULONG i = 0; i < size; ++i)
     if (std::isnan(re(in[i])) || std::isnan(im(in[i]))) {
       std::cout << "found a NaN at i = " << i << "!" << std::endl;
@@ -207,7 +207,7 @@ bool contains_nan(complex_prec *in, ULONG size) {
 
 // Operations in Fourier space //
 
-void conjugate_array(complex_prec *in, complex_prec *out, ULONG size) {
+void conjugate_array(const complex_prec *in, complex_prec *out, ULONG size) {
 #ifdef MULTITHREAD
 #pragma omp parallel for
 #endif  // MULTITHREAD
@@ -217,7 +217,7 @@ void conjugate_array(complex_prec *in, complex_prec *out, ULONG size) {
   }
 }
 
-void times_i_array(complex_prec *in, complex_prec *out, ULONG size) {
+void times_i_array(const complex_prec *in, complex_prec *out, ULONG size) {
 #ifdef MULTITHREAD
 #pragma omp parallel for
 #endif  // MULTITHREAD
@@ -230,11 +230,11 @@ void times_i_array(complex_prec *in, complex_prec *out, ULONG size) {
 
 
 // TODO: This should go to math_funcs or a new scalar_math file
-real_prec absolute_squared(complex_prec in) {
+real_prec absolute_squared(const complex_prec in) {
   return re(in)*re(in) + im(in)*im(in);
 }
 
-void absolute_squared_array(complex_prec *in, real_prec *out, ULONG size) {
+void absolute_squared_array(const complex_prec *in, real_prec *out, ULONG size) {
 #ifdef MULTITHREAD
 #pragma omp parallel for
 #endif  // MULTITHREAD
@@ -242,7 +242,7 @@ void absolute_squared_array(complex_prec *in, real_prec *out, ULONG size) {
     out[i] = absolute_squared(in[i]);
 }
 
-void absolute_squared_array(complex_prec *in, complex_prec *out, ULONG size) {
+void absolute_squared_array(const complex_prec *in, complex_prec *out, ULONG size) {
 #ifdef MULTITHREAD
 #pragma omp parallel for
 #endif  // MULTITHREAD

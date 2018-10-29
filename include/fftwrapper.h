@@ -50,8 +50,8 @@ struct plan_pkg {
     }
 
     N1 = _N1, N2 = _N2, N3 = _N3;
-    N = static_cast<ULONG>(N1*N2*N3);
-    Nhalf = static_cast<ULONG>(N1 * N2 * (N3/2 + 1));
+    N = (static_cast<ULONG>(N1) * N2) * N3;
+    Nhalf = (static_cast<ULONG>(N1) * N2) * (N3/2 + 1);
     R = in;
     C = out;
 

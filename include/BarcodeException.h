@@ -7,16 +7,13 @@
  */
 
 #pragma once
-#include <exception>
+#include <stdexcept>
 #include <string>
+#include <utility>
 
-class BarcodeException : public std::exception {
-  private:
-    std::string s;
-  public:
-    BarcodeException(std::string ss) : s(ss) {}
-    ~BarcodeException() throw () {}
-    const char* what() const throw() { return this->s.c_str(); }
+// TODO: replace by simply std::runtime_error
+struct BarcodeException : std::runtime_error {
+    explicit BarcodeException(const std::string& s) : std::runtime_error(s) {}
 };
 
 /* Usage example:

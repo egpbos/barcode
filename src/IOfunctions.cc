@@ -14,7 +14,7 @@
 
 using namespace std;
 
-void dump_measured_spec(real_prec *x, real_prec *y, string outputFileName,
+void dump_measured_spec(real_prec *x, real_prec *y, const std::string& outputFileName,
   ULONG N_bin) {
   ofstream outStream(outputFileName.data());
   assert(outStream.is_open());
@@ -32,7 +32,7 @@ void dump_measured_spec(real_prec *x, real_prec *y, string outputFileName,
 }
 
 
-void dump_ps_it(struct DATA *data,real_prec *x,real_prec *y)
+void dump_ps_it(struct DATA *data,real_prec *x, const real_prec *y)
 {
   //int N1=data->numerical->N1;
   //int N2=data->numerical->N2;
@@ -55,7 +55,7 @@ void dump_ps_it(struct DATA *data,real_prec *x,real_prec *y)
   
   assert(outStream.is_open());
     
-  real_prec NORM=static_cast<real_prec>(1.0); // output normalisation
+  auto NORM=static_cast<real_prec>(1.0); // output normalisation
   // EGP: this is now done in measure_spec already (EqSolvers.cc)
 
 //#ifdef	  FOURIER_DEF_1 

@@ -9,8 +9,8 @@
 
 #include "struct_main.h"
 
-#include <math.h>
-#include <stdlib.h>
+#include <cmath>
+#include <cstdlib>
 #include <stdexcept>  // std::logic_error
 
 #include <gsl/gsl_randist.h>
@@ -108,7 +108,7 @@ real_prec max_arr ( ULONG factor, real_prec *in )
 }
 
 // EGP: added mean_arr
-real_prec mean_arr ( ULONG size, real_prec *in )
+real_prec mean_arr ( ULONG size, const real_prec *in )
 {
   real_prec mean = 0.0;
 #ifdef MULTITHREAD
@@ -124,7 +124,7 @@ real_prec median_arr (ULONG size, real_prec *in)
 {
   //real_prec * copy = (real_prec *) malloc(size * sizeof(real_prec));
   //real_prec * copy = reinterpret_cast<real_prec *>( malloc(size * sizeof(real_prec))) ); // EGP: fixes "old style cast" warning
-  real_prec *copy = new real_prec[size]; // EGP: suggested by Johan; C++ way of doing it
+  auto *copy = new real_prec[size]; // EGP: suggested by Johan; C++ way of doing it
   //fftw_array<real_prec> copy(size);
   copyArray(in, copy, size);
 
@@ -269,7 +269,8 @@ void getCICcells(ULONG N1, ULONG N2, ULONG N3, real_prec L1, real_prec L2, real_
 // EGP: CIC weights, used in the CIC density estimator and CIC interpolator.
 // tx is just 1-dx. Note that these arrays must have length 3, and cell_index1
 // as well. The latter can be calculated using getCICcells.
-void getCICweights(real_prec L1, real_prec L2, real_prec L3, real_prec d1, real_prec d2, real_prec d3, real_prec x, real_prec y, real_prec z, ULONG *cell_index1, real_prec *dx, real_prec *tx)
+void getCICweights(real_prec L1, real_prec L2, real_prec L3, real_prec d1, real_prec d2, real_prec d3, real_prec x, real_prec y, real_prec z,
+                   const ULONG *cell_index1, real_prec *dx, real_prec *tx)
 {
   real_prec xpos, ypos, zpos, xc, yc, zc;
   
@@ -298,7 +299,7 @@ void getCICweights(real_prec L1, real_prec L2, real_prec L3, real_prec d1, real_
 real_prec interpolate_CIC(ULONG N1, ULONG N2, ULONG N3, real_prec L1,
                           real_prec L2, real_prec L3, real_prec d1,
                           real_prec d2, real_prec d3, real_prec xp,
-                          real_prec yp, real_prec zp, real_prec *input) {
+                          real_prec yp, real_prec zp, const real_prec *input) {
   real_prec dx[3], tx[3];
   ULONG i[3], ii[3];
   getCICcells(N1, N2, N3, L1, L2, L3, d1, d2, d3, xp, yp, zp, i, ii);
@@ -323,8 +324,8 @@ real_prec interpolate_CIC(ULONG N1, ULONG N2, ULONG N3, real_prec L1,
 // this, which obviously doesn't work.
 void interpolate_CIC(ULONG N1, ULONG N2, ULONG N3, real_prec L1, real_prec L2,
                      real_prec L3, real_prec d1, real_prec d2, real_prec d3,
-                     real_prec *xp, real_prec *yp, real_prec *zp,
-                     real_prec *field_grid, ULONG N_OBJ,
+                     const real_prec *xp, const real_prec *yp, const real_prec *zp,
+                     const real_prec *field_grid, ULONG N_OBJ,
                      real_prec *interpolation) {
   #ifdef MULTITHREAD
   #pragma omp parallel for
@@ -348,10 +349,10 @@ void interpolate_CIC(ULONG N1, ULONG N2, ULONG N3, real_prec L1, real_prec L2,
 
 // Single coordinate interpolator without all the array mess.
 real_prec interpolate_TSC(ULONG N1_ul, ULONG N2_ul, ULONG N3_ul, real_prec d1, real_prec d2, real_prec d3, real_prec xp,
-                          real_prec yp, real_prec zp, real_prec *field) {
-  unsigned N1 = static_cast<unsigned>(N1_ul);
-  unsigned N2 = static_cast<unsigned>(N2_ul);
-  unsigned N3 = static_cast<unsigned>(N3_ul);
+                          real_prec yp, real_prec zp, const real_prec *field) {
+  auto N1 = static_cast<unsigned>(N1_ul);
+  auto N2 = static_cast<unsigned>(N2_ul);
+  auto N3 = static_cast<unsigned>(N3_ul);
 
   real_prec output = 0;
   // particle coordinates in "kernel units" (divided by d1/2/3)
@@ -359,9 +360,9 @@ real_prec interpolate_TSC(ULONG N1_ul, ULONG N2_ul, ULONG N3_ul, real_prec d1, r
   real_prec yp_kern = yp/d2;
   real_prec zp_kern = zp/d3;
   // indices of the cell of the particle
-  unsigned ix_x_cell = static_cast<unsigned>(xp_kern);
-  unsigned ix_y_cell = static_cast<unsigned>(yp_kern);
-  unsigned ix_z_cell = static_cast<unsigned>(zp_kern);
+  auto ix_x_cell = static_cast<unsigned>(xp_kern);
+  auto ix_y_cell = static_cast<unsigned>(yp_kern);
+  auto ix_z_cell = static_cast<unsigned>(zp_kern);
   // cell_center coordinates (kernel units)
   real_prec x_cell = static_cast<real_prec>(ix_x_cell) + 0.5;
   real_prec y_cell = static_cast<real_prec>(ix_y_cell) + 0.5;
@@ -422,9 +423,9 @@ void interpolate_TSC(ULONG N1, ULONG N2, ULONG N3, real_prec d1, real_prec d2, r
 // Single coordinate interpolator without all the array mess.
 void interpolate_TSC_multi(ULONG N1_ul, ULONG N2_ul, ULONG N3_ul, real_prec d1, real_prec d2, real_prec d3, real_prec xp,
                            real_prec yp, real_prec zp, real_prec **fields, int N_fields, real_prec *out) {
-  unsigned N1 = static_cast<unsigned>(N1_ul);
-  unsigned N2 = static_cast<unsigned>(N2_ul);
-  unsigned N3 = static_cast<unsigned>(N3_ul);
+  auto N1 = static_cast<unsigned>(N1_ul);
+  auto N2 = static_cast<unsigned>(N2_ul);
+  auto N3 = static_cast<unsigned>(N3_ul);
 
   for (int ix_fields = 0; ix_fields < N_fields; ++ix_fields) {
     out[ix_fields] = 0;
@@ -434,9 +435,9 @@ void interpolate_TSC_multi(ULONG N1_ul, ULONG N2_ul, ULONG N3_ul, real_prec d1, 
   real_prec yp_kern = yp/d2;
   real_prec zp_kern = zp/d3;
   // indices of the cell of the particle
-  unsigned ix_x_cell = static_cast<unsigned>(xp_kern);
-  unsigned ix_y_cell = static_cast<unsigned>(yp_kern);
-  unsigned ix_z_cell = static_cast<unsigned>(zp_kern);
+  auto ix_x_cell = static_cast<unsigned>(xp_kern);
+  auto ix_y_cell = static_cast<unsigned>(yp_kern);
+  auto ix_z_cell = static_cast<unsigned>(zp_kern);
   // cell_center coordinates (kernel units)
   real_prec x_cell = static_cast<real_prec>(ix_x_cell) + 0.5;
   real_prec y_cell = static_cast<real_prec>(ix_y_cell) + 0.5;
@@ -514,7 +515,7 @@ real_prec k_squared(unsigned int i, unsigned int j, unsigned int k, real_prec L1
                     unsigned int N1, unsigned int N2, unsigned int N3)
 {
   real_prec k2=0.;
-  real_prec  kfac=static_cast<real_prec>(2.*M_PI);
+  auto kfac=static_cast<real_prec>(2.*M_PI);
 
   real_prec kx=0.;
   real_prec ky=0.;
@@ -536,7 +537,7 @@ real_prec k_squared(unsigned int i, unsigned int j, unsigned int k, real_prec L1
 
 // EGP: Note: calc_kx, y and z were exactly the same functions! Replaced with calc_ki
 real_prec calc_ki(unsigned int i, real_prec Li, unsigned int Ni) {
-  real_prec kfac=static_cast<real_prec>(2.*M_PI/Li);
+  auto kfac=static_cast<real_prec>(2.*M_PI/Li);
   real_prec ki=0.;
 
   if (i<=Ni/2)
@@ -567,7 +568,7 @@ real_prec calc_kz(unsigned int k, real_prec L3, unsigned int N3) {
 // Convolution and kernel functions
 ////////////////////////////////////////////////////////////////
 
-void convolve(real_prec L1, real_prec L2, real_prec L3, unsigned N1, unsigned N2, unsigned N3, real_prec *in, real_prec *out,
+void convolve(real_prec L1, real_prec L2, real_prec L3, unsigned N1, unsigned N2, unsigned N3, const real_prec *in, real_prec *out,
               real_prec smol, bool zeropad, int filtertype)
 {
   bool gauss=false;
@@ -665,7 +666,7 @@ void convolve(real_prec L1, real_prec L2, real_prec L3, unsigned N1, unsigned N2
         real_prec rS=smol;
         real_prec rS2=rS*rS;
         real_prec kcut=smol;//2.*M_PI/rS;
-        real_prec sigma=static_cast<real_prec>(.3);
+        auto sigma=static_cast<real_prec>(.3);
 
         if (tophat==true)
         {
@@ -680,7 +681,7 @@ void convolve(real_prec L1, real_prec L2, real_prec L3, unsigned N1, unsigned N2
         if (errfunc==true)
         {
           u = static_cast<real_prec>((sqrt(k2)-kcut)/(sqrt(2.)*sigma));
-          real_prec fac = static_cast<real_prec>(erfc(u));
+          auto fac = static_cast<real_prec>(erfc(u));
           wkernel[k+(Nzp3)*(j+Nzp2*i)]=fac;
         }
 
@@ -810,7 +811,7 @@ void kernelcomp(real_prec L1, real_prec L2, real_prec L3, unsigned N1, unsigned 
         real_prec rS=smol;
         real_prec rS2=rS*rS;
         real_prec kcut=smol;//2.*M_PI/rS;
-        real_prec sigma=static_cast<real_prec>(.3);
+        auto sigma=static_cast<real_prec>(.3);
 
         if (tophat==true)
         {
@@ -825,7 +826,7 @@ void kernelcomp(real_prec L1, real_prec L2, real_prec L3, unsigned N1, unsigned 
         if (errfunc==true)
         {
           u = static_cast<real_prec>((sqrt(k2)-kcut)/(sqrt(2.)*sigma));
-          real_prec fac = static_cast<real_prec>(erfc(u));
+          auto fac = static_cast<real_prec>(erfc(u));
           re(AUX[ii])=fac;
         }
 
@@ -871,7 +872,7 @@ void kernelcomp(real_prec L1, real_prec L2, real_prec L3, unsigned N1, unsigned 
 }
 
 
-void convcomp(unsigned N1, unsigned N2, unsigned N3, real_prec *in, real_prec *out, real_prec smol, string dir)
+void convcomp(unsigned N1, unsigned N2, unsigned N3, real_prec *in, real_prec *out, real_prec smol, const std::string & dir)
 {
   //bool gauss=false;
   //bool errfunc=false;
@@ -1017,14 +1018,14 @@ void gradfft(unsigned N1, unsigned N2, unsigned N3, real_prec L1, real_prec L2, 
 }
 
 
-void gradfindif(unsigned N1, real_prec L1, real_prec *in, real_prec *out, unsigned int dim)
+void gradfindif(unsigned N1, real_prec L1, const real_prec *in, real_prec *out, unsigned int dim)
 {
   if (N1 > INT_MAX) {
     std::string msg = "Box dimensions must not be larger than INT_MAX in gradfindif!";
     throw std::logic_error(msg);
     // otherwise the signed integer indices below will overflow
   }
-  real_prec fac=static_cast<real_prec>(N1/(2.*L1));
+  auto fac=static_cast<real_prec>(N1/(2.*L1));
 
 #ifdef MULTITHREAD
 #pragma omp parallel for
@@ -1185,7 +1186,8 @@ real_prec GR_NUM(gsl_rng * SEED, real_prec sigma ,int GR_METHOD)
 }
 
 
-void create_GARFIELD(unsigned N1, unsigned N2, unsigned N3, real_prec L1, real_prec L2, real_prec L3,real_prec *delta,real_prec * Power,gsl_rng * seed)
+void create_GARFIELD(unsigned N1, unsigned N2, unsigned N3, real_prec L1, real_prec L2, real_prec L3,real_prec *delta,
+                     const real_prec * Power,gsl_rng * seed)
 {
   /// FOLLOWING HUGO MARTEL
   //
@@ -1208,7 +1210,7 @@ void create_GARFIELD(unsigned N1, unsigned N2, unsigned N3, real_prec L1, real_p
 
   // Build a resolution independent random grid
   vector< complex<real_prec> > random_grid = resolution_independent_random_grid_FS<real_prec>( N1, seed, false );
-  complex_prec *random_grid_array = reinterpret_cast<complex_prec *>(random_grid.data());
+  auto *random_grid_array = reinterpret_cast<complex_prec *>(random_grid.data());
   copyArray(random_grid_array, GRF_array, N);
 
 // Factor for conversion from power spectrum to discrete fourier transform

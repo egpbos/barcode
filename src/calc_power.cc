@@ -11,7 +11,7 @@
 #include "struct_main.h"
 #include "fftw_array.h"
 
-#include <math.h>
+#include <cmath>
 #include <iomanip>
 #include <cassert>
 

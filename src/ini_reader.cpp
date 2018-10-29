@@ -26,11 +26,11 @@ parameter_inifile::parameter_inifile(const std::string& filename)  {
       }
       // trim trailing comments
       auto trailing_comment_ix = line.find('#');
-      if (trailing_comment_ix != line.npos) {
+      if (trailing_comment_ix != std::string::npos) {
         line.erase(line.begin() + static_cast<std::ptrdiff_t>(trailing_comment_ix), line.end());
       }
       // split key and value and store in output map
-      auto delimiterPos = line.find("=");
+      auto delimiterPos = line.find('=');
       auto key = line.substr(0, delimiterPos);
       auto value = line.substr(delimiterPos + 1);
       parameters[key] = value;

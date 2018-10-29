@@ -16,7 +16,7 @@
 class parameter_inifile {
   std::map<std::string, std::string> parameters;
  public:
-  parameter_inifile(const std::string& filename);
+  explicit parameter_inifile(const std::string& filename);
 
   template <typename T> T find(const std::string& key) {
     T value;

@@ -21,7 +21,7 @@ void measure_spectrum(unsigned int N1, unsigned int N2, unsigned int N3, real_pr
 {
   fftw_array<ULONG> nmode(N_bin);
 
-  ULONG N = static_cast<ULONG>(N1*N2*N3);// EGP: added
+  auto N = (static_cast<ULONG>(N1) * N2) * N3;
 
   /* Initialize the arrays */
   fillZero(power, N_bin);
@@ -45,7 +45,7 @@ void measure_spectrum(unsigned int N1, unsigned int N2, unsigned int N3, real_pr
     for(unsigned j=0;j<N2;j++)
       for(unsigned k=0;k<N3;k++) {
         real_prec ktot=sqrt(k_squared(i,j,k,L1,L2,L3,N1,N2,N3));
-        ULONG nbin=static_cast<ULONG>(ktot/dk);
+        auto nbin=static_cast<ULONG>(ktot/dk);
         // N.B.: we leave the kmax contribution out; it's only one mode, so very
         //       noisy anyway, but also otherwise we have to sacrifice room for
         //       the better modes, because we have to keep the arrays N_bin size
@@ -68,7 +68,7 @@ void measure_spectrum(unsigned int N1, unsigned int N2, unsigned int N3, real_pr
       }
 
   // Transform from discrete Fourier coefficients to actual power spectrum (see Martel 2005)
-  real_prec NORM=static_cast<real_prec>(1.0);
+  auto NORM=static_cast<real_prec>(1.0);
 #ifdef	  FOURIER_DEF_1
   NORM=static_cast<real_prec>(L1*L2*L3);//4./M_PI);
 #endif

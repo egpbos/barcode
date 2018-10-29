@@ -13,11 +13,11 @@
 #include <gsl/gsl_randist.h>
 #include <string>
 
-void interpolate_CIC(ULONG N1, ULONG N2, ULONG N3, real_prec L1, real_prec L2, real_prec L3, real_prec d1, real_prec d2, real_prec d3, real_prec *xp, real_prec *yp, real_prec *zp, real_prec *field_grid, ULONG N_OBJ, real_prec *interpolation);
+void interpolate_CIC(ULONG N1, ULONG N2, ULONG N3, real_prec L1, real_prec L2, real_prec L3, real_prec d1, real_prec d2, real_prec d3, const real_prec *xp, const real_prec *yp, const real_prec *zp, const real_prec *field_grid, ULONG N_OBJ, real_prec *interpolation);
 real_prec interpolate_CIC(ULONG N1, ULONG N2, ULONG N3, real_prec L1,
                           real_prec L2, real_prec L3, real_prec d1,
                           real_prec d2, real_prec d3, real_prec xp,
-                          real_prec yp, real_prec zp, real_prec *input);
+                          real_prec yp, real_prec zp, const real_prec *input);
 
 real_prec
 interpolate_TSC(ULONG N1, ULONG N2, ULONG N3, real_prec d1, real_prec d2, real_prec d3, real_prec xp, real_prec yp,
@@ -31,7 +31,7 @@ void interpolate_TSC_multi(ULONG N1, ULONG N2, ULONG N3, real_prec d1, real_prec
 
 void getCICcells(ULONG N1, ULONG N2, ULONG N3, real_prec L1, real_prec L2, real_prec L3, real_prec d1, real_prec d2, real_prec d3, real_prec x, real_prec y, real_prec z, ULONG *cell_index1, ULONG *cell_index2);
 
-void getCICweights(real_prec L1, real_prec L2, real_prec L3, real_prec d1, real_prec d2, real_prec d3, real_prec x, real_prec y, real_prec z, ULONG *cell_index1, real_prec *dx, real_prec *tx);
+void getCICweights(real_prec L1, real_prec L2, real_prec L3, real_prec d1, real_prec d2, real_prec d3, real_prec x, real_prec y, real_prec z, const ULONG *cell_index1, real_prec *dx, real_prec *tx);
 
 void pacman_coordinate(real_prec *x, real_prec L);
 void pacman_difference(real_prec *d_x, real_prec L);
@@ -61,7 +61,7 @@ void convolve(real_prec L1, real_prec L2, real_prec L3, unsigned N1, unsigned N2
 void kernelcomp(real_prec L1, real_prec L2, real_prec L3, unsigned N1, unsigned N2, unsigned N3, real_prec smol, int filtertype,
                 struct DATA *data);
 
-void convcomp(unsigned N1, unsigned N2, unsigned N3, real_prec *in, real_prec *out, real_prec smol, std::string dir);
+void convcomp(unsigned N1, unsigned N2, unsigned N3, real_prec *in, real_prec *out, real_prec smol, const std::string & dir);
 
 void convcompb(unsigned N1, unsigned N2, unsigned N3, real_prec *in, real_prec *out);
 
@@ -69,12 +69,12 @@ real_prec min_arr ( ULONG factor, real_prec *in );
 
 real_prec max_arr ( ULONG factor, real_prec *in );
 
-real_prec mean_arr ( ULONG size, real_prec *in );
+real_prec mean_arr ( ULONG size, const real_prec *in );
 
 void gradfft(unsigned N1, unsigned N2, unsigned N3, real_prec L1, real_prec L2, real_prec L3, real_prec *in,
              real_prec *out, unsigned int dim);
 
-void gradfindif(unsigned N1, real_prec L1, real_prec *in, real_prec *out, unsigned int dim);
+void gradfindif(unsigned N1, real_prec L1, const real_prec *in, real_prec *out, unsigned int dim);
 
 
 
@@ -91,7 +91,7 @@ void create_GARFIELDR2(int N1,int N2,int N3,real_prec *delta,real_prec * Power,g
 
 void create_GARFIELD_old(int N1,int N2,int N3, real_prec L1, real_prec L2, real_prec L3,real_prec *delta,real_prec * Power,gsl_rng * seed);
 
-void create_GARFIELD(unsigned N1,unsigned N2,unsigned N3, real_prec L1, real_prec L2, real_prec L3,real_prec *delta,real_prec * Power,gsl_rng * seed);
+void create_GARFIELD(unsigned N1,unsigned N2,unsigned N3, real_prec L1, real_prec L2, real_prec L3, real_prec *delta, const real_prec * Power, gsl_rng * seed);
 
 void grad_inv_lap_FS(unsigned N1, unsigned N2, unsigned N3, real_prec L1, real_prec L2, real_prec L3, complex_prec *in,
                      complex_prec *out, unsigned int index, bool rfft = false);

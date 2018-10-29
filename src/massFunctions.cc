@@ -27,7 +27,7 @@
 
 using namespace std;
 
-void overdens(unsigned int N1, unsigned int N2, unsigned int N3, real_prec *in, real_prec *out)
+void overdens(unsigned int N1, unsigned int N2, unsigned int N3, const real_prec *in, real_prec *out)
 {
   ULONG N=N1*N2*N3;
 
@@ -48,7 +48,7 @@ void overdens(unsigned int N1, unsigned int N2, unsigned int N3, real_prec *in, 
 
 void getDensity_NGP(unsigned int N1, unsigned int N2, unsigned int N3, real_prec L1, real_prec L2, real_prec L3,
                     real_prec d1, real_prec d2, real_prec d3, real_prec min1, real_prec min2, real_prec min3,
-                    real_prec *xp, real_prec *yp, real_prec *zp, real_prec *Par_mass, ULONG N_OBJ, real_prec *delta)
+                    const real_prec *xp, const real_prec *yp, const real_prec *zp, const real_prec *Par_mass, ULONG N_OBJ, real_prec *delta)
 {
 
   //EGP    real_prec xc, yc, zc;
@@ -97,7 +97,8 @@ void getDensity_NGP(unsigned int N1, unsigned int N2, unsigned int N3, real_prec
   if(NLOSS!=0) cout << " >>> mass assignment found "<<NLOSS<<" particles outside mesh boundary...."<<endl<<endl;
 }
 
-void getDensity_CIC(ULONG N1, ULONG N2, ULONG N3,real_prec L1, real_prec L2, real_prec L3, real_prec d1, real_prec d2, real_prec d3, real_prec min1, real_prec min2, real_prec min3,real_prec *xp,real_prec *yp,real_prec *zp, real_prec *Par_mass, ULONG N_OBJ, real_prec *delta, bool weightmass)
+void getDensity_CIC(ULONG N1, ULONG N2, ULONG N3,real_prec L1, real_prec L2, real_prec L3, real_prec d1, real_prec d2, real_prec d3, real_prec min1, real_prec min2, real_prec min3, const real_prec *xp, const real_prec *yp, const real_prec *zp,
+                    const real_prec *Par_mass, ULONG N_OBJ, real_prec *delta, bool weightmass)
 {
 #define DELTA(i,j,k) delta[k[2]+N3*(j[1]+N2*i[0])]
 
@@ -165,7 +166,7 @@ void getDensity_CIC(ULONG N1, ULONG N2, ULONG N3,real_prec L1, real_prec L2, rea
 
 void getDensity_TSC(unsigned int N1, unsigned int N2, unsigned int N3, real_prec L1, real_prec L2, real_prec L3,
                     real_prec d1, real_prec d2, real_prec d3, real_prec min1, real_prec min2, real_prec min3,
-                    real_prec *xp, real_prec *yp, real_prec *zp, real_prec *Par_mass, ULONG N_OBJ, real_prec *delta)
+                    const real_prec *xp, const real_prec *yp, const real_prec *zp, const real_prec *Par_mass, ULONG N_OBJ, real_prec *delta)
 {
 
   real_prec xc, yc, zc;
@@ -388,7 +389,11 @@ void getDensity_SPH(ULONG, ULONG, ULONG, real_prec, real_prec, real_prec, real_p
   std::cout << "This signature is deprecated, the old_cell_index parameter is no longer used. Use Mercurial revision 938 if you want to use the version with the old cell index for testing." << std::endl;
 }
 
-void getDensity_SPH(ULONG N1, ULONG N2, ULONG N3,real_prec L1, real_prec L2, real_prec L3, real_prec d1, real_prec d2, real_prec d3, real_prec min1, real_prec min2, real_prec min3,real_prec *xp,real_prec *yp,real_prec *zp, real_prec *Par_mass, ULONG N_OBJ, real_prec *delta, bool weightmass, real_prec kernel_h)
+void getDensity_SPH(ULONG N1, ULONG N2, ULONG N3,real_prec L1, real_prec L2, real_prec L3, real_prec d1, real_prec d2, real_prec d3, real_prec min1, real_prec min2, real_prec min3,
+                    const real_prec *xp,
+                    const real_prec *yp,
+                    const real_prec *zp,
+                    const real_prec *Par_mass, ULONG N_OBJ, real_prec *delta, bool weightmass, real_prec kernel_h)
 {
   // Note: current implementation assumes periodic boundary conditions!
   //

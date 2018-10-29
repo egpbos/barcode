@@ -9,11 +9,11 @@
 #include "struct_main.h"
 #include "struct_hamil.h"
 
-#include <math.h>
+#include <cmath>
 #include <iomanip>
 #include <cassert>
 #include <numeric>  // accumulate, partial_sum
-#include <algorithm>  // find, find_if, copy
+#include <algorithm>  // find, find_if, copy, count_if
 
 #include "fftw_array.h"
 
@@ -415,6 +415,7 @@ vector<T> sort_vector_by_other(const vector<T> &sortee,
   }
   auto ix_sort = sort_indexes(other);
   vector<T> sorted;
+  sorted.reserve(ix_sort.size());
   for (auto i: ix_sort) {
     sorted.push_back(sortee[i]);
   }
@@ -447,21 +448,17 @@ OutputIterator stl_smooth(InputIterator begin, InputIterator end,
   return result;
 }
 
-real_prec bool_mean(vector<bool> input) {
-  real_prec result = 0;
-  for (auto i = input.begin(); i != input.end(); ++i) {
-    if (*i) {
-      result += 1.;
-    }
-  }
+real_prec bool_mean(const vector<bool>& input) {
+  auto result = static_cast<real_prec>(std::count_if(input.begin(), input.end(), [](bool i){return i;}));
   result /= static_cast<real_prec>(input.size());
   return result;
 }
 
-vector<real_prec> real_from_bool(vector<bool> input) {
+vector<real_prec> real_from_bool(const vector<bool>& input) {
   vector<real_prec> output;
-  for (auto i = input.begin(); i != input.end(); ++i) {
-    output.push_back(static_cast<real_prec>(*i));
+  output.reserve(input.size());
+  for (auto i : input) {
+    output.push_back(static_cast<real_prec>(i));
   }
   return output;
 }
@@ -660,30 +657,30 @@ void HamiltonianMC(struct HAMIL_DATA *hd, gsl_rng * seed, struct DATA *data) {
   // }
   // else
   // {
-    if (0 == n->iGibbs % massnum || n->iGibbs == 1) {
-      // cout << "---->compute mass for the momenta ... " << endl;
-      Hamiltonian_mass(hd, hd->x, data);
-      string fname = dn->dir + string("auxmass_r");
-      if (n->mass_rs) {
-        if (contains_nan(hd->mass_r, n->N)) {
-          throw BarcodeException("auxmass_r contains a NaN! aborting.");
-        }
-        write_array(fname, hd->mass_r, n->N1, n->N2, n->N3);
+  if (0 == n->iGibbs % massnum || n->iGibbs == 1) {
+    // cout << "---->compute mass for the momenta ... " << endl;
+    Hamiltonian_mass(hd, hd->x, data);
+    string fname = dn->dir + string("auxmass_r");
+    if (n->mass_rs) {
+      if (contains_nan(hd->mass_r, n->N)) {
+        throw BarcodeException("auxmass_r contains a NaN! aborting.");
       }
-      fname = dn->dir + string("auxmass_f");
-      if (n->mass_fs) {
-        write_array(fname, hd->mass_f, n->N1, n->N2, n->N3);
-      }
-    } else {
-      string fname = dn->dir + string("auxmass_r");
-      if (n->mass_rs) {
-        read_array(fname, hd->mass_r, n->N1, n->N2, n->N3);
-      }
-      fname = dn->dir + string("auxmass_f");
-      if (n->mass_fs) {
-        read_array(fname, hd->mass_f, n->N1, n->N2, n->N3);
-      }
+      write_array(fname, hd->mass_r, n->N1, n->N2, n->N3);
     }
+    fname = dn->dir + string("auxmass_f");
+    if (n->mass_fs) {
+      write_array(fname, hd->mass_f, n->N1, n->N2, n->N3);
+    }
+  } else {
+    string fname = dn->dir + string("auxmass_r");
+    if (n->mass_rs) {
+      read_array(fname, hd->mass_r, n->N1, n->N2, n->N3);
+    }
+    fname = dn->dir + string("auxmass_f");
+    if (n->mass_fs) {
+      read_array(fname, hd->mass_f, n->N1, n->N2, n->N3);
+    }
+  }
   // }
 
   // cout << "---->start Hamiltonian sampling ... " << endl;
@@ -744,7 +741,7 @@ void HamiltonianMC(struct HAMIL_DATA *hd, gsl_rng * seed, struct DATA *data) {
     if (p_acceptance >= 1.0) {
       reach_acceptance = true;
     } else {
-      real_prec u = static_cast<real_prec>(gsl_rng_uniform(seed));
+      auto u = static_cast<real_prec>(gsl_rng_uniform(seed));
 
       if (u < p_acceptance)
         reach_acceptance = true;

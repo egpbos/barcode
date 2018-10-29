@@ -43,7 +43,7 @@ void INIT_PARAMS(struct DATA *data) {
   char fname_PAR[100]="input.par";
   parameter_inifile params (fname_PAR);
 
-  int inputmode=params.find<int>("inputmode");
+  auto inputmode=params.find<int>("inputmode");
 
   string dataFileName=params.find<string>("file");
   cout << "file: " << dataFileName << endl;
@@ -52,19 +52,19 @@ void INIT_PARAMS(struct DATA *data) {
   data->numerical->INV_SUCCESS = 0;
 
   // EGP: added following switches
-  bool random_test = params.find<bool>("random_test");
-  bool random_test_rsd = params.find<bool>("random_test_rsd");
+  auto random_test = params.find<bool>("random_test");
+  auto random_test_rsd = params.find<bool>("random_test_rsd");
 
-  int window_type = params.find<int>("window_type");
+  auto window_type = params.find<int>("window_type");
 
-  int data_model = params.find<int>("data_model");
+  auto data_model = params.find<int>("data_model");
   int negative_obs = params.find<bool>("negative_obs");
 
-  int likelihood = params.find<int>("likelihood");
-  int prior = params.find<int>("prior");
+  auto likelihood = params.find<int>("likelihood");
+  auto prior = params.find<int>("prior");
 
-  int sfmodel = params.find<int>("sfmodel"); 
-  bool rsd_model = params.find<bool>("rsd_model");
+  auto sfmodel = params.find<int>("sfmodel");
+  auto rsd_model = params.find<bool>("rsd_model");
 
   if (((data_model == 1) && (likelihood != 2)) ||
       ((likelihood == 2) && (data_model != 1)) ) {
@@ -73,78 +73,78 @@ void INIT_PARAMS(struct DATA *data) {
   // EGP: end added switches
 
   // EGP: pseudo-timestep parameters
-  real_prec N_eps_fac = params.find<real_prec>("N_eps_fac");
-  real_prec eps_fac = params.find<real_prec>("eps_fac");
-  real_prec eps_fac_initial = params.find<real_prec>("eps_fac_initial");
-  real_prec eps_fac_power = params.find<real_prec>("eps_fac_power");
-  real_prec s_eps_total_fac = params.find<real_prec>("s_eps_total_fac");
-  real_prec s_eps_total_scaling = params.find<real_prec>("s_eps_total_scaling");
-  int s_eps_total_Nx_norm = params.find<int>("s_eps_total_Nx_norm");
+  auto N_eps_fac = params.find<real_prec>("N_eps_fac");
+  auto eps_fac = params.find<real_prec>("eps_fac");
+  auto eps_fac_initial = params.find<real_prec>("eps_fac_initial");
+  auto eps_fac_power = params.find<real_prec>("eps_fac_power");
+  auto s_eps_total_fac = params.find<real_prec>("s_eps_total_fac");
+  auto s_eps_total_scaling = params.find<real_prec>("s_eps_total_scaling");
+  auto s_eps_total_Nx_norm = params.find<int>("s_eps_total_Nx_norm");
 
   // EGP: adjusting epsilon parameters
-  int eps_fac_update_type = params.find<int>("eps_fac_update_type");
-  unsigned N_a_eps_update = params.find<unsigned>("N_a_eps_update");
-  real_prec acc_min = params.find<real_prec>("acc_min");
-  real_prec acc_max = params.find<real_prec>("acc_max");
-  int eps_down_smooth = params.find<int>("eps_down_smooth");
-  real_prec eps_up_fac = params.find<real_prec>("eps_up_fac");
+  auto eps_fac_update_type = params.find<int>("eps_fac_update_type");
+  auto N_a_eps_update = params.find<unsigned>("N_a_eps_update");
+  auto acc_min = params.find<real_prec>("acc_min");
+  auto acc_max = params.find<real_prec>("acc_max");
+  auto eps_down_smooth = params.find<int>("eps_down_smooth");
+  auto eps_up_fac = params.find<real_prec>("eps_up_fac");
 
   // EGP: initial guess
-  int initial_guess = params.find<int>("initial_guess");
+  auto initial_guess = params.find<int>("initial_guess");
   string initial_guess_file = params.find<string>("initial_guess_file");
-  int initial_guess_smoothing_type = params.find<int>("initial_guess_smoothing_type");
-  real_prec initial_guess_smoothing_scale = params.find<real_prec>("initial_guess_smoothing_scale");
+  auto initial_guess_smoothing_type = params.find<int>("initial_guess_smoothing_type");
+  auto initial_guess_smoothing_scale = params.find<real_prec>("initial_guess_smoothing_scale");
 
   // mass type
   // bool mass_fs = params.find<bool>("mass_fs");
-  int mass_type = params.find<int>("mass_type");
-  ULONG massnum_init = params.find<ULONG>("massnum_burn");
-  ULONG massnum_burn = params.find<ULONG>("massnum_post");
+  auto mass_type = params.find<int>("mass_type");
+  auto massnum_init = params.find<ULONG>("massnum_burn");
+  auto massnum_burn = params.find<ULONG>("massnum_post");
 
   // output
-  unsigned outnum = params.find<unsigned>("outnum");
-  unsigned outnum_ps = params.find<unsigned>("outnum_ps");
+  auto outnum = params.find<unsigned>("outnum");
+  auto outnum_ps = params.find<unsigned>("outnum_ps");
 
   string dir=params.find<string>("dir");
 
-  unsigned N1=params.find<unsigned>("Nx");
+  auto N1=params.find<unsigned>("Nx");
   unsigned N2=N1;
   unsigned N3=N1;
 
-  real_prec L1=params.find<real_prec>("Lx");
+  auto L1=params.find<real_prec>("Lx");
   real_prec L2=L1;
   real_prec L3=L1;
 
-  real_prec xllc=params.find<real_prec>("xllc");
-  real_prec yllc=params.find<real_prec>("yllc");
-  real_prec zllc=params.find<real_prec>("zllc");
+  auto xllc=params.find<real_prec>("xllc");
+  auto yllc=params.find<real_prec>("yllc");
+  auto zllc=params.find<real_prec>("zllc");
 
-  real_prec xobs=params.find<real_prec>("xobs");
-  real_prec yobs=params.find<real_prec>("yobs");
-  real_prec zobs=params.find<real_prec>("zobs");
-  bool planepar = params.find<bool>("planepar");
-  bool periodic = params.find<bool>("periodic");
+  auto xobs=params.find<real_prec>("xobs");
+  auto yobs=params.find<real_prec>("yobs");
+  auto zobs=params.find<real_prec>("zobs");
+  auto planepar = params.find<bool>("planepar");
+  auto periodic = params.find<bool>("periodic");
 
-  ULONG seed=params.find<ULONG>("seed");
+  auto seed=params.find<ULONG>("seed");
 
-  ULONG N_bin=params.find<ULONG>("N_bin");
-  ULONG N_Gibbs=params.find<ULONG>("N_Gibbs"); // EGP: added
-  ULONG total_steps_lim = params.find<ULONG>("total_steps_lim");
+  auto N_bin=params.find<ULONG>("N_bin");
+  auto N_Gibbs=params.find<ULONG>("N_Gibbs"); // EGP: added
+  auto total_steps_lim = params.find<ULONG>("total_steps_lim");
 
-  int masskernel=params.find<int>("masskernel");
+  auto masskernel=params.find<int>("masskernel");
 
-  real_prec z=params.find<real_prec>("z");
-  real_prec ascale = static_cast<real_prec>(1./(1.+z));
+  auto z=params.find<real_prec>("z");
+  auto ascale = static_cast<real_prec>(1./(1.+z));
 
-  real_prec slength=params.find<real_prec>("slength");
+  auto slength=params.find<real_prec>("slength");
 
-  bool readPS=params.find<bool>("readPS");
+  auto readPS=params.find<bool>("readPS");
 
-  real_prec sigma_fac = params.find<real_prec>("sigma_fac");
-  real_prec sigma_min = params.find<real_prec>("sigma_min");
-  real_prec delta_min = params.find<real_prec>("delta_min");
+  auto sigma_fac = params.find<real_prec>("sigma_fac");
+  auto sigma_min = params.find<real_prec>("sigma_min");
+  auto delta_min = params.find<real_prec>("delta_min");
 
-  bool correct_delta = params.find<bool>("correct_delta");
+  auto correct_delta = params.find<bool>("correct_delta");
 
   string fnamePS=params.find<string>("fnamePS");
   cout << "fnamePS: " << fnamePS << endl;
@@ -329,7 +329,7 @@ void INIT_PARAMS(struct DATA *data) {
   data->numerical->outnum_ps = outnum_ps;
 
   // Testing:
-  real_prec mass_factor = params.find<real_prec>("mass_factor");
+  auto mass_factor = params.find<real_prec>("mass_factor");
   data->numerical->mass_factor = mass_factor;
   data->numerical->grad_psi_prior_factor = params.find<real_prec>("grad_psi_prior_factor");
   data->numerical->grad_psi_likeli_factor = params.find<real_prec>("grad_psi_likeli_factor");
@@ -421,7 +421,7 @@ void INIT_FFTW(struct DATA *data, real_prec *in_r2c, real_prec *out_c2r, complex
 
 
 /* --- function init_cosmology --- */
-int INIT_COSMOLOGY(struct COSMOLOGY *c, string codename)
+int INIT_COSMOLOGY(struct COSMOLOGY *c, const std::string& codename)
 {
   //struct COSMOLOGY *c = data->cosmology;
 
@@ -510,15 +510,15 @@ int INIT_COSMOLOGY(struct COSMOLOGY *c, string codename)
   // growth factors
   real_prec Omega_C = num_1 - c->omega_m - c->omega_q;
 
-  real_prec H0 = static_cast<real_prec>(100. * c->h *cgs_km/cgs_Mpc/cgs_sec);
+  auto H0 = static_cast<real_prec>(100. * c->h *cgs_km/cgs_Mpc/cgs_sec);
   real_prec H = H0 * sqrt(c->omega_m/c->ascale/c->ascale/c->ascale + c->omega_q + Omega_C/c->ascale/c->ascale);
   real_prec Omega=c->omega_m / (((H/H0)*(H/H0))*(c->ascale*c->ascale*c->ascale));
 
   real_prec D1 = D_growth(c->ascale, c->omega_m, c->omega_q, c->h);
   c->D1 = D1;
   cout<<"D1 = "<<D1<<endl;
-  real_prec fD2 = static_cast<real_prec>(pow(Omega,-1./143.));
-  real_prec D2 = static_cast<real_prec>(-3./7.*D1*D1*fD2);
+  auto fD2 = static_cast<real_prec>(pow(Omega,-1./143.));
+  auto D2 = static_cast<real_prec>(-3./7.*D1*D1*fD2);
   c->D2=D2;
   cout<<"D2 = "<<D2<<endl;
 

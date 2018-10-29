@@ -9,7 +9,7 @@
 #include "struct_main.h"
 #include "struct_hamil.h"
 
-#include <math.h>
+#include <cmath>
 #include <iomanip>
 #include <algorithm>  // std::max_element, std::find
 #include <iterator>  // std::distance
@@ -42,7 +42,7 @@ void poissonian_likelihood_partial_f_delta_x_log_like(struct HAMIL_DATA *hd, rea
 
   for(ULONG i = 0; i < n->N; i++)
   {
-    real_prec dens = static_cast<real_prec>(1. + hd->biasP * deltaX[i]);// must be positive!
+    auto dens = static_cast<real_prec>(1. + hd->biasP * deltaX[i]);// must be positive!
     real_prec Lambda = hd->window[i] * hd->rho_c * pow(dens, hd->biasE);
 
     if ((hd->window[i] > 0.0) && (dens > 0.0))
@@ -83,7 +83,7 @@ real_prec poissonian_likelihood_log_like(struct HAMIL_DATA *hd, real_prec *delta
 #endif // MULTITHREAD 
   for(ULONG i = 0; i < n->N; i++)
   {
-    real_prec dens = static_cast<real_prec>(1. + hd->biasP * hd->deltaX[i]);// must be positive!
+    auto dens = static_cast<real_prec>(1. + hd->biasP * hd->deltaX[i]);// must be positive!
     real_prec Lambda = hd->window[i] * hd->rho_c * pow(dens, hd->biasE);
 
     if ((hd->window[i] > 0.) && (Lambda > 0.0))
@@ -512,7 +512,7 @@ void grad_SPH_kernel_3D(real_prec x, real_prec y, real_prec z, real_prec h_inv, 
   //   real_prec r = sqrt(r_sq);
   //   partial = (2.25*r*h_inv*h_inv - 3*h_inv) * norm;
   // }
-  int q_sq_i = static_cast<int>(r_sq * h_sq_inv);
+  auto q_sq_i = static_cast<int>(r_sq * h_sq_inv);
   switch (q_sq_i) {
     case 0:
       {
@@ -751,7 +751,7 @@ void SPH_kernel_3D_cells_hull_1(const vector<int> &i, const vector<int> &j, cons
 void _likelihood_calc_V_SPH_kernel_loop_h_units(ULONG N2pad, ULONG N3pad, real_prec d1_h, real_prec d2_h, real_prec d3_h,
                                                 vector<pair<int, int> > &ij, vector<int> &k_begin, vector<int> &k_last,
                                                 unsigned ix, unsigned iy, unsigned iz, real_prec dpcx_h, real_prec dpcy_h,
-                                                real_prec dpcz_h, real_prec *part_like_padded, unsigned padding,
+                                                real_prec dpcz_h, const real_prec *part_like_padded, unsigned padding,
                                                 real_prec grad_SPH_kernel_norm, real_prec &_out_x_j, real_prec &_out_y_j,
                                                 real_prec &_out_z_j) {
   real_prec out_x_j = 0., out_y_j = 0., out_z_j = 0.; // to avoid having to add to out_#[j]'s inside the loop, which is expensive, because these arrays are not at all contiguous => factor 0.82 timesaving
@@ -766,8 +766,8 @@ void _likelihood_calc_V_SPH_kernel_loop_h_units(ULONG N2pad, ULONG N3pad, real_p
        ij_ix < ij.size(); ++ij_ix) {
     int i1 = ij[ij_ix].first;
     int i2 = ij[ij_ix].second;
-    unsigned kx = static_cast<unsigned>(static_cast<int>(ix_pad) + i1);
-    unsigned ky = static_cast<unsigned>(static_cast<int>(iy_pad) + i2);
+    auto kx = static_cast<unsigned>(static_cast<int>(ix_pad) + i1);
+    auto ky = static_cast<unsigned>(static_cast<int>(iy_pad) + i2);
     // Cell position (relative to the central cell):
     real_prec diff_x_h = dpcx_h - static_cast<real_prec>(i1)*d1_h;
     real_prec diff_y_h = dpcy_h - static_cast<real_prec>(i2)*d2_h;
@@ -775,7 +775,7 @@ void _likelihood_calc_V_SPH_kernel_loop_h_units(ULONG N2pad, ULONG N3pad, real_p
     ULONG index_xy_part = N3pad*(ky + N2pad*kx);  // N2/3pad will promote kx/y to ULONG
     int kz_begin = k_begin[ij_ix];
     int kz_last = k_last[ij_ix];
-    ULONG index_begin = static_cast<ULONG>(kz_begin + static_cast<long>(index_xy_part + iz_pad));
+    auto index_begin = static_cast<ULONG>(kz_begin + static_cast<long>(index_xy_part + iz_pad));
     ULONG index_end = index_begin + static_cast<ULONG>(kz_last - kz_begin);
     real_prec diff_z_h = dpcz_h - static_cast<real_prec>(kz_begin) * d3_h;
     // the actual loop
@@ -950,9 +950,9 @@ void likelihood_calc_V_SPH(struct HAMIL_DATA *hd, real_prec *part_like, real_pre
     // TODO: this calculation will go wrong when posx,y,z are not already put
     // in periodic box coordinates; might be negative then.
     // Addition 6 Jun 2017: TODO: guarantee that positions are in periodic box coords by making special type for that.
-    int ix = static_cast<int>(px/d1);
-    int iy = static_cast<int>(py/d2);
-    int iz = static_cast<int>(pz/d3);
+    auto ix = static_cast<int>(px/d1);
+    auto iy = static_cast<int>(py/d2);
+    auto iz = static_cast<int>(pz/d3);
     // Central cell position:
     // real_prec ccx = (static_cast<real_prec>(ix) + 0.5)*d1;
     // real_prec ccy = (static_cast<real_prec>(iy) + 0.5)*d2;

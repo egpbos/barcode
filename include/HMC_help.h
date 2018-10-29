@@ -10,4 +10,4 @@
 #pragma once
 #include "define_opt.h"
 
-void convolveInvCorrFuncWithSignal(struct HAMIL_DATA *hamil_data, real_prec *signal, real_prec *out, real_prec *corrFunc);
+void convolveInvCorrFuncWithSignal(struct HAMIL_DATA *hamil_data, real_prec *signal, real_prec *out, const real_prec *corrFunc);
