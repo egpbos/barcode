@@ -6,6 +6,7 @@
  * The full license is in the file LICENSE, distributed with this software.
  */
 
+#include <iostream>
 
 #include "transf.h"
 #include "fftw_array.h"

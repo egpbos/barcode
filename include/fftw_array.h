@@ -10,7 +10,7 @@
 #pragma once
 
 #include "fftw3.h"
-#include <iostream>
+//#include <iostream>
 #include "define_opt.h"
 #include <cstddef>  // std::ptrdiff_t, std::size_t
 /* This template allows to avoid writing fftw_free */
@@ -90,38 +90,38 @@ public:
 
 };
 
-template<typename T> class fftw_array_debug
-{
-  // N.B.: fftw_array_debug does not copy/assign properly! The data pointers will be copied, meaning that the new array will point to the same memory slots! This gives errors when destroying the objects when they go out of scope.
-public:
-  T *data;
-
-  fftw_array_debug(ULONG size)
-  {
-    std::cout << "creating fftw_array_debug with address " << this << " and data address " << data << std::endl;
-
-#ifdef SINGLE_PREC
-    data = static_cast<T *>( fftwf_malloc(size*sizeof(T)) );
-#endif
-#ifdef DOUBLE_PREC
-    data = static_cast<T *>( fftw_malloc(size*sizeof(T)) );
-#endif
-  }
-  ~fftw_array_debug()
-  {
-    std::cout << "destroying fftw_array_debug with address " << this << std::endl;
-#ifdef SINGLE_PREC
-    fftwf_free(data);
-#endif
-#ifdef DOUBLE_PREC
-    fftw_free(data);
-#endif
-  }
-
-  // implicit conversion: works for functions, but not for templates. For the latter case write: <array_name>.data
-  operator T*()
-  {
-    return data;
-  }
-
-};
+//template<typename T> class fftw_array_debug
+//{
+//  // N.B.: fftw_array_debug does not copy/assign properly! The data pointers will be copied, meaning that the new array will point to the same memory slots! This gives errors when destroying the objects when they go out of scope.
+//public:
+//  T *data;
+//
+//  fftw_array_debug(ULONG size)
+//  {
+//    std::cout << "creating fftw_array_debug with address " << this << " and data address " << data << std::endl;
+//
+//#ifdef SINGLE_PREC
+//    data = static_cast<T *>( fftwf_malloc(size*sizeof(T)) );
+//#endif
+//#ifdef DOUBLE_PREC
+//    data = static_cast<T *>( fftw_malloc(size*sizeof(T)) );
+//#endif
+//  }
+//  ~fftw_array_debug()
+//  {
+//    std::cout << "destroying fftw_array_debug with address " << this << std::endl;
+//#ifdef SINGLE_PREC
+//    fftwf_free(data);
+//#endif
+//#ifdef DOUBLE_PREC
+//    fftw_free(data);
+//#endif
+//  }
+//
+//  // implicit conversion: works for functions, but not for templates. For the latter case write: <array_name>.data
+//  operator T*()
+//  {
+//    return data;
+//  }
+//
+//};

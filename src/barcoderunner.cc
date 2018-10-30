@@ -15,6 +15,7 @@
 #include <cassert>
 #include <sstream>
 #include <algorithm>  // std::max_element
+#include <iostream>
 
 #include <gsl/gsl_randist.h>
 #include <gsl/gsl_integration.h>

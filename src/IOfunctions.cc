@@ -11,6 +11,9 @@
 
 #include <iomanip>
 #include <cassert>
+#ifdef DEBUG
+#include <iostream>
+#endif  // DEBUG
 
 using namespace std;
 
@@ -20,8 +23,7 @@ void dump_measured_spec(real_prec *x, real_prec *y, const std::string& outputFil
   assert(outStream.is_open());
 
 #ifdef DEBUG
-  cout << " >>> dump power-spectrum in : " << outputFileName << " ...."
-    << endl << endl;
+  std::cout << " >>> dump power-spectrum in : " << outputFileName << " ....\n" << std::endl;
 #endif  // DEBUG
 
   for (ULONG i = 0; i < N_bin; i++)

@@ -6,6 +6,7 @@
  * The full license is in the file LICENSE, distributed with this software.
  */
 
+#include <iostream>
 
 #include "define_opt.h"
 #include "struct_main.h"

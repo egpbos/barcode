@@ -14,6 +14,7 @@
 #include <cassert>
 #include <numeric>  // accumulate, partial_sum
 #include <algorithm>  // find, find_if, copy, count_if
+#include <iostream>
 
 #include "fftw_array.h"
 

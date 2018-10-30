@@ -14,6 +14,7 @@
 #include <cmath>
 #include <iomanip>
 #include <cassert>
+#include <iostream>
 
 #include <gsl/gsl_spline.h>
 #include <gsl/gsl_integration.h>

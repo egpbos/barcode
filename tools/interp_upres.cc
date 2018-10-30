@@ -11,6 +11,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <iostream>
 
 #include "define_opt.h"
 #include "struct_main.h"
@@ -27,7 +28,7 @@ using std::vector;
 
 void load_arguments(int argc, char *argv[], string &fname_in, unsigned &N1,
                     real_prec &L1, unsigned &N1_out, string &fname_out) {
-  stringstream N1_arg, L1_arg, N1_out_arg, Nbar_arg, seed_arg;
+  std::stringstream N1_arg, L1_arg, N1_out_arg, Nbar_arg, seed_arg;
 
   if (argc >= 5) {
     fname_in = string(argv[1]);

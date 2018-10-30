@@ -6,13 +6,13 @@
  * The full license is in the file LICENSE, distributed with this software.
  */
 
-
 #include "define_opt.h"
 #include "struct_main.h"
 
 #include <cmath>
 #include <iomanip>
 #include <stdexcept> // runtime_error
+#include <iostream>
 
 #include <gsl/gsl_integration.h>
 
@@ -94,7 +94,7 @@ void getDensity_NGP(unsigned int N1, unsigned int N2, unsigned int N3, real_prec
     }
     //else NLOSS++;
   }
-  if(NLOSS!=0) cout << " >>> mass assignment found "<<NLOSS<<" particles outside mesh boundary...."<<endl<<endl;
+  if(NLOSS!=0) std::cout << " >>> mass assignment found "<<NLOSS<<" particles outside mesh boundary....\n" << std::endl;
 }
 
 void getDensity_CIC(ULONG N1, ULONG N2, ULONG N3,real_prec L1, real_prec L2, real_prec L3, real_prec d1, real_prec d2, real_prec d3, real_prec min1, real_prec min2, real_prec min3, const real_prec *xp, const real_prec *yp, const real_prec *zp,

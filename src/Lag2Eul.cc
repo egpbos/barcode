@@ -6,6 +6,7 @@
  * The full license is in the file LICENSE, distributed with this software.
  */
 
+#include <cmath> // sqrt
 
 #include "define_opt.h"
 #include "struct_main.h"
@@ -212,7 +213,7 @@ void Lag2Eul_non_zeldovich(real_prec *in, real_prec *dummy, real_prec *posx, rea
         real_prec psisc=0.;
 
         if (1.+2./3.*psilin > 0.)
-          psisc=static_cast<real_prec>(3.*(sqrt(1.+2./3.*psilin)-1.));
+          psisc=static_cast<real_prec>(3.*(std::sqrt(1.+2./3.*psilin)-1.));
         else
           psisc=-3.;
 

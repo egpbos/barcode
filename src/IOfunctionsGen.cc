@@ -7,6 +7,10 @@
  */
 
 
+#ifdef DEBUG
+#include <iostream>
+#endif  // DEBUG
+
 #include "define_opt.h"
 #include "struct_main.h"
 
@@ -213,7 +217,7 @@ void write_array(const string& fname, real_prec *A_rm, ULONG N) {
   string FNAME = add_extension_if_missing(fname);
 
 #ifdef DEBUG
-  cout<<"... writing file "<<FNAME<<endl;
+  std::cout<<"... writing file "<<FNAME<<std::endl;
 #endif // DEBUG
 
   std::ofstream outStream(FNAME.c_str(), std::ios::binary);
