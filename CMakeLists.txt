@@ -129,6 +129,9 @@ set(BARCODE_SOURCE_FILES
 # HMC
         src/call_hamil.cc
         src/HMC.cc
+        # split off of old HMC.cc:
+        src/hmc/leapfrog/time_step.cpp
+        # --- end split off HMC.cc
         src/HMC_help.cc
         src/HMC_mass.cc
         src/HMC_momenta.cc
@@ -141,6 +144,7 @@ set(BARCODE_SOURCE_FILES
         src/hmc/likelihood/lognormal_independent.cpp
         src/HMC_models_testing.cpp
         src/SPH_kernel.cpp
+        # --- end split off HMC_models.cc
 # ARRAY, MATH AND STRING MANIPULATIONS:
         src/convenience.cc
         src/math_funcs.cc
