@@ -62,10 +62,16 @@ script:
 # Build
 - mkdir $TRAVIS_BUILD_DIR/build
 - cd $TRAVIS_BUILD_DIR/build
-- cmake -DCOVERAGE=$COVERAGE -DCMAKE_INSTALL_PREFIX=$HOME/.local ..
+- |
+  if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+    export INSTALL_PREFIX=$HOME/miniconda
+  else
+    export INSTALL_PREFIX=$HOME/.local
+  fi
+- cmake -DCOVERAGE=$COVERAGE -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX ..
 - make -j2
 - make install
-- export PATH="$HOME/.local/bin:$PATH"
+- export PATH="$INSTALL_PREFIX/bin:$PATH"
 - hash -r
 - if [[ "$COVERAGE" == "ON" ]]; then gem install coveralls-lcov; fi
 # base line coverage
