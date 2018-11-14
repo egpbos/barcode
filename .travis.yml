@@ -64,7 +64,8 @@ script:
 - cd $TRAVIS_BUILD_DIR/build
 - cmake -DCOVERAGE=$COVERAGE ..
 - make -j2
-- make install
+- make DESTDIR=$HOME/.local install
+- export PATH="$HOME/.local/bin:$PATH"
 - if [[ "$COVERAGE" == "ON" ]]; then gem install coveralls-lcov; fi
 # base line coverage
 - if [[ "$COVERAGE" == "ON" ]]; then lcov -c -i -d $TRAVIS_BUILD_DIR -o baseline.info; fi
@@ -73,6 +74,7 @@ script:
   cd $TRAVIS_BUILD_DIR/test/run
   mkdir tmp_data
   barcode
+  cd -
 # Unit tests
 - |
   cd $TRAVIS_BUILD_DIR/test
