@@ -66,6 +66,7 @@ script:
 - make -j2
 - make DESTDIR=$HOME/.local install
 - export PATH="$HOME/.local/bin:$PATH"
+- hash -r
 - if [[ "$COVERAGE" == "ON" ]]; then gem install coveralls-lcov; fi
 # base line coverage
 - if [[ "$COVERAGE" == "ON" ]]; then lcov -c -i -d $TRAVIS_BUILD_DIR -o baseline.info; fi
