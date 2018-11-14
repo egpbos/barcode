@@ -384,7 +384,7 @@ ADD_DEFAULT_BINARY(poisson_upres tools/poisson_upres.cc)
 include(GNUInstallDirs)
 
 install(TARGETS barcode barlib
-        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION bin
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
         )

@@ -62,9 +62,9 @@ script:
 # Build
 - mkdir $TRAVIS_BUILD_DIR/build
 - cd $TRAVIS_BUILD_DIR/build
-- cmake -DCOVERAGE=$COVERAGE ..
+- cmake -DCOVERAGE=$COVERAGE -DCMAKE_INSTALL_PREFIX=$HOME/.local ..
 - make -j2
-- make DESTDIR=$HOME/.local install
+- make install
 - export PATH="$HOME/.local/bin:$PATH"
 - hash -r
 - if [[ "$COVERAGE" == "ON" ]]; then gem install coveralls-lcov; fi
