@@ -64,10 +64,16 @@ script:
 - cd $TRAVIS_BUILD_DIR/build
 - cmake -DCOVERAGE=$COVERAGE ..
 - make -j2
+- make install
 - if [[ "$COVERAGE" == "ON" ]]; then gem install coveralls-lcov; fi
 # base line coverage
 - if [[ "$COVERAGE" == "ON" ]]; then lcov -c -i -d $TRAVIS_BUILD_DIR -o baseline.info; fi
-# Testing
+# Run test
+- |
+  cd $TRAVIS_BUILD_DIR/test/run
+  mkdir tmp_data
+  barcode
+# Unit tests
 - |
   cd $TRAVIS_BUILD_DIR/test
   $TRAVIS_BUILD_DIR/build/test/io_array

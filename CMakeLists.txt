@@ -376,3 +376,15 @@ ADD_DEFAULT_BINARY(2D_powspec tools/2D_powspec.cc)
 ## tools for upscaling resolution (with poisson sampling or interpolation)
 ADD_DEFAULT_BINARY(interp_upres tools/interp_upres.cc)
 ADD_DEFAULT_BINARY(poisson_upres tools/poisson_upres.cc)
+
+
+################
+# INSTALLATION #
+################
+include(GNUInstallDirs)
+
+install(TARGETS barcode barlib
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        )
