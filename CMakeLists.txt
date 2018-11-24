@@ -17,7 +17,6 @@ include(DownloadAndSetupFindFFTW)
 
 #--------------------------------------- download and setup FindFFTW
 DOWNLOAD_AND_SETUP_FINDFFTW()
-set(findFFTW_DIR ${CMAKE_CURRENT_BINARY_DIR}/findFFTW-src)
 
 #--------------------------------------- global settings
 # warnings
@@ -36,7 +35,7 @@ ENDIF("${isSystemDir}" STREQUAL "-1")
 #--------------------------------------- dependencies
 find_package(GSL REQUIRED)
 find_package(OpenMP COMPONENTS CXX)
-find_package(FFTW)
+find_package(FFTW REQUIRED)
 
 #--------------------------------------- build options
 include(Options)
