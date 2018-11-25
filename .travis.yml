@@ -1,38 +1,35 @@
 language: cpp
 
-matrix:
-  include:
-    - os: linux
-      addons:
-        apt:
-          sources:
-          - ubuntu-toolchain-r-test
-          packages:
-          - g++-7
-          - libfftw3-dev
-          - libgsl0-dev
-          - libncurses-dev
-      env:
-      - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
-    - os: linux
-      addons:
-        apt:
-          sources:
-          - ubuntu-toolchain-r-test
-          - llvm-toolchain-trusty-5.0
-          packages:
-          - clang-5.0
-          - libfftw3-dev
-          - libgsl0-dev
-          - libncurses-dev
-      env:
-      - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
-    - os: osx
-      osx_image: xcode10
-      compiler: clang
-
 jobs:
   include:
+  - os: linux
+    addons:
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        packages:
+        - g++-7
+        - libfftw3-dev
+        - libgsl0-dev
+        - libncurses-dev
+    env:
+    - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+  - os: linux
+    addons:
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        - llvm-toolchain-trusty-5.0
+        packages:
+        - clang-5.0
+        - libfftw3-dev
+        - libgsl0-dev
+        - libncurses-dev
+    env:
+    - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
+  - os: osx
+    osx_image: xcode10
+    compiler: clang
   - stage: coverage
     addons:
       apt:
