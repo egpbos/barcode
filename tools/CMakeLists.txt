@@ -23,10 +23,6 @@ ADD_DEFAULT_BINARY(powspec powspec.cc)
 ## 2D correlation function generators (with or without interpolating resolution upscaling)
 ADD_DEFAULT_BINARY(2D_corr_fct 2D_corr_fct.cc)
 ADD_DEFAULT_BINARY(2D_corr_fct_interp 2D_corr_fct_interp.cc)
-target_link_libraries(2D_corr_fct_interp PRIVATE ${FFTW_DOUBLE_LIB})
-if (MULTITHREAD_FFTW)
-    target_link_libraries(2D_corr_fct_interp PRIVATE ${FFTW_DOUBLE_OPENMP_LIB})
-endif()
 
 ## 2D power spectrum calculator
 ADD_DEFAULT_BINARY(2D_powspec 2D_powspec.cc)
