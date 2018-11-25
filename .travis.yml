@@ -2,20 +2,6 @@ language: cpp
 
 matrix:
   include:
-    # code coverage:
-    - os: linux
-      addons:
-        apt:
-          sources:
-          - ubuntu-toolchain-r-test
-          packages:
-          - g++-7
-          - libfftw3-dev
-          - libgsl0-dev
-          - libncurses-dev
-          - lcov
-      env:
-      - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7 && COVERAGE=ON"
     - os: linux
       addons:
         apt:
@@ -44,6 +30,22 @@ matrix:
     - os: osx
       osx_image: xcode10
       compiler: clang
+
+jobs:
+  include:
+  - stage: coverage
+    addons:
+      apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        packages:
+        - g++-7
+        - libfftw3-dev
+        - libgsl0-dev
+        - libncurses-dev
+        - lcov
+    env:
+    - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7 && COVERAGE=ON"
 
 before_install:
 - eval "${MATRIX_EVAL}"
