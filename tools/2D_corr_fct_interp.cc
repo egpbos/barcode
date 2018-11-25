@@ -7,9 +7,11 @@
  */
 
 
-#if defined(MULTITHREAD) | defined(MULTITHREAD_FFTW) | defined(MULTITHREAD_RNG)
+#ifdef WITH_OPENMP
 #include <omp.h>
-#endif  // openmp headers
+#else
+#include <thread>
+#endif  // WITH_OPENMP
 #include <cmath>
 #include <string>
 #include <sstream>
@@ -348,11 +350,17 @@ void load_arguments(int argc, char *argv[], string &fname_in, unsigned &N1,
 
 
 int main(int argc, char *argv[]) {
+#ifdef WITH_OPENMP
+  unsigned N_threads = omp_get_max_threads();
+#else
+  unsigned N_threads = std::thread::hardware_concurrency();
+#endif
+
 #ifdef MULTITHREAD_FFTW
   fftw_init_threads();
-  fftw_plan_with_nthreads(omp_get_max_threads());
+  fftw_plan_with_nthreads(N_threads);
   printf("Compiled with MULTITHREAD_FFTW support, with %dthreads\n",
-         omp_get_max_threads());
+         N_threads);
 #endif
 
   cout << "Note: plane-parallel RSDs only in this version!" << endl;

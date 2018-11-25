@@ -18,17 +18,7 @@ function(ADD_DEFAULT_BINARY binary_name source)
 
     target_link_libraries(${binary_name} PRIVATE ${LIBS} ${GSL_LIBRARIES} m ncurses)
 
-    if (DOUBLE_PREC)
-        target_link_libraries(${binary_name} PRIVATE ${FFTW_DOUBLE_LIB})
-        if (MULTITHREAD_FFTW)
-            target_link_libraries(${binary_name} PRIVATE ${FFTW_DOUBLE_OPENMP_LIB})
-        endif()
-    elseif(SINGLE_PREC)
-        target_link_libraries(${binary_name} PRIVATE ${FFTW_FLOAT_LIB})
-        if (MULTITHREAD_FFTW)
-            target_link_libraries(${binary_name} PRIVATE ${FFTW_FLOAT_OPENMP_LIB})
-        endif()
-    endif()
+    TARGET_ADD_FFTW(${binary_name})
 
     if (MULTITHREAD)
         target_link_libraries(${binary_name} PRIVATE OpenMP::OpenMP_CXX)

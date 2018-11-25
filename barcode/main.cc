@@ -16,9 +16,11 @@ output : initial and final density and velocity field on a cartesian grid
 */
 
 // c headers
-#if defined(MULTITHREAD) | defined(MULTITHREAD_FFTW) | defined(MULTITHREAD_RNG)
+#ifdef WITH_OPENMP
 #include <omp.h>
-#endif  // openmp headers
+#else
+#include <thread>
+#endif  // WITH_OPENMP
 #include <fftw3.h>
 #include <ncurses.h>
 #include <gsl/gsl_spline.h>
@@ -75,23 +77,29 @@ int main(int argc, char *argv[]) {
 #endif  // NAN_DETECTION
   // EGP: end NaN detection (part 2)
 
+#ifdef WITH_OPENMP
+  unsigned N_threads = omp_get_max_threads();
+#else
+  unsigned N_threads = std::thread::hardware_concurrency();
+#endif
+
 #ifdef MULTITHREAD
   printf("\nCompiled with MULTITHREAD. Using %d threads.\n*** Densities will "
          "usually be slightly different every multi-core run, due to floating "
-         "point addition order! ***\n", omp_get_max_threads());
+         "point addition order! ***\n", N_threads);
 #endif  // MULTITHREAD
 
 #ifdef MULTITHREAD_FFTW
 #ifdef SINGLE_PREC
   fftwf_init_threads();
-  fftwf_plan_with_nthreads(omp_get_max_threads());
+  fftwf_plan_with_nthreads(N_threads);
 #endif
 #ifdef DOUBLE_PREC
   fftw_init_threads();
-  fftw_plan_with_nthreads(omp_get_max_threads());
+  fftw_plan_with_nthreads(N_threads);
 #endif
   printf("Compiled with MULTITHREAD_FFTW support, with %dthreads\n",
-         omp_get_max_threads());
+         N_threads);
 #endif
 
   // memory allocation before try/catch

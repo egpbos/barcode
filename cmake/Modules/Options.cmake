@@ -124,6 +124,10 @@ function(TARGET_ADD_OPTIONS target)
         target_compile_definitions(${target} PUBLIC MULTITHREAD_RNG)
     endif()
 
+    if (OPENMP_CXX_FOUND)
+        target_compile_definitions(${target} PUBLIC WITH_OPENMP)
+    endif()
+
     if (NAN_DETECTION)
         target_compile_definitions(${target} PUBLIC NAN_DETECTION)
     endif()
