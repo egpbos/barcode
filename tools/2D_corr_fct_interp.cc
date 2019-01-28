@@ -358,7 +358,7 @@ int main(int argc, char *argv[]) {
 
 #ifdef MULTITHREAD_FFTW
   fftw_init_threads();
-  fftw_plan_with_nthreads(N_threads);
+  fftw_plan_with_nthreads(static_cast<int>(N_threads));
   printf("Compiled with MULTITHREAD_FFTW support, with %dthreads\n",
          N_threads);
 #endif

@@ -70,9 +70,9 @@ add_library(barlib
 target_compile_features(barlib PUBLIC cxx_std_11)
 TARGET_ADD_OPTIONS(barlib)
 
-target_include_directories(barlib PUBLIC include ${GSL_INCLUDE_DIRS} ${FFTW_INCLUDE_DIRS})
+target_include_directories(barlib PUBLIC include ${GSL_INCLUDE_DIRS} ${FFTW_INCLUDE_DIRS} ${CURSES_INCLUDE_DIRS})
 
-target_link_libraries(barlib PRIVATE ${GSL_LIBRARIES} m ncurses)
+target_link_libraries(barlib PRIVATE ${GSL_LIBRARIES} m ${CURSES_LIBRARIES})
 TARGET_ADD_FFTW(barlib)
 if (MULTITHREAD)
     target_link_libraries(barlib PRIVATE OpenMP::OpenMP_CXX)
