@@ -36,7 +36,8 @@ ENDIF("${isSystemDir}" STREQUAL "-1")
 find_package(GSL REQUIRED)
 find_package(OpenMP COMPONENTS CXX)
 find_package(FFTW REQUIRED)
-
+set(CURSES_NEED_NCURSES TRUE)
+find_package(Curses REQUIRED)
 #--------------------------------------- build options
 include(Options)
 
