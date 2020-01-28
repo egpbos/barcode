@@ -12,21 +12,28 @@ This repository contains both Barcode and a set of supplementary analysis tools.
 
 If you use this software, please cite it as:
 
-Bos E. G. P., Kitaura F.-S., van de Weygaert R., 2018, preprint ([arXiv:1810.05189](https://arxiv.org/abs/1810.05189))
+Bos E. G. P., Kitaura F.-S., van de Weygaert R., 2019, [MNRAS](http://dx.doi.org/10.1093/mnras/stz1864), 488, 2573
 
 In bibtex format:
 
 ```bibtex
-@article{Bos+2018,
-      author         = "Bos, E. G. Patrick and Kitaura, Francisco-Shu and van de
-                        Weygaert, Rien",
-      title          = "{Bayesian cosmic density field inference from redshift
-                        space dark matter maps}",
-      year           = "2018",
-      eprint         = "1810.05189",
-      archivePrefix  = "arXiv",
-      primaryClass   = "astro-ph.CO",
-      journal        = {ArXiv e-prints}
+@ARTICLE{2019MNRAS.488.2573B,
+       author = {{Bos}, E.~G. Patrick and {Kitaura}, Francisco-Shu and
+                 {van de Weygaert}, Rien},
+        title = "{Bayesian cosmic density field inference from redshift space dark matter maps}",
+      journal = {MNRAS},
+     keywords = {methods: analytical, methods: statistical, galaxies: distances and redshifts, cosmology: observations, large-scale structure of Universe, Astrophysics - Cosmology and Nongalactic Astrophysics, Statistics - Applications, Statistics - Computation},
+         year = "2019",
+        month = "Sep",
+       volume = {488},
+       number = {2},
+        pages = {2573-2604},
+          doi = {10.1093/mnras/stz1864},
+archivePrefix = {arXiv},
+       eprint = {1810.05189},
+ primaryClass = {astro-ph.CO},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.2573B},
+      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 }
 ```
 
