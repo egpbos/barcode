@@ -46,7 +46,33 @@ This code was previously described and applied in [conference proceedings](https
 
 ## Build
 
-Clone the repository, `cd` into the cloned directory (`$BARCODE` below) and run the following to configure and build:
+### Install dependencies
+Before compiling, make sure you have the required dependencies:
+
+- CMake
+- A compiler supporting at least C++11 (e.g. gcc 7 or clang 5)
+- FFTW 3
+- GNU Scientific Library
+- ncurses
+
+If you install these using a Linux package manager, make sure you get the development versions of the packages, i.e. the ones ending in `-dev` (`libfftw3-dev`, etcetera).
+You can also use `conda` to install everything in a virtual environment:
+
+```sh
+conda create -n barcode cmake cxx-compiler fftw gsl ncurses -c conda-forge
+```
+
+When using the `conda` environment, make sure you activate it before compiling and using `barcode`.
+
+### Compile the code
+
+Clone the repository and `cd` into the cloned directory:
+```sh
+git clone https://github.com/egpbos/barcode.git
+cd barcode
+```
+
+Then run `cmake` and `make` to configure and build:
 
 ```sh
 mkdir cmake-build
