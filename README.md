@@ -62,7 +62,11 @@ You can also use `conda` to install everything in a virtual environment:
 conda create -n barcode cmake cxx-compiler fftw gsl ncurses -c conda-forge
 ```
 
-When using the `conda` environment, make sure you activate it before compiling and using `barcode`.
+When using the `conda` environment, make sure you activate it before compiling and using `barcode`:
+
+```sh
+conda activate barcode
+```
 
 ### Compile the code
 
