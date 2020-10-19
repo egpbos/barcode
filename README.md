@@ -56,6 +56,12 @@ Before compiling, make sure you have the required dependencies:
 - ncurses
 
 If you install these using a Linux package manager, make sure you get the development versions of the packages, i.e. the ones ending in `-dev` (`libfftw3-dev`, etcetera).
+For instance, with apt-get in Debian or Ubuntu, you can install the requirements with:
+
+```sh
+sudo apt-get install cmake g++ fftw3-dev libgsl-dev libncurses-dev
+```
+
 Using MacPorts on macOS, you can install the necessary packages with:
 
 ```sh
