@@ -56,6 +56,12 @@ Before compiling, make sure you have the required dependencies:
 - ncurses
 
 If you install these using a Linux package manager, make sure you get the development versions of the packages, i.e. the ones ending in `-dev` (`libfftw3-dev`, etcetera).
+Using MacPorts on macOS, you can install the necessary packages with:
+
+```sh
+sudo port install cmake fftw-3 fftw-3-single gsl ncurses
+```
+
 You can also use `conda` to install everything in a virtual environment:
 
 ```sh
