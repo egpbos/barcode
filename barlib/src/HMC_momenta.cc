@@ -40,7 +40,12 @@ void draw_masked_momenta(struct HAMIL_DATA *hd, gsl_rng *seed,
 void draw_real_space_momenta(struct HAMIL_DATA *hd, gsl_rng *seed,
   real_prec *momenta);  // helper function defined below
 void draw_momenta(struct HAMIL_DATA *hd, gsl_rng *seed, real_prec *momenta,
-  struct DATA *data) {
+#ifdef DEBUG
+    struct DATA *data
+#else
+    struct DATA *
+#endif // DEBUG
+      ) {
   struct HAMIL_NUMERICAL *n = hd->numerical;
   // p ~ exp[-p^2/(2*M)]
 

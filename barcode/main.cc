@@ -96,7 +96,7 @@ int main(int argc, char *argv[]) {
 #endif
 #ifdef DOUBLE_PREC
   fftw_init_threads();
-  fftw_plan_with_nthreads(N_threads);
+  fftw_plan_with_nthreads(static_cast<int>(N_threads));
 #endif
   printf("Compiled with MULTITHREAD_FFTW support, with %dthreads\n",
          N_threads);
@@ -198,11 +198,8 @@ int main(int argc, char *argv[]) {
 
     delete n->R2Cplan;
     delete n->C2Rplan;
-
-    end_curses(data->curses);
   }
   catch(std::runtime_error &caught) {
-    end_curses(data->curses);
     cout << endl << "ERROR: " << caught.what() << endl;
   }
 
@@ -210,7 +207,6 @@ int main(int argc, char *argv[]) {
   gsl_rng_free(gBaseRand);
 
   data->numerical->performance_log.close();
-  delete curses;
 
   // delete data->numerical->R2Cplan;
   // delete data->numerical->C2Rplan;
