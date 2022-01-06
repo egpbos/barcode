@@ -104,7 +104,6 @@ int main(int argc, char *argv[]) {
 
   // memory allocation before try/catch
   auto data = new DATA;
-  auto curses = new CURSES_STRUCT;
   gsl_rng *gBaseRand = gsl_rng_alloc(gsl_rng_mt19937);
 
   try {
@@ -184,15 +183,9 @@ int main(int argc, char *argv[]) {
 //    }
 
     // initialize curses
-    data->curses = curses;
-    start_curses(data->curses);
-    init_windows(data->curses);
-    wprintw(data->curses->title, "BARCODE");
-    wrefresh(data->curses->title);
-    wprintw(data->curses->header, "sample cand eps   Neps K_i   pr_i  li_i  "
-            "K_f   pr_f  li_f  dH     P(a)  a a_N_a");
-    wrefresh(data->curses->header);
-    wrefresh(data->curses->table);
+    CURSES_STRUCT curses("BARCODE", "sample cand eps   Neps K_i   pr_i  li_i  "
+                         "K_f   pr_f  li_f  dH     P(a)  a a_N_a");
+    data->curses = &curses;
 
     barcoderunner(data, gBaseRand);
 

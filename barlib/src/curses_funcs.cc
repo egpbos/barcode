@@ -6,13 +6,23 @@
  * The full license is in the file LICENSE, distributed with this software.
  */
 
+#include "curses_funcs.h"
 
 #include <cstdlib>     // atexit
-// #include <ncurses.h>
-// #include <iostream>
-// #include <signal.h>     // to handle SIGWINCH signal with handle_winch
 
-#include "curses_funcs.h"
+CURSES_STRUCT::CURSES_STRUCT(const std::string & title, const std::string & header) {
+  start_curses(this);
+  init_windows(this);
+  wprintw(this->title, title.c_str());
+  wrefresh(this->title);
+  wprintw(this->header, header.c_str());
+  wrefresh(this->header);
+  wrefresh(this->table);
+}
+
+CURSES_STRUCT::~CURSES_STRUCT() {
+  end_curses(this);
+}
 
 
 // from http://hughm.cs.ukzn.ac.za/~murrellh/os/notes/ncurses.html

@@ -11,7 +11,12 @@
 
 #include <ncurses.h>
 
+#include <string>
+
 struct CURSES_STRUCT {
+    CURSES_STRUCT(const std::string & title, const std::string & header);
+    ~CURSES_STRUCT();
+
     bool started = false;
     WINDOW *table;
     WINDOW *status;
